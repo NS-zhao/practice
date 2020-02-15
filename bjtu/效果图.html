@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+
+	.header{
+		background-color: #005bac;
+		min-width: 1300px;
+	}
+	.header>img{
+		margin-left: 200px;
+	}
+	.topNav{
+		float: right;
+	}
+	.users{
+		margin-top: 28px;
+		margin-bottom: 53px;
+		margin-right: 16px;
+		display: inline-block;
+		color: #f6ad3c;
+		background-color: #004d92;
+		border-radius: 15px;
+		height: 25px;
+		line-height: 25px;
+		padding: 0 10px;
+		text-decoration: none;
+		font-size: 14px;
+		font-weight: bold;
+	}
+	.users2{
+		color: #51c200;
+	}
+	.users4{
+		margin-right: 60px;
+	}
+	.topNav img{
+		vertical-align: middle;
+		margin-left: 65px;
+		margin-right: 200px;
+	}
+	.menu {
+		position: relative;
+	}
+	.menu img{
+		width: 100%;
+	}
+	.menubar{
+		background-color: rgba(74, 59, 101, 0.6);
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+	
+		padding: 0;
+	
+	}
+	.menu ul{
+		width: 1200px;
+		list-style-type: none;
+		margin: 0 auto;
+	}
+	.menu>.menubar>ul>li{
+		float: left;
+		padding: 15px 30px;
+		position: relative;
+	}
+
+	.menu ul li a{
+		text-decoration: none;
+		color: white;
+		font-weight: bold;
+	}
+	.menu ul li ul{
+		position: absolute;
+		display: none;
+		padding-left: 0;
+		top:50px;
+		left: 0;
+		background-color: rgb(204,186,207);
+		width: 200px;
+	}
+	.menu ul li ul li{
+		padding: 5px;
+	}
+	.menu>.menubar>ul>li:hover{
+		background-color: #cce1fa;
+	} 
+	.menu ul li:hover ul{
+		display: block;
+	}
+	
+	</style>
+</head>
+<body>
+	<div class="header">
+		<img src="images/logo.jpg" alt="">
+
+		<div class="topNav">
+			<a href="#1" class="users users1">校友</a>
+			<a href="#2" class="users users2">访客及考生</a>
+			<a href="#3" class="users">教职工</a>
+			<a href="#4" class="users users4">学生</a>
+			<a href="#5" class="users english">English</a>
+			<img src="images/search.jpg" alt="">
+		</div>
+	</div>
+	<nav class="menu">
+		<img src="images/bj.jpg" alt="">
+			<div class="menubar">
+				<ul>
+					<li><a href="#1">学校概况</a></li>
+					<li><a href="#2">教学培养</a>
+						<ul>
+							<li><a href="#1">本科生</a></li>
+							<li><a href="#2">研究生</a></li>
+							<li><a href="#3">成人教育</a></li>
+							<li><a href="#4">网络教育</a></li>
+							<li><a href="#5">留学生</a></li>
+						</ul>
+					
+					</li>
+					<li><a href="#3">科学研究</a></li>
+					<li><a href="#4">学科师资</a></li>
+					<li><a href="#5">招生就业</a></li>
+					<li><a href="#6">学生天地</a></li>
+					<li><a href="#7">信息资源</a></li>
+					<li><a href="#8">院系设置</a></li>
+					<li><a href="#9">合作交流</a></li>
+				</ul>
+			</div>
+	</nav>
+</body>
+</html>
