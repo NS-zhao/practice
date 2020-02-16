@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        *{
+            border: none;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            min-width: 1650px;
+        }
+        .clearfix{
+            clear: both;
+            display: block;
+            content: "";
+        }
+        #header{
+            height: 785px;
+            background-image: url("images/bj.jpg");
+            background-size: 120%;
+        }
+        .left{
+            width: 5%;
+            height: 785px;
+            float: left;
+            background-color: rgb(32, 79, 159);
+        }
+        .left>ul>li{
+            list-style: none;
+            text-align: center;
+            line-height: 50px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .left>ul>li>a{
+            text-decoration: none;
+            color: white;
+        }
+        .left>img{
+            margin-top: 250px;
+            margin-left: 20px;
+        }
+        .en{
+            border: 2px solid white;
+            width: 30px;
+            height: 30px;
+            float: right;
+            margin-right: 100px;
+            margin-top: 25px;
+        }
+        .en>a{
+            text-decoration: none;
+            color: white;
+            line-height: 26px;
+            font-size: 14px;
+            padding: 0 5px;
+            text-align: center;
+        }
+        .menu{
+            height: 150px;
+            background-image: url("images/背景遮挡.png");
+            background-size: 70%;
+        }
+        .menu>.list{
+            margin-left:370px;
+            position: relative;
+        }
+        .menu>.list>li{
+            list-style-type: none;
+            float: left;
+            margin-right: 50px;
+            margin-top: 54px;
+            line-height: 96px;
+        }
+        .menu>.list> .logo{
+            width: 20%;
+        }
+        .menu>.list>li>a{
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding-bottom: 10px;
+        }
+        .menu>.list>li:hover .banner{
+            display: block;
+        }        
+        .menu>.list> .logo:hover>a {
+            border: 0;
+        }
+        .menu>.list>li:hover>a {
+            border-bottom: 2px solid rgb(32, 79, 159);
+        }
+        .banner{
+            display: none;
+            border-radius: 15px;
+            width: 930px;
+            height: 280px;
+            background-color: #fff;
+            position: absolute;
+        }
+        .navBanner{
+            height: 190px;
+        }
+        .navBanner>ul{
+            float: left;
+            width: 40%;
+            margin-top: 3%;
+            margin-left: 128px;
+        }
+        .navBanner>ul>li{
+            list-style: none;
+            float: left;
+            width:  120px;
+            line-height: 40px;
+            text-align: center;
+        }
+        .navBanner>ul>li>a{
+            text-decoration: none;
+            color: black;
+        }
+        .navBanner>img{
+            float: right;
+            display: block;
+            width: 25%;
+            margin-top: -12%;
+            margin-right: 10%;
+            border-radius: 15px;
+        }
+        .bottom {    
+            width: 100%;
+            height: 100px;
+            background: rgb(132, 134, 128);
+            border-radius:  0 0 15px 15px;
+        }
+        .bottom>a {
+            float: left;
+            text-decoration: none;
+            color: black;
+            line-height: 60px;
+            margin: 0 2% 0 14%;
+        }
+        .bottom>ul {
+            float: left;
+            margin-top: 1%;
+        }
+        .bottom>ul>li {
+            list-style: none;
+            line-height: 40px;
+            text-align: left;
+        }
+        .bottom>ul>li>a {
+            text-decoration: none;
+            color: black;
+			padding: 5px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            border: 1px solid rgb(206, 206, 204);
+        }
+        .footer {
+            height: 125px;
+            background-image: url("images/背景遮挡2.png");
+            background-size: 100%;
+        }
+        .footer>.p p{
+            font-size: 165%;
+            color: white;
+            margin-top: 31%;
+            margin-left:7%;
+        }
+        .footer>.box{
+            float: right;
+            width: 100px;
+            height: 60px;
+            margin-right: 5%;
+            margin-top: 1.78%;
+            background-color: #fff;
+        }
+        .footer>.tools{
+            float: right;
+            width: 40%;
+            height: 60px;
+            margin-right: -1.8%;
+            margin-top:1.78%;
+            background-color: white;
+            background-image: url("images/icon.png");
+            background-size: 100%;
+            
+        }
+        .footer>.tools>ul>li{
+            list-style: none;
+            line-height: 30px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .footer>.tools>ul>li>a{
+            text-decoration: none;
+            color: black;
+            line-height: 30px;
+            padding: 0 10px;
+        }
+        .footer>.search {
+            height: 40px;
+            background-color: rgb(72, 72, 72);
+            float: right;
+            position: relative;
+            margin-top: -39px;
+            width: 8%;
+        }
+        .footer>.search>a>img {
+            vertical-align: middle;
+        }
+        .footer>.search>a {
+            text-decoration: none;
+            color: white;
+            line-height: 40px;
+            margin: 0 20px 0 8px;
+        }
+        #foot{
+            height: 500px;
+            background-color: antiquewhite;
+        }
+        [class*="col-"]{
+            float: left;
+            padding: 30px;
+        }
+        .col-3-4{
+            width: 65%;
+            border: 2px solid burlywood;
+            height: 300px;
+            float: right;
+            margin-right: 30px;
+        }
+        .col-1-4{
+            width: 25%;
+            height: 300px;
+            border: 2px solid blueviolet;
+            float: left;
+            margin-left: 30px;
+        }
+        .c{
+            height: 50px;
+            border: 2px solid cadetblue;
+            width: 1000px;
+            float: left;
+            margin-left: 30px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div class="left">
+            <ul>
+                <li><a href="#">复旦新闻</a></li>
+                <li><a href="#">未来学生</a></li>
+                <li><a href="#">在校学生</a></li>
+                <li><a href="#">教职员工</a></li>
+                <li><a href="#">复旦校友</a></li>
+                <li><a href="#">公共访客</a></li>   
+            </ul>
+            <img src="images/weixin.png" alt="">
+        </div>
+        <div class="right">
+            <div class="menu">
+                <div class="en">
+                    <a href="#">EN</a>
+                </div>
+                <ul class="list">
+                    <li><a href="#">复旦概况</a>
+						<div class="banner">
+                            <div class="navBanner">
+                                <ul>
+                                    <li><a href="#1">> 复旦简介</a></li>
+                                    <li><a href="#2">> 治理架构</a></li>
+                                    <li><a href="#3">> 辉煌校史</a></li>
+                                    <li><a href="#4">> 统计概览</a></li>
+                                    <li><a href="#5">> 复旦标志</a></li>
+                                    <li><a href="#6">> 复旦章程</a></li>
+                                    <li><a href="#7">> 访问复旦</a></li>
+                                </ul>
+                                <img src="images/gaikuang.jpg" alt=""  class="img clearfix">
+                            </div>
+                            <div class="bottom">
+                                <a href="#1">相关链接</a>
+                                <ul>
+                                    <li>
+                                        <a href="#1">复旦年报</a>
+                                        <a href="#2">规章制度</a>
+                                        <a href="#3">历任领导</a>
+                                        <a href="#4">校园地图</a>
+                                        <a href="#5">复旦校历</a>
+                                    </li>
+                                    <li>
+                                        <a href="#6">图书馆</a>
+                                        <a href="#7">校史馆</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#">师资队伍</a></li>
+                    <li><a href="#">人才培养</a></li>
+                    <li class="logo"><a href="#"><img src="images/logo.png" alt=""></a></li>
+                    <li><a href="#">科学研究</a></li>
+                    <li><a href="#">机构设置</a></li>
+                    <li><a href="#">校园生活</a></li>
+                </ul>
+            </div>
+            <div class="footer">
+                <div class="p"><p>复旦大学2018-2019学年奖学金颁奖典礼举行</p></div>
+                <div class="box"></div>
+                <div class="tools">
+                    <ul>
+                        <li>
+                            <a href="#1">电子邮箱</a>
+                            <a href="#2">办事大厅</a>
+                            <a href="#3">电子办公</a>
+                            <a href="#4">图书馆</a>
+                            <a href="#5">信息公开</a>
+                            <a href="#6">通知公告</a>
+                            <a href="#7">校长信箱</a>
+                            <a href="#8" class="jz">捐赠</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="search clearfix">
+                    <a href="#1"><img src="images/search.png" alt="">Search</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="foot">
+        <div class="row clearfix">
+            <div class="col-1-4"></div>
+            <div class="col-3-4"></div>
+            <div class="c"></div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
