@@ -1,0 +1,3 @@
+USE STUDENT1
+UPDATE ST
+SET ÐÔ±ð = 'ÄÐ'
