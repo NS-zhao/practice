@@ -1,0 +1,2 @@
+use STUDENT1
+delete Ñ§Éú where Ñ§ºÅ = '160101'
