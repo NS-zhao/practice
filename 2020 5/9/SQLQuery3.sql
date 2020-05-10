@@ -1,0 +1,1 @@
+select sname,ssex,specialty from student
