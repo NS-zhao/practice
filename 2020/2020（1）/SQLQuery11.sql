@@ -1,0 +1,4 @@
+USE STUDENT1
+GO
+ALTER TABLE XS
+ADD ƒÍ¡‰ int 
