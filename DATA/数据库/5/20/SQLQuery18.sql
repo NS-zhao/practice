@@ -1,0 +1,1 @@
+USE STUDENT1INSERT into ST(学号,姓名,性别,出生时间)VALUES('150111','杨丽','女','1996-10-3')
