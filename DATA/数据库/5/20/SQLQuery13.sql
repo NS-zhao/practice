@@ -1,0 +1,1 @@
+USE STUDENT1	CREATE TABLE XS	( 学号   char(6)   PRIMARY KEY,           身份证号 char(20) ,           姓名   char(8)   NOT NULL,	 专业名 varchar(10)	 ) 

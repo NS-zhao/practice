@@ -1,0 +1,1 @@
+ALTER TABLE  XSALTER COLUMN  пуцШ nvarchar(10) NULL
