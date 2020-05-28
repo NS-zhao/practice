@@ -1,0 +1,1 @@
+grant update on male_view to user1

@@ -1,0 +1,1 @@
+exec sp_addrolemember 'db_datareader','user1'
