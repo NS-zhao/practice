@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_Recordset1" value="name:书号;datatype:200,name:书名;datatype:200,name:类别;datatype:200,name:作者;datatype:200,name:价格;datatype:5,name:出版社;datatype:200,name:总数;datatype:17,name:剩余;datatype:17" />
+</info>
