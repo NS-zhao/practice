@@ -1,5 +1,0 @@
-use teaching
-select student.sno,sname,count(cno) Ñ¡ÐÞ¿Î³ÌÊý
-from student full join sc
-on student.sno = sc.sno
-group by student.sno,sname

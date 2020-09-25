@@ -1,1 +1,0 @@
-USE STUDENT1   ALTER TABLE ST   Add  ±¸×¢ nvarchar(20)

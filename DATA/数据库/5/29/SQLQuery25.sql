@@ -1,1 +1,0 @@
-grant exec on Update_score to user2

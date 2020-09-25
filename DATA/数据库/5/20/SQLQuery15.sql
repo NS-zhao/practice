@@ -1,1 +1,0 @@
- USE STUDENT1CREATE TABLE XS2( 学号        char(6)   PRIMARY KEY,  身份证号 char(18) UNIQUE,  姓名       nvarchar(8)   NOT NULL,  专业名    nvarchar(10),性别     nchar(1) CHECK (性别='男' or 性别='女')    )

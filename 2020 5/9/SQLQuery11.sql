@@ -1,1 +1,0 @@
-select sno,cno,score150 = score*1.50 from sc

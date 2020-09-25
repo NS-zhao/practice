@@ -1,2 +1,0 @@
-DELETE ST
-WHERE Ñ§ºÅ = '150112'

@@ -1,1 +1,0 @@
-grant select on goods to user2

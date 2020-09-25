@@ -1,1 +1,0 @@
-grant update on student to user1

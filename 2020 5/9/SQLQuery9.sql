@@ -1,1 +1,0 @@
-select Ñ§ºÅ=sno,ĞÕÃû=sname from student

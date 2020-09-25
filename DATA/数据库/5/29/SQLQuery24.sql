@@ -1,1 +1,0 @@
-grant update on invent(number) to user2

@@ -1,4 +1,0 @@
-SELECT 专业名,性别,COUNT(*) AS '人数' 
-FROM ST
-GROUP BY 专业名,性别
-WITH ROLLUP

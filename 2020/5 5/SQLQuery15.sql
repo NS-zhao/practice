@@ -1,2 +1,0 @@
-SELECT * FROM SC
-WHERE ³É¼¨ IS NULL

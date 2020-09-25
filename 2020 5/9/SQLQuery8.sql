@@ -1,1 +1,0 @@
-select sno as Ñ§ºÅ,sname as ĞÕÃû from student

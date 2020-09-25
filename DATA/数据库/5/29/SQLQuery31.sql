@@ -1,1 +1,0 @@
-grant execute on Update_score to user2
