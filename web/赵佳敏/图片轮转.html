@@ -1,0 +1,48 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+.box{
+height:640px;
+width:450px;
+border:3px solid black;
+
+}
+.box img{
+width:100%;
+height:100%;
+}
+</style>
+<script>
+var curIndex=0;
+var timeInterval=2000;
+var arr=new Array();
+arr[0]="images/1.jpg" ;
+arr[1]="images/2.jpg" ;
+arr[2]="images/3.jpg" ;
+arr[3]="images/4.jpg" ;
+setInterval (changeImg, timeInterval);
+function changeImg ()
+{
+var obj=document.getElementById("obj");
+if(curIndex==arr.length-1){
+curIndex=0;
+}
+else{
+curIndex+=1;
+}
+obj.src=arr[curIndex] ;
+}		
+</script>
+</head>
+
+<body>
+<div class="box">
+        <img src="images/1.jpg" width="109%" height="132%" id="obj" />
+        
+
+</div>
+</body>
+</html>
