@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            font-size: 14px;
+        }
+        .w{
+            width: 1190px;
+            height: auto;
+            margin: 0 auto;
+        }
+        .header{
+            padding: 0 10px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .logo{
+            width: 190px;
+            height: auto;
+            vertical-align: middle;
+            display: inline-block;
+            overflow: hidden;
+        }
+        .logo>img{
+            width: 100%;
+        }
+        .name{
+            vertical-align: middle;
+            font-weight: bold;
+            font-size: 30px;
+        }
+        .float{
+            float: left;
+        }
+        .menu{
+            position: relative;
+            top: 50px;
+            left: 70px;
+        }
+        .menu>li{
+            list-style: none;
+            padding: 0 20px;
+            font-size: 18px;
+        }
+        .content{
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+        .banner{
+            width: 1190px;
+            height: 320px;
+
+        }
+        .banner>img{
+            width: 100%;
+        }
+        .newsbox{
+            width: 1190px;
+            height: auto;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .newsleft{
+            float: left;
+            width: 790px;
+            height: 400px;
+            background-color: red;
+        }
+        .newsinfo{
+            float: left;
+            margin-left: 10px;
+            width: 390px;
+            height: 400px;
+            background-color: blueviolet;
+        }
+        .footer{
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 10px;
+            background-color: #999999;
+        }
+        .footernav{
+            width: auto;
+            height: 100px;
+            background-color: silver;
+        }
+        .headnav{
+            width: auto;
+            height: 100px;
+            background-color: silver;
+        }
+    </style>
+</head>
+    <!--浮动之后后面的元素都是相对于前面的边框对齐，即左上角对齐-->
+<body>
+    <div class="headnav">
+
+    </div>
+    <!--上导航-->
+    <div class="header w">
+        <div class="logoinfo float">
+            <a class="logo" href="#">
+                <img src="./image/logo.jpg" alt=""/>
+            </a>
+            <span class="name">
+                华为官方旗舰店
+            </span>
+        </div>
+        <ul class="menu float">
+            <li class="float">首页</li>
+            <li class="float">心情随笔</li>
+            <li class="float">技术分享</li>
+            <li class="float">个人归档</li>
+            <li class="float">Blog留言</li>
+            <li class="float">关于我</li>
+        </ul>
+    </div>
+    <!--中间内容区域-->
+    <div class="content w">
+        <div class="banner">
+            <img src="./image/hbanner-vmall-mate40p-p.jpg" alt=""/>
+        </div>
+        <div class="newsbox">
+            <div class="newsleft"></div>
+            <div class="newsinfo"></div>
+        </div>
+    </div>
+    <!--底部导航-->
+    <div class="footer w">
+        网站声明
+    </div>
+    <div class="footernav">
+
+    </div>
+</body>
+</html>
