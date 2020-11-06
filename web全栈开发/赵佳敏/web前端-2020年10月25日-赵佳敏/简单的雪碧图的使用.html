@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            width: 150px;
+            margin: 0 auto;
+            padding-left: 20px;
+            overflow: hidden;
+        }
+        ul>li{
+            position: relative;
+            list-style: none;
+            /*height: 30px;*/
+            line-height: 30px;
+            background-color: #afa698;
+            border-bottom: 1px solid silver;
+            box-sizing: border-box;
+            /*padding-left: 10px;*/
+        }
+        .icon,.iconpage{
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: url("./image/cd-icons.svg") no-repeat;
+            vertical-align: middle;
+        }
+        ul>li>i{
+            font-style: normal;
+            vertical-align: middle;
+        }
+        .pagedown{
+            background-position: 0px 0px;
+            transform: rotatez(-90deg);/*旋转*/
+        }
+        .page{
+            background-position: -16px 0px;
+            margin-left: 10px;
+        }
+        .ckbox{
+            height: 30px;
+            width: 100%;
+            top: 0px;
+            left: 0;
+            position: absolute;
+            opacity: 0;
+        }
+        .ckbox:checked~.menu{
+            display: block;
+        }
+        .menu{
+            display: none;
+        }
+        .ckbox:checked~.page{
+            background-position: -32px 0px;
+        }
+        .ckbox:checked~.pagedown{
+            background-position: 0px 0px;
+            transform: rotatez(0deg);/*旋转*/
+        }
+        .pagewen{
+            background-position: -48px 0px;
+            margin-left: 30px;
+        }
+    </style>
+</head>
+<body>
+<ul>
+
+    <li><input type="checkbox" class="ckbox"/>
+        <span class="icon pagedown"></span>
+        <span class="iconpage page"></span>
+        <i>one</i>
+        <ul class="menu">
+            <li><input type="checkbox" class="ckbox"/>
+                <span class="icon pagedown"></span>
+                <span class="iconpage page"></span>
+                <i>one--1</i>
+                <ul class="menu"></ul>
+            </li>
+            <li><input type="checkbox" class="ckbox"/>
+                <span class="icon pagedown"></span>
+                <span class="iconpage page"></span>
+                <i>one--2</i>
+            </li>
+
+        </ul>
+    </li>
+
+    <li><span class="icon pagedown"></span>
+        <span class="iconpage page"></span>
+        <i>two</i>
+    </li>
+    <li><span class="icon pagedown"></span>
+        <span class="iconpage page"></span>
+        <i>three</i>
+    </li>
+</ul>
+</body>
+</html>
