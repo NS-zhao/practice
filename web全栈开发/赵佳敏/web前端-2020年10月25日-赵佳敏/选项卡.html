@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: #d9ddf1;
+        }
+        .box{
+            margin: 30px auto 0;
+            width: auto;
+            height: 710px;
+            background: url("./image/0a19d02b801743a2.png") center no-repeat;
+        }
+        .centerblock{
+            margin: 0 auto;
+            width: 1190px;
+            height: 470px;
+        }
+        .base{
+            width: 190px;
+            height: 470px;
+            background-color: white;
+        }
+        .centerbox{
+            width: 790px;
+            height: 470px;
+            /*background-color: blueviolet;*/
+            margin: 0 10px;
+        }
+        .centerblock>div{
+            float: left;
+        }
+        .leftmenu{
+            padding: 10px 0;
+        }
+        .leftmenu>li{
+            list-style: none;
+            padding-left: 18px;
+            height: 25px;
+            line-height: 25px;
+        }
+        .leftmenu>li>a{
+            font-size: 14px;
+        }
+        .leftmenu>li>span{
+            padding: 0 2px;
+            font-size: 12px;
+        }
+        .leftmenu>li:hover{
+            background-color: #afa698;
+        }
+        .leftmenu>li>a:hover{
+            color: red;
+        }
+        .banner{
+            width: 590px;
+            height: 470px;
+            background-color: white;
+            float: left;
+            margin-right: 10px;
+        }
+        .list{
+            width: 190px;
+            height: 470px;
+            background-color: white;
+            float: left;
+        }
+        .list>div{
+            width: 190px;
+            height: 150px;
+            background-color: #bebebe;
+        }
+        .centerimg{
+            margin: 10px 0;
+        }
+        .child{
+            width: 1000px;
+            height: 470px;
+            background-color: #afa698;
+            position: absolute;
+            box-shadow: 0 0 5px #a2a2a2;
+            left: 190px;
+            top: 0;
+            display: none;
+        }
+        .menu{
+            position: relative;
+        }
+        .leftmenu>li:hover>.child{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="centerblock">
+            <div class="menu base">
+                <ul class="leftmenu">
+                    <li><a href="#">家用电器</a>
+                        <div class="child">
+                            我是子集
+                        </div>
+                    </li>
+                    <li><a href="#">手机</a><span>/</span><a href="#">运营商</a><span>/</span><a href="#">数码</a>
+                        <div class="child">
+                            我是子集
+                        </div>
+                    </li>
+                    <li><a href="#">电脑</a><span>/</span><a href="#">办公</a>
+                        <div class="child">
+                            我是子集
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="centerbox">
+                <div class="banner"></div>
+                <div class="list">
+                    <div class="topimg"></div>
+                    <div class="centerimg"></div>
+                    <div class="bottomimg"></div>
+                </div>
+            </div>
+            <div class="user base"></div>
+        </div>
+    </div>
+</body>
+</html>
