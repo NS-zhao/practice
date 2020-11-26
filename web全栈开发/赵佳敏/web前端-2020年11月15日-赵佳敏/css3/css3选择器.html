@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        p:first-letter{
+            color: red;
+        }
+        p:first-line{
+            background-color: orangered;
+        }
+        ul>li:first-of-type{
+            color: red;
+        }
+        ul>li:last-of-type{
+            color: #4f3dff;
+        }
+        h3:only-of-type{
+            color: #37ff8d;
+        }
+        li:only-child{
+            color: blueviolet;
+        }
+        ul>li:nth-of-type(1){
+            color: #82ff23;
+        }
+        html{
+            color: #ff55f6;
+        }
+        :empty{
+            border: 1px solid red;
+        }
+        .hs:not(h5){
+            background-color: #cbcbcb;
+        }
+        input:out-of-range{
+            border: 1px solid #74ff3b;
+            color: #253cff;
+        }
+        input:read-only{
+            color: #c6ff3c;
+        }
+        input:read-write{
+            color: #cb39b9;
+        }
+    </style>
+</head>
+<body>
+<p>元素CSS选择器用于选择你<br/>想要的的样式的模式。</p>
+<ul>
+    <h3>0</h3>
+    <h3>0</h3>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+</ul>
+<ul>
+    <li>哈哈哈</li>
+</ul>
+<div></div>
+<h1 class="hs">标签</h1>
+<h2 class="hs">标签</h2>
+<h3 class="hs">标签</h3>
+<h4 class="hs">标签</h4>
+<h5 class="hs">标签</h5>
+<input type="number" min="5" max="10" value="20"/>
+<input type="text" readonly value="123"/>
+<input type="text" value="123"/>
+
+</body>
+</html>
