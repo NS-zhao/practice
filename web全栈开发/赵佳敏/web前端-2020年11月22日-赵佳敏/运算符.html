@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var a = 10;
+    var b = "10";
+    console.log(a == b);
+    console.log(a === b);
+
+   /* var c = 10;
+     var d = 20;
+     var m = ++c-d;
+     console.log(m);*/
+
+    var c = 10;
+    var d = 20;
+    var h = c+++d;
+    console.log(h);
+    console.log(c, d);
+
+    console.log(1 && 2);
+    console.log(0 && 2);
+    console.log(50 && 100);
+    console.log(true && true);
+    console.log(false || true);
+    console.log(!false);
+
+
+    var cell = 1;
+    var number = 10;
+    var price = 99;
+    var way = "";
+    if(way == "微信支付"){
+        cell = 0.85;
+    }
+    else if(way == "支付宝支付"){
+        cell = 0.8;
+    }
+    else{
+        cell = 1;
+    }
+    console.log(number * price * cell);
+
+    /*for(var i = 1;i<10;i++)
+    {
+        var s = "";
+        for(var k = 1;k<=i;k++)
+        {
+            s+=k+"*"+i+"="+(i*k)+"";
+        }
+        console.log(s);
+    }*/
+
+   /* for(var i = 0;i<4;i++)
+    {
+        var s = " ";
+        for(var k = 0;k<2*i+1;k++)
+        {
+            s+="*";
+        }
+        console.log(s);
+    }*/
+
+    /*for(var i = 0;i<4;i++)
+    {
+        var s = " ";
+        //打印空格
+        for(var j = 0;j<h-i-1;j++)
+        {
+            s+=" ";
+        }
+        //打*
+        for(var k = 0;k<2*i+1;k++)
+        {
+            s+="*";
+        }
+        console.log(s);
+    }
+*/
+
+    var h = 4;
+    for(var i = 0;i<h;i++)
+    {
+        var s = "";
+        for(var j = 0;j<h-i-1;j++)
+        {
+            s+=" ";
+        }
+        for(var j = 0;j<2*i+1;j++)
+        {
+            s+="*";
+        }
+        console.log(s);
+    }
+    for(var i = 0;i<h-1;i++)
+    {
+        s = "";
+        for(var j = 0;j<=i;j++)
+        {
+            s += " ";
+        }
+        for(j = 0;j<2*(h-1-i)-1;j++)
+        {
+            s+="*";
+        }
+        console.log(s);
+    }
+    </script>
+</body>
+</html>
