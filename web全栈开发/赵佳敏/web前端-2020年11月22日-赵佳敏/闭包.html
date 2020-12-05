@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        /*function method(){
+            var name = "张三";
+            return function(){
+                console.log(name);
+            }
+        }
+        method()();
+
+        function method(){
+            var name = "张三";
+            return function(){
+                console.log(name);
+            }
+        }
+        var fun = method()();*/
+
+        /*function method(){
+            var name = "张三";
+            return function(){
+                return name;
+            }
+        }
+        var fun = method()();
+        console.log(fun);*/
+
+        /*function method(){
+            var num = 1;
+            return function(){
+                num = num+5;
+                console.log(num);
+            }
+        }
+        var fun = method();
+        fun();
+        fun();
+        fun();
+
+
+        var arr = [];
+        for(var i = 0;i<10;i++){
+            function list(){
+                console.log(i);
+            }
+            arr.push(list);
+        }
+        console.log(arr);
+        arr[0]();
+
+        var arr = [];
+        for(var i = 0;i<10;i++){
+            var list = (function(n){
+                var num = n;
+                return function(){
+                    console.log(num);
+                    num++;
+                }
+            })(i);
+            arr.push(list);
+        }
+        console.log(arr);
+        arr[0]();
+        arr[1]();
+
+
+        var arr = [];
+        for(var i = 0;i<10;i++){
+            var f = (function(n){
+                var num = n;
+                return function(){
+                    console.log(num);
+                }
+            })(i);
+            arr.push(f);
+        }
+        console.log(arr);
+        arr[0]();
+        arr[1]();
+        arr[2]();
+        arr[4]();
+        arr[5]();
+        arr[6]();
+        arr[7]();
+        arr[8]();
+        arr[9]();*/
+
+
+        /*function aaa(){
+            var name = "xxx";
+            return function bbb(){
+                alert(name);
+            }
+        }
+        aaa()();*/
+
+
+        /*setTimeout(function(){
+            console.log("执行代码");
+        },1000);*/
+
+
+        /*for(var i = 0;i<10;i++){
+            setTimeout(function(){
+                console.log(i);
+            },0);
+        }
+
+        for(var i = 0;i<10;i++)
+        {
+            (function(n){
+                setTimeout(function(){
+                    console.log(n);
+                },0);
+            })(i);
+        }*/
+
+        /*function my(){
+            var n = 999;
+            return function(){
+                n++;
+                console.log(n);
+
+            }
+        }
+        my()();*/
+        /*function my(){
+            var n=999;
+            return function (){
+                n++;
+                console.log(n);
+            }
+        }
+        my()();
+        my()();
+
+
+        var name = "The Window";
+        var object = {
+            name:"my object",
+            getNameFunc:function(){
+                return function(){
+                    return this.name;
+                };
+            }
+        };
+        console.log(object.getNameFunc()());
+
+        var name = "The Window";
+        var object = {
+            name:"my object",
+            getNameFunc:function(){
+                var name = this.name;
+                return function(){
+                    return name;
+                };
+            }
+        };
+        console.log(object.getNameFunc()());*/
+
+        /*var name = "张三";
+        function method(){
+            var sex = "男";
+        }
+        method();
+        console.log(name, sex);
+        //或者
+        function method2(){
+            console.log(name, sex);
+        }
+        method2();*/
+    </script>
+</head>
+<body>
+<script>
+    /*function method(){
+        var name = "张三";  //闭包变量
+        return function(){  //闭包函数
+            console.log(name);
+        }
+    }
+    method()();
+    //或者
+    var fun = method()();*/
+
+
+    /*function method(){
+        var name = "张三";
+        return function(){
+            return name;
+        }
+    }
+    var fun = method()();
+    console.log(fun);*/
+
+    /*function method(){
+        var num = 1;
+        return function(){
+            num = num+5;
+            console.log(num);
+        }
+    }
+    var fun = method();
+    fun();
+    fun();*/
+
+
+    /*var arr = [];
+    for(var i = 0;i<10;i++){
+        function list(){
+            console.log(i);
+        }
+        arr.push(list);
+    }
+    console.log(arr);
+    arr[0]();
+    arr[1]();
+    arr[2]();
+    arr[3]();*/
+
+     /*var arr = [];
+     for(var i = 0;i<10;i++){
+        var f = (function(n){
+            return function(){
+                console.log(n);
+            }
+        })(i);
+        arr.push(f);
+     }
+     console.log(arr);
+     arr[0]();
+     arr[1]();
+     arr[2]();
+     arr[3]();*/
+
+    /*function aaa(){
+        var name = "xxx";
+        return function bbb(){
+            alert(name);
+        }
+    }
+    aaa()();*/
+
+    /*setTimeout(function(){
+        console.log("执行代码");
+    },1000);*/
+
+    /*for(var i = 0;i<10;i++)
+    {
+        setTimeout(function(){
+            console.log(i);
+        },0);
+    }*/
+
+
+    /*for(var i = 0;i<10;i++)
+    {
+        (function(n){
+            setTimeout(function(){
+                console.log(n);
+            },0);
+        })(i)
+    }*/
+
+
+    /*function my()
+    {
+        var n = 999;
+        return function(){
+            n++;
+            console.log(n);
+        }
+    }
+    my()();
+    my()();
+    var f = my();
+    f();
+    f();
+    f();*/
+
+
+</script>
+</body>
+</html>
