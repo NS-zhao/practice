@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--<button id="but" onclick="fun1()" onmouseover="fun2()">按钮</button>
+<button id="btn">按钮1</button>
+<hr/>
+
+<button class="info">集合</button>
+<button class="info">集合</button>
+<button class="info">集合</button>
+<button class="info">集合</button>
+<button class="info">集合</button>
+
+<button id="btndate">监听按钮</button>-->
+<!--<script>
+    function fun1(){
+        console.log(this);
+    }
+</script>-->
+<div id="box" style="width: 100px;height: 100px;background-color: orangered">
+    <button id="btn">按钮</button>
+</div>
+
+<div style="position: relative">
+    <button id="list">事件对象</button>
+</div>
+<div id="block" style=" width: 100px; height: 100px; border: 1px solid red;">
+    <button id="btnlist">按钮</button>
+</div>
+<ul class="nav">
+    <li>火锅</li>
+    <li>烧烤</li>
+    <li>炸鸡</li>
+    <li>牛排</li>
+</ul>
+<script>
+    /*function fun1(args){
+        console.log("123",args);
+    }
+    function fun2(){
+        console.log("welcome");
+    }
+    btn.onclick = function(){
+        console.log("zhao",this);
+        this.onclick = null;
+    }
+    btn.onclick = function(){
+        console.log("jia",this);
+        this.onclick = null;
+    }*/
+   /* btn.onclick = function(){
+        console.log("zhao",this);
+        this.onclick = null;
+    }
+    btn.click();*/
+    /*console.log(but.attributes);//获取属性的集合
+    but.attributes.removeNamedItem("onmouseover");//移除这个属性
+    console.log(but.attributes.getNamedItem("onmouseover"));//根据属性获取属性的一组值
+*/
+    //把fun2()设置给btn
+   /* var args = document.createAttribute("onmousemove");
+    args.nodeValue = "fun2()";
+    but.setAttribute("onmousemove",fun2())*/
+
+    /*but.setAttribute("onmousemove",fun2());*/
+
+    /*var btnlist = document.getElementsByClassName("info");
+    for(var i = 0;i<btnlist.length;i++){
+        btnlist[i].onclick = function(){
+            console.log("事件",this);
+        }
+    }
+    btnlist = null;*/
+
+
+    /*btndate.addEventListener("click",function(){
+        console.log("事件执行函数");
+    });
+    btndate.addEventListener("click",function(){
+        console.log("事件执行函数");
+    });*/
+
+    /*btndate.addEventListener("click",m1);
+    function m1(){
+        console.log("事件执行函数");
+    }
+    btndate.addEventListener("click",m2);
+    function m2(){
+        console.log("事件执行函数");
+        console.log(this);
+        this.removeEventListener("click",m2);
+    }*/
+
+    /*var num = 0;
+    btn.onclick = function(){
+        num++;
+        console.log(this,num);
+        var e = window.event||event;
+        e.stopPropagation();
+    }
+    box.onclick = function(){
+     num++;
+     console.log(this,num);
+     }*/
+
+   /* var num = 0;
+    btn.onclick = function(e){
+        num++;
+        console.log(this,num);
+        e.cancelBubble = true;
+    }
+    box.onclick = function(){
+        num++;
+        console.log(this,num);
+    }*/
+    list.onclick = function(event){
+        /*console.log(event);
+        console.log(event.pageX, event.pageY);
+        console.log(event.clientX, event.clientY);
+        console.log(event.layerX, event.layerY);
+        console.log(event.offsetX, event.offsetY);
+        console.log(event.target);
+        console.log(event.srcElement);*/
+        console.log(event.timeStamp);
+    }
+    document.body.onkeypress = function(e){
+        console.log(e);
+        console.log(e.code);
+        console.log(e.key);
+        console.log(e.keyCode);
+        console.log(e.charCode);
+        console.log(e.which);
+    }
+    block.addEventListener("click",function(){
+        console.log("div的事件");
+    },false)
+    btnlist.addEventListener("click",function(){
+        console.log("button的事件");
+    },false)
+
+    var nav = document.querySelector(".nav");
+    nav.onclick = function(e){
+        //将事件委托给子元素来执行
+        if(e.target.nodeName.toLowerCase() == "li"){
+            console.log("事件执行");
+        }
+    }
+</script>
+</body>
+</html>
