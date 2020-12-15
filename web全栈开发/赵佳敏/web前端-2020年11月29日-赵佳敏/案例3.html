@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .c_box{
+            position: relative;
+            width: 350px;
+            height: 420px;
+            border: 1px solid #000;
+            margin: 0 auto;
+        }
+        .c_middle>img{
+            width: 100%;
+            vertical-align: middle;
+        }
+        .c_bottom_list{
+            position: relative;
+            height: 70px;
+            overflow: hidden;
+        }
+        .c_bottom_list:hover .leftbtn{
+            left: 0;
+        }
+        .c_bottom_list:hover .rightbtn{
+            right: 0;
+        }
+        .c_bottom_list>span{
+            position: absolute;
+            width: 20px;
+            height: 70px;
+            background-color: rgba(203, 203, 203, 0.58);
+            text-align: center;
+            line-height: 70px;
+            color: #a26729;
+            font-weight: bolder;
+            font-size: 25px;
+            transition: all .2s linear;
+            cursor: pointer;
+        }
+        .leftbtn{
+            left: -20px;
+        }
+        .rightbtn{
+            right: -20px;
+        }
+        .small_img{
+            position: absolute;
+            width: 300px;
+            left: 25px;
+            top: 10px;
+            height: 50px;
+            overflow: hidden;
+
+        }
+        .small_box{
+            position: relative;
+            float: left;
+            width: 50px;
+            height: 50px;
+            margin-right: 8px;
+        }
+        .small_box>img{
+            width: 100%;
+            vertical-align: middle;
+            border: 1px solid #220a20;
+            box-sizing: border-box;
+        }
+        .marnone{
+            margin-right: 0;
+        }
+        .small_list{
+            width: 398px;
+            height: 50px;
+            transition: transform .2s ease-in;
+        }
+        .userck:after{
+            content: "";
+            position: absolute;
+            width: 46px;
+            height: 46px;
+            border: 2px solid red;
+            left: 0;
+            top: 0;
+        }
+        .userck:before{
+            content: "√";
+            position: absolute;
+            color: #fff;
+            font-size: 10px;
+            line-height: 10px;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-color: transparent red red transparent;
+            right: 0;
+            bottom: 0;
+        }
+        .c_middle{
+            cursor: move;
+            position: relative;
+        }
+        .ceng{
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: rgba(255, 255, 0, 0.18) url("./img/bg.png");
+            background-size: 4px;
+        }
+        .big_img{
+            display: none;
+            position: absolute;
+            left: 350px;
+            top: 0;
+            width: 500px;
+            height: 500px;
+            border: 1px solid #000;
+            background: url("./img/1-3.jpg") left top no-repeat;
+        }
+    </style>
+</head>
+<body>
+<div class="c_box">
+    <div class="c_middle">
+        <img class="c_middle_img" src="./img/1-2.jpg" alt=""/>
+    </div>
+    <div class="big_img">
+
+    </div>
+    <div class="c_bottom_list">
+        <span class="leftbtn"><</span>
+        <span class="rightbtn">></span>
+        <div class="small_img">
+            <div class="small_list">
+                <div class="small_box userck" data-big = "./img/1-3.jpg" data-middle = "./img/1-2.jpg"><img src="./img/1-1.jpg" alt=""/></div>
+                <div class="small_box" data-big = "./img/2-3.jpg" data-middle = "./img/2-2.jpg"><img src="./img/2-1.jpg" alt=""/></div>
+                <div class="small_box" data-big = "./img/5-3.jpg" data-middle = "./img/5-2.jpg"><img src="./img/5-1.jpg" alt=""/></div>
+                <div class="small_box" data-big = "./img/4-3.jpg" data-middle = "./img/4-2.jpg"><img src="./img/4-1.jpg" alt=""/></div>
+                <div class="small_box" data-big = "./img/1-3.jpg" data-middle = "./img/1-2.jpg"><img src="./img/1-1.jpg" alt=""/></div>
+                <div class="small_box" data-big = "./img/2-3.jpg" data-middle = "./img/2-2.jpg"><img src="./img/2-1.jpg" alt=""/></div>
+                <div class="small_box marnone" data-big = "./img/5-3.jpg" data-middle = "./img/5-2.jpg"><img src="./img/5-1.jpg" alt=""/></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //给small_box添加事件，点击small_box，切换userck---使用变量接收已经选中的类，清除之前的类---获取左右两个按钮--添加两个按钮的点击事件---
+    //获取底部容器以及小图的容器---底部容器的宽减去小图的容器的宽刚好就是small_list移动的距离---获取中图图片，点击小图找对应的中图----
+    //获取中图容器，给中图添加事件，鼠标离开黄层消失，进入出现黄层---设置光标移动，黄块跟着移动，且光标位置在黄块正中间----对黄块进行限制，让他不能出去
+    //设置黄块里面的内容刚好显示对应的大图，大图的中图的比例就要等于中图和黄块的比例（创建时要按照比例计算层的宽和高）---移动时，黄块往右移动时，
+    // 大图往左移动才能到对应的大图位置（即设置大图显示背景图片坐标）---获取大图容器
+    /*var small_box = document.querySelectorAll(".small_box");
+    //3. 获取左右两个按钮
+    var leftbtn = document.querySelector(".leftbtn");
+    var rightbtn = document.querySelector(".rightbtn");
+    //5. 获取底部容器以及小图的容器
+    var small_img = document.querySelector(".small_img");
+    var small_list = document.querySelector(".small_list");
+    //5. 获取中图图片
+    var c_middle_img = document.querySelector(".c_middle_img");
+    //6. 获取中图容器
+    var c_middle = document.querySelector(".c_middle");
+    //9.获取最大父容器
+    var c_box = document.querySelector(".c_box");
+    //10.获取大图容器
+    var big_img = document.querySelector(".big_img");
+    var bili = 800/350;
+
+
+    //7.给中图容器添加事件（使用变量接收创建的层）
+    var pos_ceng = null;
+    c_middle.onmouseenter = function(){
+        pos_ceng = document.createElement("div");
+        pos_ceng.className = "ceng";
+        //创建时要按照比例计算层的宽和高
+        var cengwh = 500/bili;
+        pos_ceng.style.width = cengwh+"px";
+        pos_ceng.style.height = cengwh+"px";
+        this.appendChild(pos_ceng);
+        big_img.style.display = "block";
+    }
+    c_middle.onmouseleave = function(){//不能用onmouseout，因为他是垂直方向离开的
+        pos_ceng.remove();
+        big_img.style.display = "none";
+    }
+    //8. 设置光标移动，黄块跟着移动，且光标位置在黄块正中间（设置光标的坐标
+    c_middle.onmousemove = function(e){
+        var x = (e.pageX-c_box.offsetLeft)-pos_ceng.offsetWidth/2;
+        var y = (e.pageY-c_box.offsetTop)-pos_ceng.offsetHeight/2;
+        //对黄块进行限制，让他不能出去，即对x,y进行限制
+        var maxLeft = c_middle.offsetWidth-pos_ceng.offsetWidth;
+        var maxTop = c_middle.offsetHeight-pos_ceng.offsetHeight;
+        x = x<=0?0:x>maxLeft?maxLeft:x;
+        y = y<=0?0:y>maxTop?maxTop:y;
+        pos_ceng.style.left = x+"px";
+        pos_ceng.style.top = y+"px";
+        //11.设置大图显示背景图片坐标
+        big_img.style.backgroundPosition = (-x*bili)+"px "+(-y*bili)+"px";
+    }
+    //4.添加两个按钮的点击事件
+    leftbtn.addEventListener("click",function(){
+        small_list.style.transform = "translatex(0px)";
+    });
+    rightbtn.addEventListener("click",function(){
+        var transX = small_img.offsetWidth-small_list.offsetWidth;
+        small_list.style.transform = "translatex("+transX+"px)";
+    });
+    //2. 使用变量接收已经选中的类，清除之前的类
+    var save_ele = null;
+    save_ele = small_box[0];
+    //1. 给small_box添加事件，点击small_box，切换userck
+    for(var i = 0;i<small_box.length;i++){
+        small_box[i].onclick = function(){
+            save_ele.classList.remove("userck");
+            this.classList.add("userck");
+            save_ele = this;
+
+            //点击小图找对应的中图
+            var middle = this.getAttribute("data-middle");
+            c_middle_img.src = middle;
+            //点击小图找换对应的大图
+            var big = this.getAttribute("data-big");
+            big_img.style.backgroundImage = "url('"+big+"')";
+        }
+    }*/
+
+
+    //给small_box添加事件，点击small_box，切换userck---使用变量接收已经选中的类，清除之前的类---获取左右两个按钮--添加两个按钮的点击事件---
+    //获取底部容器以及小图的容器---底部容器的宽减去小图的容器的宽刚好就是small_list移动的距离---获取中图图片，点击小图找对应的中图----
+    //获取中图容器，给中图添加事件，鼠标离开黄层消失，进入出现黄层---设置光标移动，黄块跟着移动，且光标位置在黄块正中间----对黄块进行限制，让他不能出去
+    //设置黄块里面的内容刚好显示对应的大图，大图的中图的比例就要等于中图和黄块的比例（创建时要按照比例计算层的宽和高）---移动时，黄块往右移动时，
+    // 大图往左移动才能到对应的大图位置（即设置大图显示背景图片坐标）---获取大图容器
+    /*var small_box = document.querySelectorAll(".small_box");
+    var leftbtn = document.querySelector(".leftbtn");
+    var rightbtn = document.querySelector(".rightbtn");
+    var small_list = document.querySelector(".small_list");
+    var small_img = document.querySelector(".small_img");
+    var c_middle_img = document.querySelector(".c_middle_img");
+    var c_middle = document.querySelector(".c_middle");
+    var bili = 800/350;
+    var c_box = document.querySelector(".c_box");
+    var big_img = document.querySelector(".big_img");
+
+    var saveEle = null;
+    saveEle = small_box[0];
+    for(var i = 0;i<small_box.length;i++)
+    {
+        small_box[i].onclick = function(){
+            saveEle.classList.remove("userck");
+            this.classList.add("userck");
+            saveEle = this;
+
+            var middle = this.getAttribute("data-middle");
+            c_middle_img.src = middle;
+
+            var big = this.getAttribute("data-big");
+            big_img.style.backgroundImage = "url('"+big+"')";
+        }
+    }
+    leftbtn.addEventListener("click",function(){
+        small_list.style.transform = "translatex(0px)";
+    });
+    rightbtn.addEventListener("click",function(){
+        var transX = small_img.offsetWidth-small_list.offsetWidth;
+        small_list.style.transform = "translatex("+transX+"px)";
+    });
+
+    var Posceng = null;
+    c_middle.onmouseenter = function(){
+        Posceng = document.createElement("div");
+        Posceng.className = "ceng";
+        var cenghw = 500/bili;
+        Posceng.style.width = cenghw+"px";
+        Posceng.style.height = cenghw+"px";
+        this.appendChild(Posceng);
+        big_img.style.display = "block";
+    }
+    c_middle.onmouseleave = function(){
+        Posceng.remove();
+        big_img.style.display = "none";
+    }
+    c_middle.onmousemove = function(e){
+        var x = (e.pageX-c_box.offsetLeft)-Posceng.offsetWidth/2;
+        var y = (e.pageY-c_box.offsetTop)-Posceng.offsetHeight/2;
+        var maxLeft = c_middle.offsetWidth-Posceng.offsetWidth;
+        var maxTop = c_middle.offsetHeight-Posceng.offsetHeight;
+        x = x<=0?0:x>maxLeft?maxLeft:x;
+        y = y<=0?0:y>maxTop?maxTop:y;
+        Posceng.style.left = x+"px";
+        Posceng.style.top = y+"px";
+        big_img.style.backgroundPosition = (-x*bili)+"px "+(-y*bili)+"px";
+    }*/
+</script>
+</body>
+</html>
