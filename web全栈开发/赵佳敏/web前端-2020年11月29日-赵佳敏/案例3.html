@@ -152,7 +152,150 @@
     //给small_box添加事件，点击small_box，切换userck---使用变量接收已经选中的类，清除之前的类---获取左右两个按钮--添加两个按钮的点击事件---
     //获取底部容器以及小图的容器---底部容器的宽减去小图的容器的宽刚好就是small_list移动的距离---获取中图图片，点击小图找对应的中图----
     //获取中图容器，给中图添加事件，鼠标离开黄层消失，进入出现黄层---设置光标移动，黄块跟着移动，且光标位置在黄块正中间----对黄块进行限制，让他不能出去
-    //设置黄块里面的内容刚好显示对应的大图，大图的中图的比例就要等于中图和黄块的比例（创建时要按照比例计算层的宽和高）---移动时，黄块往右移动时，
+    //设置黄块里面的内容刚好显示对应的大图，大图的中图的比例就要等于大图容器和黄块的比例（创建时要按照比例计算层的宽和高）---移动时，黄块往右移动时，
+    // 大图往左移动才能到对应的大图位置（即设置大图显示背景图片坐标）---获取大图容器
+
+    var small_box = document.querySelectorAll(".small_box");
+    var leftbtn = document.querySelector(".leftbtn");
+    var rightbtn = document.querySelector(".rightbtn");
+    var small_list = document.querySelector(".small_list");
+    var small_img = document.querySelector(".small_img");
+    var c_middle_img = document.querySelector(".c_middle_img");
+    var c_middle = document.querySelector(".c_middle");
+    var bili = 800/350;
+    var c_box = document.querySelector(".c_box");
+    var big_img = document.querySelector(".big_img");
+
+
+    for(var i = 0;i<small_box.length;i++)
+    {
+        var saveEle = null;
+        saveEle = small_box[0];
+        small_box[i].onclick = function(){
+            saveEle.classList.remove("userck");
+            this.classList.add("userck");
+            saveEle = this;
+
+            var middle = this.getAttribute("data-middle");
+            c_middle_img.src = middle;
+
+            var big = this.getAttribute("data-big");
+            big_img.backgroundImage = "url('"+big+"')";
+        }
+    }
+    leftbtn.addEventListener("click",function(){
+        small_list.style.transform = "translatex(0px)";
+    });
+    rightbtn.addEventListener("click",function(){
+        var transX = small_img.offsetWidth-small_list.offsetWidth;
+        small_list.style.transform = "translatex("+transX+"px)";
+    });
+    var pos_ceng = null;
+    c_middle.onmouseenter = function(){
+        pos_ceng = document.createElement("div");
+        pos_ceng.className = "ceng";
+        var cenghw = 500/bili;
+        pos_ceng.style.width = cenghw+"px";
+        pos_ceng.style.height = cenghw+"px";
+        this.appendChild(pos_ceng);
+        big_img.style.display = "block";
+    }
+    c_middle.onmouseleave = function(){
+        pos_ceng.remove();
+        big_img.style.display = "none";
+    }
+    c_middle.onmousemove = function(e){
+        var x = e.pageX-c_box.offsetLeft-pos_ceng.offsetWidth/2;
+        var y = e.pageY-c_box.offsetTop-pos_ceng.offsetHeight/2;
+        var maxLeft = c_middle.offsetWidth-pos_ceng.offsetWidth;
+        var maxTop = c_middle.offsetHeight-pos_ceng.offsetHeight;
+        x = x<=0?0:x>maxLeft?maxLeft:x;
+        y = y<=0?0:y>maxTop?maxTop:y;
+        pos_ceng.style.left = x+"px";
+        pos_ceng.style.top = y+"px";
+        big_img.style.backgroundPosition = (-x*bili)+"px "+(-y*bili)+"px";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    /*var small_box = document.querySelectorAll(".small_box");
+    var leftbtn = document.querySelector(".leftbtn");
+    var rightbtn = document.querySelector(".rightbtn");
+    var small_list = document.querySelector(".small_list");
+    var small_img = document.querySelector(".small_img");
+    var c_middle_img = document.querySelector(".c_middle_img");
+    var c_middle = document.querySelector(".c_middle");
+    var bili = 800/350;
+    var c_box = document.querySelector(".c_box");
+    var big_img = document.querySelector(".big_img");
+
+    for(var i = 0;i<small_box.length;i++)
+    {
+        var saveEle = null;
+        saveEle = small_box[0];
+        small_box[i].onclick = function(){
+            saveEle.classList.remove("userck");
+            this.classList.add("userck");
+            saveEle = this;
+
+            var middle = this.getAttribute("data-middle");
+            c_middle_img.src = middle;
+
+            var big = this.getAttribute("data-big");
+            big_img.backgroundImage = "url('"+big+"')";
+        }
+    }
+    leftbtn.addEventListener("click",function(){
+        small_list.style.transform = "translatex(0px)";
+    });
+    rightbtn.addEventListener("click",function(){
+        var transX = small_img.offsetWidth-small_list.offsetWidth;
+        small_list.style.transform = "translatex("+transX+"px)";
+    });
+    var pos_ceng = null;
+    c_middle.onmouseenter = function(){
+        pos_ceng = document.createElement("div");
+        pos_ceng.className = "ceng";
+        var cenghw = 500/bili;
+        pos_ceng.style.width = cenghw+"px";
+        pos_ceng.style.height = cenghw+"px";
+        this.appendChild(pos_ceng);
+        big_img.style.display = "block";
+    }
+    c_middle.onmouseleave = function(){
+        pos_ceng.remove();
+        big_img.style.display = "none";
+    }
+    c_middle.onmousemove = function(e){
+        var x = e.pageX-c_box.offsetLeft-pos_ceng.offsetWidth/2;
+        var y = e.pageY-c_box.offsetTop-pos_ceng.offsetHeight/2;
+        var maxLeft = c_middle.offsetWidth-pos_ceng.offsetWidth;
+        var maxTop = c_middle.offsetHeight-pos_ceng.offsetHeight;
+        x = x<=0?0:x>maxLeft?maxLeft:x;
+        y = y<=0?0:y>maxTop?maxTop:y;
+        pos_ceng.style.left = x+"px";
+        pos_ceng.style.top = y+"px";
+        big_img.style.backgroundPosition = (-x*bili)+"px "+(-y*bili)+"px";
+    }
+*/
+
+
+
+
+
+    //给small_box添加事件，点击small_box，切换userck---使用变量接收已经选中的类，清除之前的类---获取左右两个按钮--添加两个按钮的点击事件---
+    //获取底部容器以及小图的容器---底部容器的宽减去小图的容器的宽刚好就是small_list移动的距离---获取中图图片，点击小图找对应的中图----
+    //获取中图容器，给中图添加事件，鼠标离开黄层消失，进入出现黄层---设置光标移动，黄块跟着移动，且光标位置在黄块正中间----对黄块进行限制，让他不能出去
+    //设置黄块里面的内容刚好显示对应的大图，大图的中图的比例就要等于大图容器和黄块的比例（创建时要按照比例计算层的宽和高）---移动时，黄块往右移动时，
     // 大图往左移动才能到对应的大图位置（即设置大图显示背景图片坐标）---获取大图容器
     /*var small_box = document.querySelectorAll(".small_box");
     //3. 获取左右两个按钮
@@ -233,7 +376,7 @@
     //给small_box添加事件，点击small_box，切换userck---使用变量接收已经选中的类，清除之前的类---获取左右两个按钮--添加两个按钮的点击事件---
     //获取底部容器以及小图的容器---底部容器的宽减去小图的容器的宽刚好就是small_list移动的距离---获取中图图片，点击小图找对应的中图----
     //获取中图容器，给中图添加事件，鼠标离开黄层消失，进入出现黄层---设置光标移动，黄块跟着移动，且光标位置在黄块正中间----对黄块进行限制，让他不能出去
-    //设置黄块里面的内容刚好显示对应的大图，大图的中图的比例就要等于中图和黄块的比例（创建时要按照比例计算层的宽和高）---移动时，黄块往右移动时，
+    //设置黄块里面的内容刚好显示对应的大图，大图的中图的比例就要等于大图容器和黄块的比例（创建时要按照比例计算层的宽和高）---移动时，黄块往右移动时，
     // 大图往左移动才能到对应的大图位置（即设置大图显示背景图片坐标）---获取大图容器
     /*var small_box = document.querySelectorAll(".small_box");
     var leftbtn = document.querySelector(".leftbtn");
