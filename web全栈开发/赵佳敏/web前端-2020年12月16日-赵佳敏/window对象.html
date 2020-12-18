@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .copy{
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+是否可以复制
+<button id="btn">点击重新加载</button>
+<script>
+    //常用提示框
+    //window.alert("弹框");
+    //window.confirm("确认是否提交？");
+    /*if(window.confirm("确认是否提交？"))
+    {
+        console.log("确认");
+    }
+    else
+    {
+        console.log("用户拒绝");
+    }*/
+
+   /* var price = prompt("请输入价格","0");
+    console.log(price);*/
+
+    /*window.onload = function(){
+        console.log("加载完成");
+    }*/
+
+    window.onresize = function(){
+        /*//浏览器可视区域的尺寸
+        console.log(window.innerHeight, window.innerHeight);
+        //浏览器的大小
+        console.log(window.outerWidth,window.outerHeight);
+        //屏幕的实际尺寸
+        console.log(window.screen.width);
+        console.log(window.screen.height);
+        //屏幕的尺寸，不包含任务栏
+        console.log(window.screen.availWidth);
+        console.log(window.screen.availHeight);*/
+
+        //浏览器的尺寸
+        /*console.log(document.documentElement.clientWidth);
+        //屏幕的宽
+        console.log(window.screen.availWidth);
+        console.log(window.innerWidth);*/
+    }
+
+    //禁止浏览器右键菜单事件
+    window.oncontextmenu = function(e){
+        //e.preventDefault();
+        return false;
+    }
+
+    document.body.oncopy = function(){
+        //根据浏览器的兼容写代码
+        //document.selection.createRange().text 这个是IE识别
+        var selection = window.getSelection()?window.getSelection():document.selection.createRange().text;
+        var link = "---------------------------------------</br>"+
+                   "转载来源：</br>"+
+                   "原文链接："+document.location.href+
+                   "---------------------------------------</br>";
+        var copytext = selection+link;
+        if(window.clipboardData){
+            window.clipboardData.setData("Text",copytext);
+        }
+        else{
+            //使用元素创建
+            var div = document.createElement("div");
+            div.className = "copy";
+            div.innerHTML = copytext;
+            document.body.appendChild(div);
+            selection.selectAllChildren(div);
+            setTimeout(function(){
+                div.remove();
+            },0)
+        }
+    }
+
+    window.onerror = function(){
+        console.log(1);
+    }
+
+    btn.onclick = function(){
+        window.location.reload();
+    }
+
+    window.onunload = function(){
+        console.log("关闭");
+        //浏览器关闭的时候写入缓存
+        window.cookie = "user = maodou";
+    }
+
+
+    window.onclose = function(){
+        alert("关闭");
+    }
+    btn.onclick = function(){
+        window.location.reload();
+        //关闭当前网页
+        window.close();
+        //打开网页
+        window.open("www.baidu.com");
+    }
+    console.log(navigator);
+    //系统环境
+    console.log(window.navigator.userAgent);
+</script>
+
+</body>
+</html>
