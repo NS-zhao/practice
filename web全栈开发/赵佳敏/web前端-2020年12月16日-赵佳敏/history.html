@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button id="gol">倒退</button>
+<button id="gor">前进</button>
+<script>
+    console.log(window.history);
+    history.back();//后退
+    history.forward();//前进
+    history.go();//参数1：前进1；参数-1：倒退1
+    history.pushState(null,'window对象',"./window对象.html");
+    history.replaceState(null,null,"./window对象.html");
+    gol.onclick = function(){
+        history.back();
+    }
+    gor.onclick = function(){
+        history.forward();
+    }
+    window.addEventListener("popstate",function(){
+        console.log(1);
+    })
+</script>
+</body>
+</html>
