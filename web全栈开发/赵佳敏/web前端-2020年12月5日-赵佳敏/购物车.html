@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="./js/cart.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+            color: #000;
+            margin: 0 5px;
+        }
+        .main{
+            width: 1190px;
+            min-height: 300px;
+            margin: 0 auto;
+        }
+        .totle_num{
+            float: left;
+            width: 100px;
+            height: 45px;
+            line-height: 45px;
+            color: #db0000;
+        }
+        .pos_address{
+            text-align: right;
+            height: 45px;
+            line-height: 45px;
+        }
+        .cart_title{
+            overflow: hidden;
+            background-color: #e0e0e0;
+            line-height: 50px;
+        }
+        .list{
+            width: 120px;
+            float: left;
+            font-size: 13px;
+
+        }
+
+        .ckAll,.userck{
+            vertical-align: middle;
+            margin: 0 10px 0 15px;
+        }
+        .shop_name{
+            width: 590px;
+        }
+        .centerinfo{
+            text-align: center;
+        }
+        .number{
+            font-size: 0;
+        }
+        .cart_num_list{
+            height: 90px;
+            padding: 10px 0 0 0;
+        }
+        .cartimg{
+            float: right;
+            width: 80px;
+            height: 80px;
+        }
+        .cartimg>img{
+            width: 100%;
+            height: 100%;
+        }
+        .shop_info{
+            display: block;
+            width: 208px;
+            height: 40px;
+            float: left;
+            font-size: 12px;
+            line-height: 20px;
+            overflow: hidden;
+        }
+        .dan_ov{
+            width: 130px;
+            float: left;
+            margin-left: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .is_disabled{
+            color: #e0e0e0;
+            cursor: no-drop;
+        }
+        .btn_left,.btn_right{
+            width: 17px;
+            height: 20px;
+            background-color: #efefef;
+            outline: none;
+            border: 1px solid #cbcbcb;
+        }
+        .shop_number{
+            width: 46px;
+            height: 20px;
+            text-align: center;
+            outline: none;
+            border: 1px solid #cbcbcb;
+            box-sizing: border-box;
+        }
+        .smallPrice{
+            display: inline;
+        }
+        .cart_footer{
+            line-height: 50px;
+            height: 50px;
+            border: 1px solid #e6e6e6;
+        }
+        .cart_f_left{
+            float: left;
+            width: 363px;
+            height: 50px;
+            font-size: 13px;
+        }
+        .cart_f_right{
+            float: right;
+            margin-top: 10px;
+        }
+        .go_btn{
+            float: right;
+            width: 90px;
+            height: 50px;
+            line-height: 50px;
+            background-color: #d80000;
+            color: #fff;
+            text-align: center;
+        }
+        .all_number{
+            float: right;
+            font-size: 13px;
+            line-height: 20px;
+            width: auto;
+            margin: 7px 20px 0 10px;
+        }
+        .all{
+            margin: 0 3px;
+            color: #d80000;
+            font-weight: 700;
+        }
+        .allprice{
+            font-size: 14px;
+        }
+        .cart_num_list_on{
+            background-color: rgba(255, 196, 89, 0.5);
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="main_title">
+        <div class="totle_num">
+            <h3>全部商品 4</h3>
+        </div>
+        <div class="pos_address">
+            <span>配送至：</span>
+            <span>西安市</span>
+        </div>
+    </div>
+    <div class="cart">
+        <div class="cart_title">
+            <div class="list">
+                <input class="ckAll" type="checkbox"/>
+                <span>全选</span>
+            </div>
+            <div class="list shop_name">
+                商品
+            </div>
+            <div class="list centerinfo">
+                单价
+            </div>
+            <div class="list centerinfo">
+                数量
+            </div>
+            <div class="list centerinfo">
+                小计
+            </div>
+            <div class="list centerinfo">
+                操作
+            </div>
+        </div>
+        <div class="cart_list">
+            <div class="cart_num_list">
+                <div class="list">
+                    <input class="userck" type="checkbox"/>
+                    <div class="cartimg">
+                        <img src="./img/1.jpg" alt=""/>
+                    </div>
+                </div>
+                <div class="list shop_name">
+                    <a class="shop_info" href="">小米（MI） 小米手环5代/5nfc升级款智能支付多功能运动手环男女防水手表心率检测手环腕带计步器 小米手环5 标准版</a>
+                    <a class="dan_ov" href="">小米（MI） 小米手环5代/5nfc升级款智能支付多功能运动手环男女防水手表心率检测手环腕带计步器 小米手环5 标准版</a>
+                </div>
+                <div class="list centerinfo">
+                    ￥
+                    <span class="price">600.00</span>
+                </div>
+                <div class="list centerinfo">
+                    <div class="number">
+                        <button class="btn_left is_disabled">-</button>
+                        <input class="shop_number" type="text" max = "200" value="1"/>
+                        <button class="btn_right">+</button>
+                    </div>
+                </div>
+                <div class="list centerinfo">
+                    ￥<h4 class="smallPrice">600.00</h4>
+                </div>
+                <div class="list centerinfo">
+                    <a class="remove_ele" href="">删除</a>
+                </div>
+            </div>
+            <div class="cart_num_list">
+                <div class="list">
+                    <input class="userck" type="checkbox"/>
+                    <div class="cartimg">
+                        <img src="./img/2.jpg" alt=""/>
+                    </div>
+                </div>
+                <div class="list shop_name">
+                    <a class="shop_info" href="">小米（MI） 小米手环5代/5nfc升级款智能支付多功能运动手环男女防水手表心率检测手环腕带计步器 小米手环5 标准版</a>
+                    <a class="dan_ov" href="">小米（MI） 小米手环5代/5nfc升级款智能支付多功能运动手环男女防水手表心率检测手环腕带计步器 小米手环5 标准版</a>
+                </div>
+                <div class="list centerinfo">
+                    ￥
+                    <span class="price">600.00</span>
+                </div>
+                <div class="list centerinfo">
+                    <div class="number">
+                        <button class="btn_left is_disabled">-</button>
+                        <input class="shop_number" type="text" max = "200" value="1"/>
+                        <button class="btn_right">+</button>
+                    </div>
+                </div>
+                <div class="list centerinfo">
+                    ￥<h4 class="smallPrice">600.00</h4>
+                </div>
+                <div class="list centerinfo">
+                    <a class="remove_ele" href="">删除</a>
+                </div>
+            </div>
+            <div class="cart_num_list">
+                <div class="list">
+                    <input class="userck" type="checkbox"/>
+                    <div class="cartimg">
+                        <img src="./img/3.jpg" alt=""/>
+                    </div>
+                </div>
+                <div class="list shop_name">
+                    <a class="shop_info" href="">小米（MI） 小米手环5代/5nfc升级款智能支付多功能运动手环男女防水手表心率检测手环腕带计步器 小米手环5 标准版</a>
+                    <a class="dan_ov" href="">小米（MI） 小米手环5代/5nfc升级款智能支付多功能运动手环男女防水手表心率检测手环腕带计步器 小米手环5 标准版</a>
+                </div>
+                <div class="list centerinfo">
+                    ￥
+                    <span class="price">600.00</span>
+                </div>
+                <div class="list centerinfo">
+                    <div class="number">
+                        <button class="btn_left is_disabled">-</button>
+                        <input class="shop_number" type="text" max = "200" value="1"/>
+                        <button class="btn_right">+</button>
+                    </div>
+                </div>
+                <div class="list centerinfo">
+                    ￥<h4 class="smallPrice">600.00</h4>
+                </div>
+                <div class="list centerinfo">
+                    <a class="remove_ele" href="">删除</a>
+                </div>
+            </div>
+            <div class="cart_num_list">
+                <div class="list">
+                    <input class="userck" type="checkbox"/>
+                    <div class="cartimg">
+                        <img src="./img/4.jpg" alt=""/>
+                    </div>
+                </div>
+                <div class="list shop_name">
+                    <a class="shop_info" href="">小米（MI） 小米手环5代/5nfc升级款智能支付多功能运动手环男女防水手表心率检测手环腕带计步器 小米手环5 标准版</a>
+                    <a class="dan_ov" href="">小米（MI） 小米手环5代/5nfc升级款智能支付多功能运动手环男女防水手表心率检测手环腕带计步器 小米手环5 标准版</a>
+                </div>
+                <div class="list centerinfo">
+                    ￥
+                    <span class="price">600.00</span>
+                </div>
+                <div class="list centerinfo">
+                    <div class="number">
+                        <button class="btn_left is_disabled">-</button>
+                        <input class="shop_number" type="text" max = "200" value="1"/>
+                        <button class="btn_right">+</button>
+                    </div>
+                </div>
+                <div class="list centerinfo">
+                    ￥<h4 class="smallPrice">600.00</h4>
+                </div>
+                <div class="list centerinfo">
+                    <a class="remove_ele" href="">删除</a>
+                </div>
+            </div>
+        </div>
+        <div class="cart_footer">
+            <div class="cart_f_left">
+                <input class="ckAll" type="checkbox"/>全选
+                <a id="deleteselect" href="">删除选中的商品</a>
+                <a href="">移入关注</a>
+                <a class="deleteCart" href="">清理购物车</a>
+            </div>
+            <div class="go_btn">去结算</div>
+            <div class="cart_f_right">
+                <div class="all_number">
+                    <span>已选择
+                        <span class="allnum all">0</span>
+                        件商品
+                    </span>
+                    <span>总价：
+                        <span class="allprice all">
+                            ￥
+                            <span id="s_totleprice">0.00</span>
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
