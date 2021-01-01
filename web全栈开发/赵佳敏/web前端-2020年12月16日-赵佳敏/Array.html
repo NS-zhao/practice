@@ -106,6 +106,65 @@
     console.log(f3);
     console.log(f3.shift());
     console.log(f3);
+
+    var has = f3.every(function(val,index){
+        return val%2 == 0;
+    });
+    console.log(has);
+
+    var has1 = f3.filter(function(value){
+        return value%2!=0;
+    });
+    console.log(has1);
+
+    var has2 = f3.find(function(value){
+        return value>1;
+    });
+    console.log(has2);
+
+    console.log(f3.includes(2));
+
+    console.log(f3.indexOf(2));
+    console.log(f3.indexOf(4));
+    console.log(f3.lastIndexOf(1));
+
+    console.log(Array.isArray(f3));
+
+    //var m1 = [1,2,3,4];
+   /* console.log(m1.slice(0, 3));
+    console.log(m1);
+
+    console.log(m1.splice(0, 2));
+    console.log(m1);
+
+    console.log(m1.toString());
+
+    var h1 = new Array('a','b');
+    console.log(h1.valueOf());
+    console.log(h1);
+    var h2 = ['a','b'];
+    console.log(h2.valueOf());
+    console.log(h2);
+    var sf = new String("abcdef");
+    console.log(sf.valueOf());
+    console.log(sf);
+
+    var inter = m1.keys();
+    console.log(inter.next());
+    console.log(inter.next());
+    console.log(inter.next());
+
+
+    var en = m1.entries();
+    console.log(en.next());
+    console.log(en.next());
+    console.log(en.next());*/
+
+    var m1 = [1,2,3,4];
+    console.log(m1.some(function (val, index) {
+        console.log(val);
+        return val % 2 == 0;
+    }));
 </script>
 </body>
 </html>
