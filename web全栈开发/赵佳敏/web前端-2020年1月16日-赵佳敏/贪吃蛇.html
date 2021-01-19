@@ -15,6 +15,10 @@
         .snack{
             position: absolute;
         }
+        .food{
+            position: absolute;
+
+        }
     </style>
 </head>
 <body>
@@ -22,7 +26,11 @@
     //1.创建地图实例---当地图不存在的时候，创建地图--把地图追加到body里面--加载地图，加载完成后实例化这个地图对象
     //2.创建蛇的实例---创建蛇---如果蛇元素不存在，创建蛇元素；若是蛇元素存在，直接修改坐标--将创建的蛇添加到地图里面---加载蛇，加载完成后实例化蛇这个对象
     //3.设置蛇移动，创建一个计时器，设置一个速度，再设置蛇移动的默认方向---蛇头根据方向来变
-    //4.根据按键设置蛇移动
+    //4.根据按键设置蛇移动--设置长按键加速
+    //5.移动过后，检测是否可以穿墙（只管蛇头）
+    //6.创建食物实例---创建食物方法--随机使用坐标--如果食物不存在，创建一个食物--如果食物存在，直接随机坐标就可以--将食物添加到地图上--实例化创建食物--
+       //检测食物坐标（食物不能设置在蛇身上）
+    //检测蛇头是否吃到食物
     var map,snack,food;
     //1.创建地图实例
     function Map(){
@@ -109,8 +117,100 @@
                     this._snack[0][3]+=1;
                     break;
             }
+
+            //检测蛇头是否吃到食物
+            this.iseatfood();
+            this.goqiang();
             //让界面元素都发生变化
             this.createSnack();
+        };
+        this.iseatfood() = function{
+            if(this._snack[0][2] == food.x&&this._snack[0][3] == food.y)
+            {
+                //蛇增加一节，食物重新随机位置
+                //蛇最后一节增加的坐标
+                var len = this._snack.length-1;
+                var x = this._snack[len][2];
+                var y = this._snack[len][3];
+                this._snack.push(['#fff',null,1,1]);
+                //食物重新随机位置
+                food.createFood();
+            }
+        }
+        //移动之后，检测是否可以穿墙
+        this.goqiang = function(){
+            if(this._snack[0][2]>29){
+                this._snack[0][2] = 0;
+            }
+            if(this._snack[0][2]<0){
+                this._snack[0][2] = 29;
+            }
+            if(this._snack[0][3]>19){
+                this._snack[0][3] = 0;
+            }
+            if(this._snack[0][3]<0){
+                this._snack[0][3] = 19;
+            }
+        }
+
+    }
+
+
+
+    //6.创建食物实例
+    function Food(){
+        this.w = 30;
+        this.h = 30;
+        this.fcolor = "pink";
+        this.x;
+        this.y;
+        this._food = null;//保留食物当前对象
+        //检测食物坐标（食物不能设置在蛇身上）
+        this.checkPos = function(){
+            var iswhile = false;//表示开关
+            do{
+                //随机使用坐标
+                this.x = Math.floor(Math.random()*30);
+                this.y = Math.floor(Math.random()*20);
+                var ishas = false;//检测坐标中是否有相等的
+                //检测坐标
+                for(var i = 0;i<snack._snack.length;i++)
+                {
+                    if(snack._snack[i][2] == this.x&&snack._snack[i][3] == this.y)
+                    {
+                        //如果坐标一样，需要重新随机，直到坐标不一样
+                        ishas = true;
+                        break;
+                    }
+                }
+                if(ishas)
+                {
+                    iswhile = true;
+                }
+                else{
+                    iswhile = false;
+                }
+            }
+            while(iswhile)
+        }
+        //创建食物方法
+        this.createFood = function(){
+            //检测坐标
+            this.checkPos();
+
+            //如果食物不存在，创建一个食物
+            if(this._food == null){
+                this._food = document.createElement("div");
+                this._food.style.width = this.w+"px";
+                this._food.style.height = this.h+"px";
+                this._food.style.backgroundColor = this.fcolor;
+                this._food.classList.add("food");
+                //将食物添加到地图上
+                map._map.appendChild(this._food);
+            }
+            //如果食物存在，直接随机坐标就可以
+            this._food.style.left = this.x*this.w+"px";
+            this._food.style.top = this.y*this.h+"px";
         }
 
     }
@@ -126,6 +226,10 @@
         //timer = setInterval(snack.move,map.speed);
         //设置计时
         map.resetTimer();
+
+        //实例化创建食物
+        food = new Food();
+        food.createFood();
         //添加键盘事件
         document.body.onkeyup = function(e){
             checkWay(e);
