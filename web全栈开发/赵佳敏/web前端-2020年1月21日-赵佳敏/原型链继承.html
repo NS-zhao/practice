@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //动物父类
+    function Animal(name,sex){
+        this.name = name||'Animal';
+        this.sex = sex||'未知';
+        this.sleep = function(){
+            console.log(this.name + "在睡觉！");
+        }
+    }
+    //添加原型属性和方法
+    Animal.prototype = {
+        eat:function(){
+            console.log(this.name + "在吃饭！");
+        },
+        play:function(){
+            console.log(this.name + "在玩！");
+        }
+    }
+    //原型链继承
+    function Cat(){
+
+    }
+    //实现原型链继承
+    //Cat.prototype = new Animal('小赵','女');
+    //或者也可以用下面这种方式写
+    Cat.prototype = new Animal();
+    Cat.prototype.name = "小赵";
+    Cat.prototype.sex = "女";
+    var scat = new Cat();
+    //但是不能想下面这种方式写，若是这样写，直接成了类的构造属性和方法了。
+    //scat.name = "小赵";
+    //scat.sex = "女";
+    console.log(scat);
+    scat.sleep();
+    scat.eat();
+    scat.play();
+
+    console.log(scat instanceof Animal);//true
+    console.log(scat instanceof Cat);//true
+</script>
+</body>
+</html>
