@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function Person(name,age){
+        this.name = name;
+        this.age = age;
+    }
+    Person.prototype = {
+        sleep:function(){
+            console.log(this.name + "在睡觉！");
+        }
+    }
+    //实例继承
+    function Student(obj){
+        function fun(){
+
+        }
+        //把obj寄生到fun函数的prototype上面
+        fun.prototype = obj;
+        return new fun();
+    }
+    var p = new Person('小赵',18);//实例化Person
+    //实例继承
+    function getObj(){
+        var stu = Student(p);
+        stu.work = "学习";
+        return stu;
+    }
+    var s = getObj();
+    console.log(s);
+    s.sleep();
+</script>
+</body>
+</html>
