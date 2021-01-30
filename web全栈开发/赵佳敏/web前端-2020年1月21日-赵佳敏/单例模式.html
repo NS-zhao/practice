@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var singn = (function(){
+        var instance;
+        //构建唯一实例
+        if(instance == undefined)//检测当前是否有实例
+        {
+            instance = new Constructor();
+        }
+        //这里写构造函数的代码
+        function Constructor(){
+
+        }
+        //返回唯一实例
+        return instance;
+    })();
+    console.log(singn);
+
+    function Person(name){
+        this.name = name;
+    }
+    Person.prototype.eat = function(){
+        console.log("吃饭");
+    }
+    //闭包方式写单例
+    var instance = (function(){
+        var ins;
+        var fun = function(name){
+            if(ins == undefined){
+                this.name = name;
+                this.sleep();
+                return this;
+            }
+        };
+        fun.prototype.sleep = function(){
+            console.log(this.name);
+        }
+        return fun;
+    })();
+    var p = new instance('小赵');
+    console.log(p);
+</script>
+</body>
+</html>
