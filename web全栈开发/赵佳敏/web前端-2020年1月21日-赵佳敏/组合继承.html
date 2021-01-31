@@ -1,0 +1,39 @@
+ <!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //动物父类
+    function Animal(name,sex){
+        this.name = name||'Animal';
+        this.sex = sex||'未知';
+        this.sleep = function(){
+            console.log(this.name + "在睡觉！");
+        }
+    }
+    //添加原型属性和方法
+    Animal.prototype = {
+        eat:function(){
+            console.log(this.name + "在吃饭！");
+        },
+        play:function(){
+            console.log(this.name + "在玩！");
+        }
+    }
+    function Cat(name,sex){
+        //构造继承
+        Animal.call(this,name,sex);
+    }
+    //原型链继承
+    Cat.prototype = new Animal();
+    var cat = new Cat('小花','公');
+    console.log(cat);
+
+    console.log(cat instanceof Animal);//true
+    console.log(cat instanceof Cat);//true
+</script>
+</body>
+</html>
