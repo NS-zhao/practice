@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //订阅中心
+    var pubsub = {
+        list:{},//存储订阅事件
+        //添加订阅方法
+        subscribe:function(key,fn){
+            if(!this.list[key])
+            {
+                this.list[key] = [];
+            }
+            this.list[key].push(fn);
+        },
+        //发布订阅
+        publish:function(key,time){
+            for(var index in this.list[key]){
+                this.list[key][index].call(this);
+            }
+        },
+        //取消订阅
+        unpublish:function(key,fn){
+            var that = this;
+            if(!that.list[key])
+                return;
+            if(!fn)
+            {
+                console.log("fn参数不存在");
+            }
+            else
+            {
+                if(typeof fn == 'function')
+                {
+                    that.list[key].map(function(f,index){
+                        if(f === fn)
+                        {
+                            that.list[key].splice(index,1);
+                        }
+                    });
+                }
+                else
+                {
+                    console.log("fn参数不是函数");
+                }
+            }
+        }
+    }
+    //订阅
+    pubsub.subscribe('gowork',function(time){
+        console.log("上班了,打卡时间为："+time);
+    });
+    pubsub.subscribe('backwork',work);
+    function work(time){
+        console.log("下班了,打卡时间为："+time);
+    }
+    console.log(pubsub.list);
+    //发布订阅
+    pubsub.publish('gowork','8:00:00');
+    pubsub.publish('backwork','18:00:00');
+    //取消订阅
+    pubsub.unpublish('backwork',work);
+    console.log(pubsub.list);
+</script>
+</body>
+</html>
