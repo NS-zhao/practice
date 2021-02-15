@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //定义错误的策略集‘
+    var msg = {
+        default: '输入格式不正确！',
+        maxLength: '输入长度太长！',
+        minLength: '输入长度不够！',
+        isEmpty: '输入不能为空！',
+        isNumber: '输入的值必须为数字！',
+        success:'正确！'
+    }
+    //逻辑代码使用（验证规则）
+    var ruleList = {
+        isNumber: function (value, info) {
+            if (!/^\d+$/.test(value)) {
+                return info || msg['isNumber'];
+            }
+            else{
+                msg['success'];
+            }
+        },
+        default: function (value, info) {
+            if (!/^\w+$/.test(value)) {
+                return info || msg['default'];
+            }
+            else{
+                return msg['success'];
+            }
+        },
+        maxLength: function (value, length, info) {
+            if (value.length > length) {
+                return info || msg['maxLength'];
+            }
+            else{
+                return  msg['success'];
+            }
+        },
+        minLength: function (value, length, info) {
+            if (value.length < length) {
+                return info || msg['minLength'];
+            }
+            else
+            {
+                return  msg['success'];
+            }
+        },
+        isEmpty: function (value, info) {
+            if (value.length == 0) {
+                return info || msg['isEmpty'];
+            }
+            else{
+                return  msg['success'];
+            }
+        },
+        replace: function (value) {
+            return value.replace(/\s/g, '');
+        }
+    }
+
+    //创建一个验证类
+    function Validator() {
+        this.item = {};//存储验证规则
+    }
+    Validator.prototype = {
+        constructor: Validator,
+        add: function (id, value, rule, info) {
+            if (!this.item[id]) {
+                this.item[id] = [];
+            }
+            value=ruleList.replace(value);
+            var arr = [value];
+            //针对rule进行逻辑检测
+            var len;
+            if (rule.indexOf(":") != -1) {
+                arr.push(rule.split(":")[1]);
+                rule = rule.split(":")[0];
+            }
+            arr.push(info);
+            this.item[id].push([ruleList[rule], arr]);
+        },
+        //开始验证的方法
+        start: function (id) {
+            if (!this.item[id])
+                return;
+            this.item[id].map(function (list, index) {
+                console.log(list[0].apply(null,list[1]));
+            });
+        }
+    };
+    //给当前类添加验证规则
+    var validator = new Validator();
+
+    validator.add('userid', 'abc123_nm+', 'default', '值只能包含数字、字母、_');
+    validator.add('userid', 'abc123_nm11', 'maxLength:10', '长度不能大于10位！');
+    validator.add('userid', 'abc', 'minLength:5', '长度不能小于5位！');
+    validator.add('userid', '     ', 'isEmpty');
+
+    validator.add('pwd', 'abc123_nm+', 'default', '值只能包含数字、字母、_');
+    validator.add('pwd', 'abc123_nm11', 'maxLength:10', '长度大于10位！');
+    validator.add('pwd', 'abc', 'minLength:5', '长度不能小于5位！不能');
+    validator.add('pwd', '     ', 'isEmpty');
+
+    console.log(validator.item);
+
+    validator.start('userid');
+    validator.start('pwd');
+
+</script>
+</body>
+</html>
