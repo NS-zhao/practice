@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    /*try{
+        //抓异常的代码
+    }
+    catch(e){
+        throw e;//抛出异常
+    }
+    finally{
+        //最后的代码
+    }*/
+
+    var txt = "你好";
+    try{
+        method('Hello World');
+    }
+    catch(e){
+        //throw e;
+        //throw e.message;
+        console.log(e.message);
+        var error = new Error("请稍后");
+        throw error;
+    }
+    finally{
+        fun(txt);
+    }
+    function fun(a){
+        console.log(a);
+    }
+    console.log(10);
+</script>
+</body>
+</html>
