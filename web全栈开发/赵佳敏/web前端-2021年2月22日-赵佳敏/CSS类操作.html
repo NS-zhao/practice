@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .red0{
+            color: red;
+        }
+        .red1{
+            color: deeppink;
+        }
+        .red2{
+            color: deepskyblue;
+        }
+    </style>
+</head>
+<body>
+<script src="js/jquery-1.9.1.js"></script>
+<button class="btn red0">按钮</button>
+<button class="btn red1">按钮</button>
+<button class="btn red2">按钮</button>
+
+<script>
+    /*$('.btn').addClass('red');
+    $('.btn').addClass(function(index){
+        return 'red'+index;
+    })*/
+
+    /*$('.btn').removeClass('.btn');
+     $('.btn').removeClass(function(index){
+     return 'red'+index;
+     })*/
+
+    $('.btn').toggleClass('btn');
+    $('.btn').toggleClass('btn-list');
+    //true代表添加，false代表删除
+    $('.btn').toggleClass('btn-list',false);
+    $('.btn').toggleClass(function(index,cs){
+        return 'list'+index;
+    },true);
+</script>
+</body>
+</html>
