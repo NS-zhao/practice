@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div.box{
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<script src="js/jquery-1.9.1.js"></script>
+<div class="box">
+    <button class="box">按钮</button>
+</div>
+<script>
+    //jquery处理事件冒泡
+    //方法1：
+    /*var count = 0;
+    $('.box').click(function(e){
+        count++;
+        console.log(count);
+        return false;
+    })*/
+    //方法2：
+   /* var count = 0;
+    $('.box').click(function(e){
+        count++;
+        console.log(count);
+        e.stopPropagation();
+    })*/
+    //原生js处理事件冒泡：
+    /*var count = 0;
+    $('.box').click(function(e){
+        count++;
+        console.log(count);
+        e.originalEvent.cancelBubble = true;
+    })*/
+    //处理事件默认行为
+    var count = 0;
+    $('.box').click(function(e){
+        count++;
+        console.log(count);
+        e.preventDefault();
+    })
+</script>
+</body>
+</html>
