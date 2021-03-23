@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="js/jquery-1.9.1.js"></script>
+<button id="btn">按钮</button>
+<input type="text" class="ipt" value="123"/>
+<div class="box" style="width: 100px;height: 100px;border: 1px solid red"></div>
+<ul class="menu">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+</ul>
+<p>段落</p>
+<div class="red" style="width: 100px;height: 100px;background-color: red"></div>
+<script>
+    /*$(document).ready(function(){
+        console.log('加载完成');
+    });
+    $(function(){
+        console.log('加载完成');
+    });*/
+
+
+    /*$('#btn').click(function(e){
+     console.log('点击', e.data);
+     }).mouseleave(function(){
+     console.log('离开');
+     }).mouseenter(function(){
+     console.log('进入');
+     }).mousemove(function(){
+     console.log('移动');
+     })
+
+     //完全获焦
+     $('.ipt').focus(function(){
+     $(this).css({
+     color:'red'
+     });
+     });
+
+     //获焦
+     $('.ipt').focusin(function(){
+     $(this).css({
+     color:'red'
+     });
+     //失焦
+     }).focusout(function(){
+     $(this).css({
+     color:'blue'
+     });
+     });
+
+     $('.ipt').focusin(function(){
+     console.log(1);
+     }).focus(function(){
+     console.log(2);
+     }).focusout(function(){
+     console.log(3);
+     }).blur(function(){
+     console.log(4);
+     })*/
+
+
+    /*$(document).bind('mousewheel',function(e){
+        //下面这个值的正负，判断上下滑动
+        console.log(e.originalEvent.deltaY);
+    });
+
+    document.addEventListener('mousewheel',function(e){
+        console.log(e.deltaY);
+    })*/
+
+    /*$('.box').hover(function(){
+        console.log('进入');
+    },function(){
+        console.log('离开');
+    });*/
+
+   /* $('.box').on('click',10,function(e){
+        console.log(e.data);
+    });
+    $('.menu').on('click','li',function(e){
+        console.log(e.target);
+    });
+    $('.box').on('mouseenter mouseleave',function(e){
+        if(e.type == 'mouseenter')
+        {
+            console.log('进入');
+        }
+        else{
+            console.log('离开');
+        }
+    });*/
+
+    /*$('.menu').off();
+    //移除指定事件
+    $('.menu').off('click');*/
+    /*function method(){
+        console.log('段落');
+        $('body').off('click','p',method);
+    }
+    $('body').on('click','p',method);
+    $('.red').bind('click mouseleave',function(){
+        console.log('点击');
+    });*/
+
+    /*//全部移除
+    $('.red').unbind();
+    //移除指定事件
+    $('.red').one('click',function(){
+        console.log('点击');
+    });
+    $('.red').click(20,function(e,a,b,c){
+        console.log('点击', e.data, a, b, c);
+    }).trigger('click',[1,2,3]);*/
+
+
+    $('.red').on('myevent',function(e){
+        console.log(e);
+    }).trigger('myevent');
+</script>
+</body>
+</html>
