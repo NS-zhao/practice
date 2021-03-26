@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let {id,name} = {id:10086,name:"张三"};
+        // console.log(id,name);//10086 "张三"
+        // let {id,name,sex} = {id:10086,name:"张三"};
+        // console.log(sex);//undefined
+
+        // let {id:num,name:nickname} = {id:10086,name:"张三"};
+        // console.log(num,nickname);//10086 "张三"
+        // console.log(id,name);//报错，找不到
+
+        // let {a:a,b:b} = {a:1,b:2};
+        // //等价于
+        // let {a,b} = {a:1,b:2};
+
+        // let {id,name,hobby} = {id:10086,name:"张三",hobby:[1,2,3]};
+        // console.log(hobby);//[1, 2, 3]
+        // let {a:[b,[c,d]]} = {a:[1,[2,3]]};
+        // console.log(a);//a is not defined
+        // console.log(b,c,d);//1 2 3
+
+        // let {a,a:[b,[c,d]]} = {a:[1,[2,3]]};
+        // console.log(a);//[1,[2,3]]
+        // console.log(b,c,d);//1 2 3
+
+        // let {a} = {a:1};
+        // console.log(a);//1
+        // let {a:b} = {a:1};
+        // console.log(a);//a is not defined
+        // console.log(b);//1
+        // let {a,a:b} = {a:1};
+        // console.log(a);//1
+        // console.log(b);//1
+        // let {a,a:[x,y]} = {a:[1,2]};
+        // console.log(a);//[1,2]
+        // console.log(x,y);//1 2
+
+        // let {a = 1,b = 2} = {a:undefined,b:undefined};
+        // console.log(a,b);//1 2
+        // let {a = 1,b = 2} = {};
+        // console.log(a,b);//1 2
+        // let {a,b} = {};
+        // console.log(a,b);//undefined undefined
+        // let {a:1,b:2} = {a:3,b:4};//这个格式不支持
+
+        // {
+        //     let x;
+        //     {x} = {x:1};
+        //     console.log(x);//报错
+        // }
+
+        let {x} = {x:1};
+        //或者
+        ({x} = {x:1});
+    </script>
+</body>
+</html>
