@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="press">按钮</button>
+    <script>
+        // let obj = {
+        //     sleep:function(){
+        //         console.log(this);//sleep
+        //         setTimeout(function(){
+        //             console.log(this);//window
+        //         },1000);
+        //     }
+        // };
+        // obj.sleep();
+
+        // let obj = {
+        //     sleep:function(){
+        //         console.log(this);//Object
+        //         setTimeout(()=>{
+        //             console.log(this);//Object
+        //         },1000);
+        //     }
+        // };
+        // obj.sleep();
+
+        function data(){
+            //不带参
+            // let data = () => {
+
+            // }
+            // //1个参
+            // //es5写法
+            // let data1 = function(a){
+
+            // }
+            // //es6写法
+            // let data2 = a => {
+
+            // }
+            // //2个参
+            // //es5写法
+            // let data3 = function(a,b){
+
+            // }
+            // //es6写法
+            // let data2 = (a,b) => {    
+
+            // }
+
+            // let d1 = () => {
+            //     return 123;
+            // }
+            // let d2 = () => 123;
+
+            // let d3 = () => ({a:1,b:2});
+            // console.log(d3());
+            // //但是不能像下面这样写，会报错
+            // let d3 = () => {a:1,b:2};
+            // console.log(d3());//报错
+
+            // let stu = {
+            //     sleep:() => {
+            //         console.log(this);
+            //     }
+            // }
+            // stu.sleep();
+
+
+            // var button = document.getElementById('press');
+            // button.addEventListener('click', () => {
+            //     this.classList.toggle('on');
+            // });
+
+            // let stus = {
+            //     eat(){
+                    
+            //     }
+            // }
+
+            let fun3 = function (...values) {
+                console.log(arguments);
+                console.log(values);
+            }
+            fun3(1, 2, 3, 4);
+            
+        }
+    </script>
+</body>
+</html>
