@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let a = [1,2,5,4,5,4,1,1,2];
+        let arr = new Set(a);
+        console.log(arr);// {1, 2, 5, 4}
+
+
+        // arr.map((it,index) => {
+        //     console.log(it);
+        // });
+
+        // //无长度属性
+        // console.log(arr.length);//undefined
+        // for(var i = 0;i<arr.length;i++){
+        //     console.log(arr[i]);
+        // }
+        // console.log(arr.entries());
+        // for(let key in arr.entries()){
+        //     console.log(key);
+        // }
+
+        // for(let value of arr){
+        //     console.log(value);//1 2 5 4
+        // }
+        // arr.forEach((item) => {
+        //     console.log(item);//1 2 5 4
+        // });
+
+        console.log(arr.size);//4
+
+        // let sets = new Set([1,2,3,4]);
+        // //添加元素
+        // sets.add('a');
+        // console.log(sets);//{1, 2, 3, 4, "a"}
+        // //检测Set集合中是否包含某个元素，若是有，返回true，没有返回false
+        // console.log(sets.has('a'));//true
+        // //删除某个元素，删除成功返回true，不成功返回false
+        // console.log(sets.delete('a'));//true
+        // console.log(sets);// {1, 2, 3, 4}
+        // //清除集合，无返回值
+        // sets.clear();
+        // console.log(sets);//{}
+        // console.log(sets.clear());//undefined
+
+
+        let setarr = new Set([1,2,3,4,5]);
+        console.log(setarr.keys());//SetIterator {1, 2, 3, 4, 5}
+        for(let key of setarr.keys()){
+            console.log(key);//1 2 3 4 5
+        }
+
+        console.log(setarr.values());//SetIterator {1, 2, 3, 4, 5}
+        for(let key of setarr.values()){
+            console.log(key);//1 2 3 4 5
+        }
+
+        console.log(setarr.entries());//SetIterator {1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}
+        for(let key of setarr.entries()){
+            console.log(key);//[1, 1] [2, 2] [3, 3] [4, 4] [5, 5]
+        }
+
+        console.log(...setarr);//1 2 3 4 5
+
+        let m = [1,2,3,4,5,4,5,6];
+        let m1 = [...new Set(m)];
+        console.log(m1);//[1, 2, 3, 4, 5, 6]
+
+
+        let h = [[1,2],[3,4]];
+        //数组外层拆开，里层还是数组，数组也是对象
+        let weak = new WeakSet(h);
+        // let weak1 = new WeakSet(1);//报错
+        // let weak2 = new WeakSet([1,2,3]);//报错
+        console.log(weak);//WeakSet {Array(2), Array(2)}
+
+
+        weak.add({});
+        console.log(weak);//WeakSet {Array(2), {…}, Array(2)}
+        console.log(weak.has({}));//false
+        weak.add([5,6]);
+        console.log(weak.has([5,6]));//false
+        let so = {};
+        weak.add(so);
+        console.log(weak.has(so));//true
+
+
+        // for(let key of weak){
+        //     console.log(key);//报错  weak is not iterable
+        // }
+
+        let sm = [
+            ["name","zhaojiamin"],
+            ["sex","女"]
+        ]
+        let maparr = new Map(sm);
+        console.log(maparr);///Map(2) {"name" => "zhaojiamin", "sex" => "女"}
+
+        console.log(maparr.size);//2
+        
+
+        maparr.set("age",20);
+        console.log(maparr);//Map(3) {"name" => "zhaojiamin", "sex" => "女", "age" => 20}
+
+        console.log(maparr.get("name"));//zhaojiamin
+
+        console.log(maparr.has("sex"));//true
+
+        console.log(maparr.delete("age"));//true
+        console.log(maparr);//Map(2) {"name" => "zhaojiamin", "sex" => "女"}
+
+        // maparr.clear();
+        console.log(maparr);//Map(0) {}
+
+        for(let item of maparr){
+            console.log(item);//["name", "zhaojiamin"]["sex", "女"]
+        }
+
+        console.log(maparr.keys());//MapIterator {"name", "sex"}
+        for(let key of maparr.keys()){
+            console.log(key);//name sex
+        }
+
+        console.log(maparr.values());//MapIterator {"zhaojiamin", "女"}
+        for(let value of maparr.values()){
+            console.log(value);//zhaojiamin 女
+        }
+
+        console.log(maparr.entries());//MapIterator {"name" => "zhaojiamin", "sex" => "女"}
+        for(let item of maparr.entries()){
+            console.log(item);// ["name", "zhaojiamin"]["sex", "女"]
+        }
+        maparr.forEach((item)=>{
+            console.log(item);//zhaojiamin 女
+        })
+        console.log(...maparr);//(2)["name", "zhaojiamin"] (2) ["sex", "女"]
+
+        let m2 = new Map([
+            [true, 7],
+            [{foo: 3}, ['abc']]]);
+        console.log(m2);
+
+        let obj = {};
+        for(let item of maparr)
+        {
+            obj[item[0]] = item[1];
+        }
+        console.log(obj);//{name: "zhaojiamin", sex: "女"}
+
+        // let obj1 = {"a":1, "b":2};
+        // let map = new Map(Object.entries(obj1)); 
+        // console.log(map);//{"a" => 1, "b" => 2}
+
+
+        function strMapToObj(strMap) {
+            let obj = Object.create(null);
+            for (let [k,v] of strMap) {
+                obj[k] = v;
+            }
+        return obj;
+        }
+        function strMapToJson(strMap) {
+            return JSON.stringify(strMapToObj(strMap));
+        }
+        // let myMap = new Map().set('yes', true).set('no', false);
+        // console.log(strMapToJson(myMap));//{"yes":true,"no":false}
+
+        function mapToArrayJson(map) {
+            return JSON.stringify([...map]);
+        }
+        let myMap = new Map().set(true, 7).set({foo: 3}, ['abc']);
+        console.log(mapToArrayJson(myMap));//[[true,7],[{"foo":3},["abc"]]]
+
+
+        let json = {"a":"1","b":"2","c":"3"};
+        let ay = [];
+        //转成[['a',1],['b',2],['c',3]]的格式
+        for(let key in json)
+        {
+            console.log(key);
+            ay.push([key,json[key]]);
+        }
+        console.log(new Map(ay));//Map(3) {"a" => "1", "b" => "2", "c" => "3"}
+
+
+        let weakmap=new WeakMap();
+        console.log(weakmap);
+    </script>
+</body>
+</html>
