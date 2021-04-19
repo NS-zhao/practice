@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        {
+            // //es5
+            // var n = '赵';
+            // var obj = {
+            //     name:n
+            // }
+            // console.log(obj);//{name: "赵"}
+            // //es6
+            // var name = '赵';
+            // var stu = {
+            //     name
+            // }
+            // console.log(stu);//{name: "赵"}
+
+            // let a = 10;
+            // let b = 20;
+            // let stu = {
+            //     //es5函数写法
+            //     sleep:function(){
+
+            //     },
+            //     //es6函数写法
+            //     eat(){
+            //         return{
+            //             a,b
+            //         }
+            //     }
+            // }
+
+
+            // let ani = {
+            //     _name:'',
+            //     set name(n){
+            //         console.log('设置');//设置
+            //         this._name = n;
+            //     },
+            //     get name(){
+            //         console.log('获取');//获取
+            //         return this._name;
+            //     }
+            // }
+            // console.log(ani);//{_name: ""}
+            // ani.name = '赵';
+            // console.log(ani.name);//赵
+
+
+            // let z = {a:1};
+            // console.log(z.a);//1
+            // console.log(z['a']);//1
+
+            // let o = {};
+            // o.age = 18;
+            // o['sex'] = '男';
+            // console.log(o);//{age: 18, sex: "男"}
+
+            // let person = "name";
+            // let per = "eat";
+            // //解析属性变量使用[]包变量
+            // let list = {
+            //     [person]:'',
+            //     [per](){
+            //         console.log('执行函数');//执行函数
+            //     }
+            // }
+            // console.log(list);//{name: "", eat: ƒ}
+            // console.log(list[per]());//undefined
+            // //对象属性上的name属性，获取的是函数名称
+            // console.log(list[per].name);//eat
+
+
+            let a = {
+                set age(n){
+                    this._age = n;
+                },
+                get age(){
+                    return _age;
+                }
+            }
+            //console.log(a.age.name);
+
+
+            // //首先得获取整个访问器
+            // let descript = Object.getOwnPropertyDescriptor(a,'age');
+            // console.log(descript);//{get: ƒ, set: ƒ, enumerable: true, configurable: true}
+            // console.log(descript.set.name);//set age
+            // console.log(descript.get.name);//get age
+
+
+            // let people = {
+            //     name:"赵佳敏",
+            //     age:20
+            // }
+            // //获取people对象name属性的相关配置
+            // var desc = Object.getOwnPropertyDescriptor(people,'name');
+            // console.log(desc);//{value: "赵佳敏", writable: true, enumerable: true, configurable: true}
+            // //设置对象属性的相关配置
+            // Object.defineProperty(people,'name',{
+            //     enumerable:false
+            // });
+            // var desc1 = Object.getOwnPropertyDescriptor(people,'name');
+            // console.log(desc);//{value: "赵佳敏", writable: true, enumerable: true, configurable: true}
+
+
+            // //不可枚举的属性，有以下几种情况忽略改属性
+            // for(let key in people){
+            //     console.log(key);//age
+            // }
+            // //configurable 默认true，允许删除对象属性，false不允许
+            // delete people.age;
+            // console.log(people);//{name: "赵佳敏"}
+
+            //对象的遍历
+            //对对象的属性设置不可枚举，不能获取到
+            let sw = {
+                name:'zhao',
+                age:10,
+                sex:"女",
+                [Symbol('age')](){
+                    console.log('独一无二的方法');
+                }
+            }
+            for(let key in sw){
+                console.log(key);
+            }
+
+            //Object.keys();返回所有key集合
+            console.log(Object.keys(sw));//["name", "age", "sex"]
+            console.log(Object.getOwnPropertyNames(sw));//["name", "age", "sex"]
+            //返回symbol数据类型的key值
+            console.log(Object.getOwnPropertySymbols(sw));//[Symbol(age)]
+
+        }
+    </script>
+</body>
+</html>
