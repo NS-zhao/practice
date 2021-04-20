@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // console.log(Object.is('abc','abc'));//true
+        // console.log(Object.is({},{}));//false
+
+        // Object.defineProperty(Object,'is',{
+        //     value:function(x,y){
+        //         if(x === y)
+        //         {
+        //             return true;
+        //         }
+        //         else{
+        //             return false;
+        //         }
+        //     }
+        // });
+        // console.log(Object.is({},{}));
+
+
+        // let h1 = {a:1,b:2};
+        // let h2 = {a:2,c:3};
+        // console.log(Object.assign({},h1,h2));//{a: 2, b: 2, c: 3}
+
+        // let h1 = {a:1,b:2};
+        // let h2 = {a:2,c:3};
+        // let target = {};
+        // console.log(Object.assign(target,h1,h2));//{a: 2, b: 2, c: 3}
+        // console.log(target);//{a: 2, b: 2, c: 3}
+
+        // const obj1 = {a:{b:1}};
+        // const obj2 = Object.assign({},obj1);
+        // obj1.a.b = 2;
+        // console.log(obj2.a.b);//2
+
+
+        // const obj1 = {a:1};
+        // const obj2 = Object.assign({},obj1);
+        // obj1.a = 2;
+        // console.log(obj2.a);//1
+
+        // const obj1 = {a:1,b:{c:1}};
+        // const obj2 = Object.assign({},obj1);
+        // obj1.b.c = 2;
+        // console.log(obj2.b.c);//2
+
+        // let o1 = {a:1,b:2,c:3};
+        // let o2 = {a:'abc',b:'def'};
+        // console.log(Object.assign(o1,o2));//{a: "abc", b: "def", c: 3}
+        // let o3 = [1,2,3];
+        // let o4 = [4,5];
+        // console.log(Object.assign(o3,o4));//[4, 5, 3]
+
+        // let work = {};
+        // console.log(Object.assign(work,{a:1,b:2}));//{a: 1, b: 2}
+
+        // Array.prototype.mySort = function(){
+        //     mySort = function(){
+
+        //     }
+        // }
+        // console.log(Array.prototype);
+        // Object.assign(Array.prototype,{
+        //     myPai:function(){
+
+        //     }
+        // })
+        // console.log([]);
+
+        let m={a:1,b:2,c:3}
+        console.log(Object.keys(m));//["a", "b", "c"]
+        //返回的是key的集合
+        console.log(Object.values(m));//[1, 2, 3]
+        //返回值的集合
+        console.log(Object.entries(m));//[Array(2), Array(2), Array(2)]
+        //返回的是key:value的二维数组
+    </script>
+</body>
+</html>
