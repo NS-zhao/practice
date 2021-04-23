@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html{
+            font-size: 13px;
+        }
+        a{
+            text-decoration: none;
+            color: #666;
+        }
+        .content{
+            position: relative;
+            margin: 0 auto;
+            width: 400px;
+            height: 500px;
+        }
+        .leftmenu{
+            float: left;
+            width: 190px;
+            height: 500px;
+        }
+        .rightmenu{
+            float: right;
+            width: 180px;
+            height: 490px;
+            border: 1px solid #000;
+            overflow-y: scroll;
+            padding: 5px;
+        }
+        .search{
+            padding: 5px 0;
+        }
+        .search>input{
+            width: 120px;
+            height: 26px;
+            outline: none;
+            vertical-align: middle;
+        }
+        .search>button{
+            width: 60px;
+            height: 30px;
+            vertical-align: middle;
+        }
+        .nav{
+            width: 175px;
+            height: 440px;
+            border: 1px solid #000;
+            padding: 20px 0 0 15px;
+        }
+        .icon{
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            background: url("./img/zTreeStandard.png") no-repeat left top;
+            background-position: -74px 0;
+        }
+        .sicon{
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: url("./img/dept.png") no-repeat left top;
+            margin-right: 3px;
+        }
+        .li-list>*{
+            vertical-align: middle;
+
+        }
+        .li-list{
+            list-style: none;
+        }
+        .c-list{
+            margin-left: 20px;
+        }
+        li {
+            list-style: none;
+        }
+        .c-menu{
+            display: none;
+            padding: 7px 0;
+        }
+        .red{
+            color: red;
+        }
+        .rightmenu>h4{
+            padding-left: 10px;
+            line-height: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="leftmenu">
+            <div class="search">
+                <input class="ipt" type="text">
+                <button class="btnsearch">搜索</button>
+            </div>
+            <div class="nav">
+                <ul class="nav-item">
+                </ul>
+            </div>
+        </div>
+        <div class="rightmenu">
+    
+        </div>
+    </div>
+    <script src="./js/jquery-1.9.1.js"></script>
+    <script>
+        $(function(){
+            //模拟数据
+            var people = [
+                {
+                    id:1,
+                    name:'技术部',
+                    child:[
+                        {name:'用户一'},
+                        {name:'用户二'},
+                        {name:'用户三'},
+                    ]
+                },
+                {
+                    id:2,
+                    name:'人事部',
+                    child:[
+                        {name:'人事一'},
+                        {name:'人事二'},
+                        {name:'人事三'},
+                    ]
+                },
+                {
+                    id:3,
+                    name:'财务部',
+                    child:[
+                        {name:'财务一'},
+                        {name:'财务二'},
+                        {name:'财务三'},
+                    ]
+                },
+                {
+                    id:4,
+                    name:'项目部',
+                    child:[
+                        {name:'项目一'},
+                        {name:'项目二'},
+                        {name:'项目三'},
+                    ]
+                }
+            ]
+            //获取父级元素
+            var parItem = $(".nav-item");
+            //接收所有的icon
+            var iconList = null;
+            //接收cmenu
+            var cmenu = null;
+            //获取所有的复选框
+            var ckboxlist = null;
+            //获取右边的父容器
+            var rightContent = $(".rightmenu");
+            //获取搜索按钮
+            var serch = $('.btnsearch');
+            //获取文本框
+            var iptc = $(".ipt");
+            createDom();
+
+            //搜索相关代码
+            serch.click(function(){
+                var val = iptc.val();
+                if(!val.length){
+                    alert("请输入值！");
+                    return;
+                }
+                //搜索相关的人
+                people.map(function(item,pindex){
+                    item.child.map(function(it,cindex){
+                        if(it.name == val){
+                            iconList.eq(pindex).trigger('click');
+                            cmenu.eq(pindex).find('.ckbox').eq(cindex).trigger('click');
+                            //cmenu.eq(pindex).find('.ckbox').eq(cindex).siblings('.a-text').addClass("red");
+                        }
+                    })
+                })
+            })
+            //给icon添加事件
+            iconList.each(function(index){
+                $(this).click(function(){
+                    var change = parseInt($(this).attr('data-change'));
+                    $(this).css({
+                        backgroundPosition:change?'-74px 0':'-92px 0'
+                    });
+                    $(this).attr('data-change',change?0:1);
+
+                    cmenu.eq(index).slideToggle();
+                    //获取同胞c-menu，取同胞里面的复选框
+                    ckboxlist = $(this).siblings('.c-menu').find('.ckbox');
+                    addCheckbox(index);
+                })
+            });
+            //给所有的复选框添加事件
+            function addCheckbox(parentIndex){
+                ckboxlist.each(function(cindex){
+                    $(this).unbind().click(function(){
+                        var aele = $(this).siblings('.a-text')
+                        if($(this).prop('checked')){
+                            aele.addClass('red');//切换类
+                            rightContent.append($("<h4 class='c-h4' data-p="+parentIndex+" data-c="+cindex+">"+aele.text()+"</h4>"));//获取对应的值
+                        }
+                        else{
+                            aele.removeClass('red');
+                            $('.c-h4').each(function(){
+                                var pindex = $(this).attr("data-p");
+                                var childindex = $(this).attr("data-c");
+                                if(parentIndex == pindex&&cindex == childindex)
+                                {
+                                    $(this).remove();
+                                }
+                            })
+                        }
+                    })
+                });
+            }
+            //封装方法
+            function createDom(){
+                people.map(function(item,index){
+                    //绑定最外层
+                    commonEle('li-list',item,parItem,true);
+                    
+                    //绑定内层
+                    //下面这个代码需要获取当前的父元素li
+                    //获取当前所有的li
+                    var lis = $('.li-list').eq(index);
+                    var ulchild = $("<ul class='c-menu'></ul>");
+                    item.child.map(function(citem,cindex){ 
+                        commonEle('c-list',citem,ulchild,false);
+                        
+                    });
+                    lis.append(ulchild);
+                });
+                iconList = $('.icon');
+                cmenu = $(".c-menu");
+                ckboxlist = $(".ckbox");
+                
+            }
+            //封装创建dom
+            function commonEle(parclass,obj,parent,bool){
+                //创建当前的部门li
+                var liele = $("<li class='"+parclass+"'></li>");
+                var sbtn = null;
+                if(bool){
+                    //创建前面的加减号
+                    sbtn = $("<span class='icon' data-change = '0'></span>");
+                }
+                else{
+                    //创建checkbox
+                    sbtn = $("<input type='checkbox' class='ckbox'/>");
+                }
+                //创建前面的小图标
+                var smallIcon = $("<span class='sicon'></span>");
+                //创建a标签
+                var aEle = $("<a href='#' class='a-text'>"+obj.name+"</a>");
+                liele.append(sbtn);
+                liele.append(smallIcon);
+                liele.append(aEle);
+                parent.append(liele);
+            }
+        })
+    </script>
+</body>
+</html>
