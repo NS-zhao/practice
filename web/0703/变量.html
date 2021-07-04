@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button>按钮</button>
+<button>按钮</button>
+<button>按钮</button>
+<button>按钮</button>
+<button>按钮</button>
+<script>
+//    <!-- 变量声明提前-->
+//    console.log(price);//undefined
+//    var price=100;
+//    console.log(price);//100
+//    console.log(window.price);//100
+//
+//    function method1(){
+//        console.log("函数执行");//函数执行
+//        return true;
+//    }
+//    console.log(method1());//true
+//    function method2(){
+//        console.log("函数执行");//函数执行
+//    }
+//    console.log(method2());//undefined
+//
+//    function method(){
+//        var num=1;
+//        return function(){
+//            num++;
+//            console.log(num);
+//        }
+//        //手动回收
+//        //null表示引用了一处内存，但是不占位置
+//        num=null;
+//    }
+//    var a=method();
+//    a();//2
+//    a();//3
+//
+//    function method3(){
+//        var num=1;
+//        return function(){
+//            var n=10;
+//            num++;
+//            n++;
+//            console.log(num, n);
+//        }
+//        num=null;
+//    }
+//    var f=method3();
+//    f();//2 11
+//    f();//3 11
+//
+//
+//    var stu={
+//        goschool:function(){
+//            console.log(this);
+//        }
+//    };
+//    stu.goschool();//{goschool: ƒ}
+//
+//    //事件闭包
+//    addHandle();
+//    function addHandle(){
+//        var btn=document.getElementsByClassName("btn");//闭包变量
+//        for(var i=0;i<btn.length;i++){
+//            (function (n){
+//                btn[n].onclick=function(){
+//                    console.log("点我", n);
+//                }
+//            })(i);
+//        }
+//        //手动回收
+//        btn=null;
+//    }
+
+
+    function fun(n,o){
+        console.log(o);
+        return{
+            fun: function (m) {
+                return fun(m,n)
+            }
+        };
+    }
+    var a=fun(0);a.fun(1);a.fun(2);a.fun(3);//undefined 0 0 0
+    var b=fun(0).fun(1).fun(2).fun(3);//undefined 0 1 2
+    var c=fun(0).fun(1);c.fun(2);c.fun(3);//undefined 0 1 1
+</script>
+</body>
+</html>
