@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var a="123.123";
+    console.log(parseInt(a));//123
+    console.log(typeof parseInt(a));//number
+    console.log(parseFloat(a));//123.123
+    console.log(parseFloat(a).toFixed(1));//123.1
+    console.log(typeof parseFloat(a).toFixed(1));//string
+    console.log(Number(a));//123.123
+    console.log(Number(' '));//0
+
+
+    //转化为字符串
+    var b=10;
+    console.log(b.toString());//10
+    console.log(typeof b.toString());//string
+    //也可以转化为字符串
+    console.log(String(b));//10
+    console.log(typeof String(b));//string
+</script>
+</body>
+</html>
