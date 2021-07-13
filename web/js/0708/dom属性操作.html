@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button class="btn" id="btn">按钮</button>
+<script>
+    console.log(btn.id);//btn
+
+    btn.timer=1000;
+    console.log(btn.timer);//1000
+    btn.index=1;
+    console.log(btn.index);//1
+
+    btn.setAttribute("cls-tag","自定义");
+    console.log(btn.attributes);//返回值是对象
+    console.log(btn.attributes['class']);//class="btn"
+    console.log(btn.attributes[0]);//class="btn"
+
+    //获取属性节点
+    console.log(btn.getAttributeNode('cls-tag'));//cls-tag="自定义"
+    //获取属性节点值
+    console.log(btn.getAttributeNode('cls-tag').value);//自定义
+    //获取属性节点名称
+    console.log(btn.getAttributeNode('cls-tag').name);//cls-tag
+
+
+    console.log(btn.hasAttribute('cls-tag'));//true
+    console.log(btn.hasAttributes());//true
+
+    btn.removeAttribute('cls-tag');
+    console.log(btn.getAttribute('cls-tag'));//null
+    btn.removeAttribute('index');
+    console.log(btn.index);//1
+</script>
+</body>
+</html>
