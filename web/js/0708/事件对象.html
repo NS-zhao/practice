@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="box" style="width: 100px;height: 100px;background-color: orangered">
+    <button id="btn">按钮</button>
+</div>
+<script>
+//    var num = 0;
+//    btn.onclick = function(){
+//        num++;
+//        console.log(this,num);
+//    }
+//    box.onclick = function(){
+//        num++;
+//        console.log(this,num);
+//    }
+
+//    btn.onclick = function(){
+//        num++;
+//        console.log(this,num);
+//        var e = window.event||event;
+//        e.stopPropagation();
+//    }
+//    var num = 0;
+//    btn.onclick = function(e){
+//        num++;
+//        console.log(this,num);
+//        console.log(e);
+//    }
+
+var num = 0;
+btn.onclick = function(e){
+    num++;
+    console.log(this,num);
+    e.stopPropagation();
+}
+box.onclick = function(){
+    num++;
+    console.log(this,num);
+    console.log(e.keyCode);
+    console.log(e.charCode);
+    console.log(e.which);
+}
+
+
+</script>
+</body>
+</html>
