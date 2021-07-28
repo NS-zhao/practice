@@ -181,23 +181,22 @@
 </div>
 <script>
     //获取所有的small_box
-    var small_box=document.querySelectorAll(".small_box");
+    var small_box = document.querySelectorAll(".small_box");
     //获取两个按钮
-    var leftbtn=document.querySelector(".leftbtn");
-    var rightbtn=document.querySelector(".rightbtn");
-    //获取小图容器
-    var small_list=document.querySelector("small_list");
+    var leftbtn = document.querySelector(".leftbtn");
+    var rightbtn = document.querySelector(".rightbtn");
+    //获取小图的容器
+    var small_list = document.querySelector(".small_list");
     //获取小图图片
-    var small_img=document.querySelector("small_img");
-    //获取中图容器
-    var c_middle=document.querySelector("c_middle");
+    var small_img = document.querySelector(".small_img");
     //获取中图图片
-    var c_middle_img=document.querySelector("c_middle_img");
+    var c_middle_img = document.querySelector(".c_middle_img");
+    //获取中图容器
+    var c_middle = document.querySelector(".c_middle");
     //获取最大父容器
-    var c_box=document.querySelector("c_box");
-    //获取大图图片
-    var big_img=document.querySelector("big_img");
-
+    var c_box = document.querySelector(".c_box");
+    //获取大图容器
+    var big_img = document.querySelector(".big_img");
     var bili=800/350;
     //使用变量接收层
     var pos_ceng=null;
@@ -215,9 +214,9 @@
         pos_ceng.remove();
         big_img.style.display="none";
     };
-    c_middle.onmousemove=function(){
-        var x= (e.pageX-c_box.offsetLeft)-c_middle.offsetWidth/2;
-        var y= (e.pageY-c_box.offsetTop)-c_middle.offsetHeight/2;
+    c_middle.onmousemove=function(e){
+        var x= (e.pageX-c_box.offsetLeft)-pos_ceng.offsetWidth/2;
+        var y= (e.pageY-c_box.offsetTop)-pos_ceng.offsetHeight/2;
         //对x,y进行限制
         var maxLeft=c_middle.offsetWidth-pos_ceng.offsetWidth;
         var maxTop=c_middle.offsetHeight-pos_ceng.offsetHeight;
@@ -226,15 +225,15 @@
         pos_ceng.style.left=x+"px";
         pos_ceng.style.top=y+"px";
         //设置大图的背景图片坐标
-        big_img.style.backgroundPosition=(-x*bili)+"px"+(-y*bili)+"px";
+        big_img.style.backgroundPosition=(-x*bili)+"px "+(-y*bili)+"px";
     }
     //添加两个按钮的点击事件
     leftbtn.addEventListener("click",function(){
-        small_list.style.transform="translate(0px)";
+        small_list.style.transform="translatex(0px)";
     });
     rightbtn.addEventListener("click",function(){
         var transX=small_img.offsetWidth-small_list.offsetWidth;
-        small_list.style.transform="translate("+transX+"px)";
+        small_list.style.transform="translatex("+transX+"px)";
     });
     //使用变量接收已经选中的元素
     var save=null;
