@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="./js/cart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            margin: 0 auto;
+            width: 1190px;
+            min-height: 300px;
+        }
+
+        .main_title {
+        }
+
+        .totle_num {
+            width: 100px;
+            float: left;
+            height: 45px;
+            line-height: 45px;
+            color: #db0000;
+        }
+
+        .pos_address {
+            text-align: right;
+            height: 45px;
+            line-height: 45px;
+        }
+
+        .list {
+            width: 120px;
+            float: left;
+            font-size: 13px;
+        }
+
+        .shop_name {
+            width: 590px;
+        }
+
+        .cart_title {
+            overflow: hidden;
+            background-color: #e0e0e0;
+            line-height: 50px;
+        }
+
+        .ckAll, .userck {
+            vertical-align: middle;
+            margin: 0 10px 0 15px;
+        }
+
+        .cart_footer {
+            height: 50px;
+            border: 1px solid #e6e6e6;
+            line-height: 50px;
+        }
+
+        .cart_f_left {
+            float: left;
+            width: 363px;
+            height: 50px;
+            font-size: 13px;
+        }
+
+        a {
+            color: #000;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        .cart_f_left > a:hover {
+            color: #d80000;
+        }
+
+        .cart_f_right {
+            float: right;
+        }
+
+        .go_btn {
+            float: right;
+            width: 90px;
+            height: 50px;
+            background-color: #d80000;
+            color: #fff;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .all_number {
+            line-height: 20px;
+            float: right;
+            width: auto;
+            margin: 7px 20px 0 10px;
+            font-size: 13px;
+        }
+
+        .all {
+            font-weight: 700;
+            color: #d80000;
+            margin: 0 3px;
+        }
+
+        .allprice {
+            font-size: 14px;
+        }
+
+        .cart_num_list {
+            height: 90px;
+            padding: 10px 0 0 0;
+        }
+
+        .cartimg {
+            float: right;
+            width: 80px;
+            height: 80px;
+            background-color: red;
+        }
+
+        .shop_info {
+            display: block;
+            width: 208px;
+            height: 40px;
+            float: left;
+            font-size: 12px;
+            overflow: hidden;
+            line-height: 20px;
+        }
+
+        .shop_info:hover, .dan_ov:hover {
+            color: #d80000;
+        }
+
+        .dan_ov {
+            width: 130px;
+            margin-left: 20px;
+            float: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .btn_left, .btn_right {
+            width: 17px;
+            height: 20px;
+            outline: none;
+            background-color: #efefef;
+            border: 1px solid #cbcbcb;
+        }
+
+        .shop_number {
+            width: 46px;
+            height: 20px;
+            outline: none;
+            border: 1px solid #cbcbcb;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .number {
+            font-size: 0;
+        }
+
+        .is_disabled {
+            color: #e0e0e0;
+            cursor: no-drop;
+        }
+
+        .centerinfo {
+            text-align: center;
+        }
+
+        .cart_num_list_on {
+            background-color: #ffe9c5;
+        }
+
+        h4 {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="main_title">
+        <div class="totle_num">
+            <h3>全部商品 4</h3>
+        </div>
+        <div class="pos_address">
+            <span>配送至：</span>
+            <span>*****地址</span>
+        </div>
+    </div>
+    <div class="cart">
+        <div class="cart_title">
+            <div class="list">
+                <input class="ckAll" type="checkbox"/>全选
+            </div>
+            <div class="list shop_name">
+                商品
+            </div>
+            <div class="list centerinfo">
+                单价
+            </div>
+            <div class="list centerinfo">
+                数量
+            </div>
+            <div class="list centerinfo">
+                小计
+            </div>
+            <div class="list centerinfo">
+                操作
+            </div>
+        </div>
+        <div class="cart_list">
+            <div class="cart_num_list">
+                <div class="list">
+                    <input class="userck" type="checkbox"/>
+
+                    <div class="cartimg">
+                        1
+                    </div>
+                </div>
+                <div class="list shop_name">
+                    <a class="shop_info " href="#">京选|小白声波电动牙刷头3支装（全面呵护款）提示性刷毛适配于小白声波电动牙刷ET101</a>
+                    <a class="dan_ov" href="#">刷头（软毛x3）仅适配于小白牙刷</a>
+                </div>
+                <div class="list centerinfo">
+                    ￥<span class="price">69.00</span>
+                </div>
+                <div class="list centerinfo">
+                    <div class="number">
+                        <button class="btn_left is_disabled" disabled>-</button>
+                        <input class="shop_number" type="text" max="200" value="1"/>
+                        <button class="btn_right">+</button>
+                    </div>
+                </div>
+                <div class="list centerinfo">
+                    ￥<h4 class="smallPrice">69.00</h4>
+                </div>
+                <div class="list centerinfo">
+                    <a href="#" class="remove_ele">删除</a>
+                </div>
+            </div>
+            <div class="cart_num_list">
+                <div class="list">
+                    <input class="userck" type="checkbox"/>
+
+                    <div class="cartimg">
+                        2
+                    </div>
+                </div>
+                <div class="list shop_name">
+                    <a class="shop_info " href="#">京选|小白声波电动牙刷头3支装（全面呵护款）提示性刷毛适配于小白声波电动牙刷ET101</a>
+                    <a class="dan_ov" href="#">刷头（软毛x3）仅适配于小白牙刷</a>
+                </div>
+                <div class="list centerinfo">
+                    ￥<span class="price">69.00</span>
+                </div>
+                <div class="list centerinfo">
+                    <div class="number">
+                        <button class="btn_left is_disabled" disabled>-</button>
+                        <input class="shop_number" type="text" max="200" value="1"/>
+                        <button class="btn_right">+</button>
+                    </div>
+                </div>
+                <div class="list centerinfo">
+                    ￥<h4 class="smallPrice">69.00</h4>
+                </div>
+                <div class="list centerinfo">
+                    <a href="#" class="remove_ele">删除</a>
+                </div>
+            </div>
+            <div class="cart_num_list">
+                <div class="list">
+                    <input class="userck" type="checkbox"/>
+
+                    <div class="cartimg">
+                        3
+                    </div>
+                </div>
+                <div class="list shop_name">
+                    <a class="shop_info " href="#">京选|小白声波电动牙刷头3支装（全面呵护款）提示性刷毛适配于小白声波电动牙刷ET101</a>
+                    <a class="dan_ov" href="#">刷头（软毛x3）仅适配于小白牙刷</a>
+                </div>
+                <div class="list centerinfo">
+                    ￥<span class="price">69.00</span>
+                </div>
+                <div class="list centerinfo">
+                    <div class="number">
+                        <button class="btn_left is_disabled" disabled>-</button>
+                        <input class="shop_number" type="text" max="200" value="1"/>
+                        <button class="btn_right">+</button>
+                    </div>
+                </div>
+                <div class="list centerinfo">
+                    ￥<h4 class="smallPrice">69.00</h4>
+                </div>
+                <div class="list centerinfo">
+                    <a href="#" class="remove_ele">删除</a>
+                </div>
+            </div>
+            <div class="cart_num_list">
+                <div class="list">
+                    <input class="userck" type="checkbox"/>
+
+                    <div class="cartimg">
+                        4
+                    </div>
+                </div>
+                <div class="list shop_name">
+                    <a class="shop_info " href="#">京选|小白声波电动牙刷头3支装（全面呵护款）提示性刷毛适配于小白声波电动牙刷ET101</a>
+                    <a class="dan_ov" href="#">刷头（软毛x3）仅适配于小白牙刷</a>
+                </div>
+                <div class="list centerinfo">
+                    ￥<span class="price">69.00</span>
+                </div>
+                <div class="list centerinfo">
+                    <div class="number">
+                        <button class="btn_left is_disabled" disabled>-</button>
+                        <input class="shop_number" type="text" max="200" value="1"/>
+                        <button class="btn_right">+</button>
+                    </div>
+                </div>
+                <div class="list centerinfo">
+                    ￥<h4 class="smallPrice">69.00</h4>
+                </div>
+                <div class="list centerinfo">
+                    <a href="#" class="remove_ele">删除</a>
+                </div>
+            </div>
+        </div>
+        <div class="cart_footer">
+            <div class="cart_f_left">
+                <input class="ckAll" type="checkbox"/>全选
+                <a href="#" id="deleteselect">删除选中的商品</a>
+                <a href="#">移入关注</a>
+                <a href="#" id="deleteCart">清理购物车</a>
+            </div>
+            <div class="cart_f_right">
+                <div class="go_btn">
+                    去结算
+                </div>
+                <div class="all_number">
+                    <span>以选择<span class="allnum all">0</span>件商品</span>
+                    <span>总价：<span class="allprice all">￥<span id="s_totleprice">0.00</span></span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
