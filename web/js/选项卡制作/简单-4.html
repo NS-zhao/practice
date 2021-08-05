@@ -75,47 +75,34 @@
     </div>
 </div>
 <script>
-    <!-- 选项卡案例-->
-    //获取所有的nav
     var item=document.querySelectorAll(".nav");
-    //获取navitem所有的子集
     var child=document.querySelector(".navitem").children;
-    //记录默认状态
     var save=item[0];
     child[0].style.display="block";
-    for(var i=0;i<item.length;i++)
-    {
-        (function(n){
-            //关联自定义属性
-            item[n].index=n;
-            item[n].onmouseenter=function(){
-                if(save){
-                    save.classList.remove("check");
-                    child[save.index].style.display="none"
-                }
-                this.classList.add("check");
-                //对应的底下出现对应的页面
-                //console.log(i);//出现的全是5，所以要使用闭包，让它出来是1-5
-                child[n].style.display="block";
-                save=this;
-            }
-        })(i)
-        //或者
+    for(var i=0;i<item.length;i++){
 //        item[i].index=i;
-//        item[i].onmouseenter=function(){
-//            if(save){
+//        item[i].onmouseover=function(){
+//            if(save&&save.classList.contains("check")){
 //                save.classList.remove("check");
-//                child[save.index].style.display="none"
+//                child[save.index].style.display="none";
 //            }
-//            //console.log(i);//5，绑定当前对象或者闭包
-//            //console.log(this);//指向当前对象
-//            //因为i已经发生变化，所以不能直接写item[i]
 //            this.classList.add("check");
-//            //对应的底下出现对应的页面
-//            //console.log(i);//出现的全是5，所以要使用闭包，让它出来是1-5
 //            child[this.index].style.display="block";
 //            save=this;
 //        }
+
+        (function(n){
+            item[n].index=n;
+            item[n].onmouseover=function(){
+                if(save&&save.classList.contains("check")){
+                    save.classList.remove("check");
+                    child[save.index].style.display="none";
+                }
+                this.classList.add("check");
+                child[this.index].style.display="block";
+                save=this;
+            }
+        })(i)
     }
 </script>
 </body>
