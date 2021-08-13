@@ -32,9 +32,7 @@ function checkStatus(status){
         if(status!=undefined){
             //检测status变量的类型
             cklist[i].checked=typeof status=="boolean"?status:!cklist[i].checked;
-            if(cklist[i].checked){
-                item[i].classList.add('ck')
-            }
+            changeColor();
         }
         if(!cklist[i].checked){
             isAll=false;
@@ -53,7 +51,16 @@ function addcklistHandle(){
         cklist[i].onclick=function(){
             checkStatus();
             //点击单个选择，当前行变色
-
+            changeColor();
         }
+    }
+}
+//当前行变色
+function changeColor(){
+    if(cklist[i].checked){
+        item[i].classList.add('ckColor');
+    }
+    else{
+        item[i].classList.remove('ckColor')
     }
 }
