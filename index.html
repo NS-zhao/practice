@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>我的第一个网页</title>
+</head>
+<body>
+我测试
+测试
+<!--标题标签-->
+<h1>标题标签</h1>
+
+<h2>标题标签</h2>
+
+<h3>标题标签</h3>
+<h4>标题标签</h4>
+<h5>标题标签</h5>
+<h6>标题标签</h6>
+<!-- 水平线-->
+<hr>
+<!--段落标签-->
+<p>我是一段文字</p>
+<!--折行标签-->
+<p>
+    我们无法确定 HTML 被显示的确切效果。屏幕的大小，以及对窗口的调整都可能导致不同的结果。<br/>
+    对于 HTML，您无法通过在 HTML 代码中添加额外的空格或换行来改变输出的效果。
+</p>
+<!--文本格式化标签-->
+<b>加粗</b>
+<strong>加粗</strong>
+<i>斜体</i>
+<em>斜体</em>
+<!--小字标签-->
+<small>小号字</small>
+<!-- 上下标标签-->
+H<sub>2</sub>o
+3<sup>2</sup>=9
+<!--添加下划线标签-->
+<ins>我右下划线</ins>
+<del>￥99.9</del>
+<!-- 格式化标签-->
+    <pre>
+        我们无法确定 HTML 被显示的确切效果。屏幕的大小，以及对窗口的调整都可能导致不同的结果。
+        对于 HTML，您无法通过在 HTML 代码中添加额外的空格或换行来改变输出的效果。
+    </pre>
+<!-- code显示代码-->
+<code>
+       <pre>
+          $.ajax({
+                type:"GET",
+                url:"service.php?number="+$("#keyword").val(),
+                dataType:"json", 预期服务器返回数据的类型
+                success:function(data){
+                if(data.success){
+                $("searchResult").html(data.msg);
+                }else{
+                $("#searchResult").html("出现错误：" + data.msg);
+                }
+                },
+                error:function(jqXHR){
+                aler("发生错误："+ jqXHR.status);
+                }
+            });
+      </pre>
+</code>
+<!-- time标签-->
+<time>2020-1-12</time>
+<!--address地址标签-->
+<address>西安市</address>
+<!--超链接-->
+<a href="#">当前页面</a>
+<a href="https://www.baidu.com/" target="_blank">百度</a>
+<a href="备注.txt">备注</a>
+<a href="./备注.txt">备注</a>
+<a href="../0112第一模块html/备注.txt">备注</a>
+<a href="http://127.0.0.1:63342/202101012/0112第一模块html/备注.txt">备注</a>
+<a href="./page/index.html">index页面</a>
+
+
+<!--图片 标签-->
+<img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1091405991,859863778&fm=26&gp=0.jpg" alt=""/>
+<img src="./img/baidu.png" width="400" alt=""/>
+<img src="./img/baidu.pn" alt="加载失败"/>
+
+<!--标记-->
+<p id="target">
+    这里是标记
+</p>
+<!--列表标签-->
+<ul>
+    <li>蔬菜
+        <ul>
+            <li>黄瓜</li>
+            <li>西红柿</li>
+        </ul>
+    </li>
+    <li>水果
+        <ul>
+            <li>苹果</li>
+            <li>橘子</li>
+        </ul>
+    </li>
+</ul>
+<ol type="A">
+    <li>蔬菜
+        <ol>
+            <li>黄瓜</li>
+            <li>西红柿</li>
+        </ol>
+    </li>
+    <li>水果
+        <ol>
+            <li>苹果</li>
+            <li>橘子</li>
+        </ol>
+    </li>
+</ol>
+
+<ol type="A">
+    <li>蔬菜
+        <ul>
+            <li>黄瓜</li>
+            <li>西红柿</li>
+        </ul>
+    </li>
+    <li>水果
+        <ol>
+            <li>苹果</li>
+            <li>橘子</li>
+        </ol>
+    </li>
+</ol>
+<!--自定义标签-->
+<dl>
+    <dt>蔬菜</dt>
+    <dd>黄瓜</dd>
+    <dd>西红柿</dd>
+</dl>
+<!--区块元素-->
+<div>我是区块</div>
+<div>我是区块</div>
+<span>文字</span>
+<span>文字</span>
+<span>文字</span>
+<!--表格标签-->
+<table bgcolor="#ffe4c4" border="1" cellspacing="0" width="500" cellpadding="10">
+    <!--<thead>-->
+      <!--<tr>-->
+          <!--<td>页眉</td>-->
+      <!--</tr>-->
+    <!--</thead>-->
+    <tbody>
+        <caption>学生信息表</caption>
+        <tr>
+            <th rowspan="5">信息表</th>
+            <th colspan="4">学生基本信息：</th>
+        </tr>
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>电话</th>
+            <th>性别</th>
+        </tr>
+        <tr>
+            <td>姓名</td>
+            <td>年龄</td>
+            <td>电话</td>
+            <td>性别</td>
+        </tr>
+        <tr>
+            <td>姓名</td>
+            <td>年龄</td>
+            <td>电话</td>
+            <td>性别</td>
+        </tr>
+        <tr>
+            <td>姓名</td>
+            <td>年龄</td>
+            <td>电话</td>
+            <td>性别</td>
+        </tr>
+    </tbody>
+    <!--<tfoot>-->
+        <!--<tr>-->
+            <!--<td>页脚</td>-->
+        <!--</tr>-->
+    <!--</tfoot>-->
+</table>
+<span>测试</span>
+
+<!--form表单元素-->
+<form action="" method="post">
+
+</form>
+
+<button type="button">按钮</button>
+<!--input标签-->
+<input/>
+<input type="text" maxlength="10" value="123" placeholder="请输入id。。"/>
+<input type="password"  placeholder="请输入密码..."/>
+<input type="radio" name="sex" checked/>男
+<input type="radio" name="sex"/>女
+<input type="checkbox" checked/>篮球
+<input type="checkbox"/>足球
+<input type="button" value="注册"/>
+<input type="submit" value="注册"/>
+<input type="reset" value="清空"/>
+
+<select multiple>
+    <option>—请选择—</option>
+    <option value="0">—西安市—</option>
+    <option value="1">—宝鸡市—</option>
+    <option value="2">—咸阳市—</option>
+</select>
+
+<textarea ></textarea>
+
+<input type="file" multiple  accept=".jpg,.png"/>
+
+
+<form action="" method="post">
+    <ul>
+        <li>姓名：<input type="text" name="name"/></li>
+        <li>年龄：<input type="text" name="age"/></li>
+        <li>密码：<input type="password" name="pwd"/></li>
+        <li>爱好：<input type="checkbox" name="hobby" value="0"/>篮球<input type="checkbox" name="hobby" value="1"/>足球<input type="checkbox" name="hobby" value="2"/>羽毛球</li>
+        <li>备注：
+        <textarea name="detail"></textarea>
+        </li>
+        <li><input type="submit"/><input type="reset"/></li>
+    </ul>
+</form>
+
+<!--iframe-->
+<iframe width="1000" src="https://www.baidu.com" frameborder="0">
+
+</iframe>
+
+<br/>
+<!--使用a连接来写-->
+<a href="./备注.txt" target="list">备注</a>
+<iframe name="list" src="./page/index.html" frameborder="0"></iframe>
+
+<!--锚标记-->
+<a href="#target">向上找</a>
+<a href="./page/index.html#target">跨页面找</a>
+
+<br/>
+&copy;
+&gt;
+&lt;
+&mapsto;
+</body>
+</html>
