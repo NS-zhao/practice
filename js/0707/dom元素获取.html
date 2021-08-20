@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button class="btn">按钮</button>
+<button class="btn">按钮</button>
+<button class="btn">按钮</button>
+<button class="btn" id="btn">按钮</button>
+<script>
+//    console.log(document);//输出整个页面元素
+//    var btnarr = document.querySelector(".btn");
+//    var btnArray = document.querySelectorAll(".btn");
+//    console.log(btnarr);
+//    console.log(btnArray);
+//    console.log(btnArray.name);
+//    console.log(btnArray[0]);
+//    console.log(btnArray[1]);
+//    for(var i=0;i<btnArray.length;i++)
+//    {
+//        console.log(btnArray[i]);
+//    }
+//
+//    console.log(document.querySelector("#btn"));
+//    console.log(document.querySelectorAll("#btn"));
+//
+//
+//    var btnclass = document.getElementsByClassName("btn");
+//    console.log(btnclass);
+//
+//    //创建元素
+//    var ele=document.createElement("button");
+//    ele.className="btn";
+//    document.body.appendChild(ele);
+//    console.log(ele, btnclass, btnArray);
+
+    var info=document.getElementsByClassName("btn");
+    info.name="张三";//设置无效
+
+    for(var i=0;i<info.length;i++)
+    {
+        info[i].name="张三"+i;
+    }
+
+    console.log(document.documentURI);
+    console.log(document.doctype);
+
+console.log(info[0]);
+console.log(info['btn']);
+</script>
+</body>
+</html>
