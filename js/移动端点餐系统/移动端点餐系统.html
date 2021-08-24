@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            font-size: 14px;
+        }
+        /*去除视觉上的滚动条*/
+        ::-webkit-scrollbar{
+            display: none;
+        }
+        .item{
+            height: 40rem;
+            border: 1px solid #000;
+            display: flex;
+            flex-direction: row;
+        }
+        .item-l{
+            flex: 1;
+            border-right: 1px solid #000;
+            overflow-y: scroll;
+        }
+        .item-r{
+            flex: 4;
+            overflow-y: scroll;
+        }
+        .item-nav{
+            line-height: 4rem;
+            border-bottom: 1px solid #cbcbcb;
+        }
+        .item-nav>li.item-li{
+            padding-left: 1rem;
+            border-bottom: 1px solid #cbcbcb;
+        }
+        .ck{
+            background-color: #d9d9d9;
+        }
+        .item-r-list{
+            border-bottom: 1px solid #cbcbcb;
+            padding: 1rem 0;
+        }
+        .item-r-list>li{
+            padding: 0.6rem;
+            position: relative;
+            display: flex;
+        }
+        .img{
+            width: 9rem;
+            height: 9rem;
+            float: left;
+        }
+        .img>img{
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+        }
+        .info{
+            padding: 0 1rem;
+            overflow: hidden;
+        }
+        .info>h2{
+            margin: 1rem 0;
+        }
+        .s{
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+        .cao{
+            position: absolute;
+            right: 0.5rem;
+            bottom: 0.5rem;
+        }
+        .c-l,.c-num,.c-r{
+            display: inline-block;
+            width: 1.4rem;
+            height: 1.4rem;
+            text-align: center;
+            line-height: 1.4rem;
+            vertical-align: middle;
+        }
+        .c-num{
+            font-size: 1.3rem;
+        }
+        .c-l,.c-r{
+            border: 1px solid #000;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+<script src="js/jquery-1.9.1.js"></script>
+<div class="item">
+    <div class="item-l">
+        <ul class="item-nav">
+            <li class="item-li ck">热销</li>
+            <li class="item-li">优惠</li>
+            <li class="item-li">毕业季</li>
+            <li class="item-li">当季新品</li>
+            <li class="item-li">真鲜果茶</li>
+            <li class="item-li">鲜冰淇凌</li>
+            <li class="item-li">人气必买</li>
+            <li class="item-li">原叶纯茶</li>
+            <li class="item-li">现煮奶茶</li>
+            <li class="item-li">特调甜品</li>
+            <li class="item-li">芝士奶盖</li>
+            <li class="item-li">温馨提示</li>
+        </ul>
+    </div>
+    <div class="item-r">
+        <ul class="item-r-list">
+            <li>
+                <div class="img">
+                    <img src="./img/1.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/2.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/3.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/4.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul class="item-r-list">
+            <li>
+                <div class="img">
+                    <img src="./img/4.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/5.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/6.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/7.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/8.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul class="item-r-list">
+            <li>
+                <div class="img">
+                    <img src="./img/9.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/10.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/11.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/12.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul class="item-r-list">
+            <li>
+                <div class="img">
+                    <img src="./img/13.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/14.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul class="item-r-list">
+            <li>
+                <div class="img">
+                    <img src="./img/15.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/16.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/17.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul class="item-r-list">
+            <li>
+                <div class="img">
+                    <img src="./img/18.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/19.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/20.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/21.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul class="item-r-list">
+            <li>
+                <div class="img">
+                    <img src="./img/22.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/23.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul class="item-r-list">
+            <li>
+                <div class="img">
+                    <img src="./img/24.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul class="item-r-list">
+            <li>
+                <div class="img">
+                    <img src="./img/25.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/26.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul class="item-r-list">
+            <li>
+                <div class="img">
+                    <img src="./img/27.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <img src="./img/28.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul class="item-r-list">
+            <li>
+                <div class="img">
+                    <img src="./img/29.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul class="item-r-list">
+            <li>
+                <div class="img">
+                    <img src="./img/30.jpg" alt=""/>
+                </div>
+                <div class="info">
+                    <p><h2>满杯百香果</h2></p>
+                    <p class="s">评分：4.9分</p>
+                    <p class="s">月售：358</p>
+                    <div class="cao">
+                        <span class="c-l">-</span>
+                        <span class="c-num">0</span>
+                        <span class="c-r">+</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    var itemright=document.querySelector(".item-r");
+    var itemrightul=document.querySelectorAll(".item-r-list");
+    var itemli=document.querySelectorAll(".item-li");
+    var save=itemli[0];//存储默认选择
+    //滑动右侧区域
+    //定义一个默认数组，存储元素的上偏移值
+    var offset=[];
+    //默认执行获取
+    getEleOffset();
+    //获取每个右边ul的上偏移
+    function getEleOffset(){
+        for(var i=0;i<itemrightul.length;i++){
+            offset.push(itemrightul[i].offsetTop);
+        }
+        console.log(offset);
+    }
+
+
+    //在itemright上鼠标按下的时候，添加事件，鼠标抬起，移除事件
+    //使用手机触屏事件
+    itemright.addEventListener('touchstart',function(){
+        //鼠标按下添加事件
+        itemright.addEventListener('scroll',scrollBar);
+    });
+    itemright.addEventListener('touchend',function(){
+        //鼠标抬起移除事件
+        itemright.removeEventListener('scroll',scrollBar);
+    });
+    function scrollBar(){
+        for(var i=0;i<offset.length;i++){
+            if(this.scrollTop>=offset[i]&&this.scrollTop<offset[i+1]){
+                if(!itemli[i].classList.contains('ck')){
+                    changeColor(itemli[i]);
+                }
+            }
+        }
+    }
+    //左边li切换颜色的方法
+    function changeColor(obj){
+        if(!obj.classList.contains('ck')){
+            if(save&&save.classList.contains('ck')){
+                save.classList.remove('ck');
+            }
+            obj.classList.add('ck');
+            save=obj;//计入save，为下次使用做准备
+        }
+    }
+    //左边li的所有点击事件
+    clickRight();
+    function clickRight(){
+        for(var i=0;i<itemli.length;i++){
+            (function (n){
+                itemli[n].onclick=function(){
+                    changeColor(this);
+                    //修改右边容器的scrollTop值
+                    //下面这样设置可行，但是没有动画
+                    //itemright.scrollTop=offset[n];
+                    $(itemright).animate({scrollTop:offset[n]},300);
+                }
+            })(i)
+        }
+    }
+</script>
+</body>
+</html>
