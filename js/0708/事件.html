@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--<ul class="list">-->
+    <!--<li class="list">123</li>-->
+    <!--<li class="list">456</li>-->
+<!--</ul>-->
+<!--<script>-->
+    <!--var listle=document.querySelectorAll(".list");-->
+    <!--var count=0;-->
+    <!--for(var i=0;i<listle.length;i++)-->
+    <!--{-->
+        <!--listle[i].addEventListener('click',function(){-->
+            <!--count++;-->
+            <!--console.log(this);-->
+        <!--},true);-->
+    <!--}-->
+<!--</script>-->
+
+
+<div style="position: relative">
+    <button id="list">事件对象</button>
+</div>
+<script>
+    list.onclick = function(event){
+        console.log(event);
+        console.log(event.pageX, event.pageY);
+        console.log(event.clientX, event.clientY);
+        console.log(event.layerX, event.layerY);
+        console.log(event.offsetX, event.offsetY);
+        console.log(event.screenX, event.screenY);
+    }
+    list.addEventListener('click',function(e){
+        var event=e||event;
+        console.log(event);
+    })
+</script>
+</body>
+</html>
