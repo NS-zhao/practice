@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        table{
+            border-collapse: collapse;
+            border: 1px solid #000;
+            width: 300px;
+            margin: 0 auto;
+        }
+        td{
+            border: 1px solid #000;
+            width: 70px;
+            height: 70px;
+        }
+        button{
+            width: 100%;
+            height: 100%;
+            font-size: 20px;
+        }
+        #script{
+            border-style: none;
+            outline: none;
+            font-size: 25px;
+            text-align: right;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td colspan="4">
+            <input type="text" disabled id="script" value="0"/>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2"><button class="btn">AC</button></td>
+        <td colspan="2"><button class="btn">DEL</button></td>
+    </tr>
+    <tr>
+        <td><button class="btn">7</button></td>
+        <td><button class="btn">8</button></td>
+        <td><button class="btn">9</button></td>
+        <td><button class="btn">*</button></td>
+    </tr>
+    <tr>
+        <td><button class="btn">4</button></td>
+        <td><button class="btn">5</button></td>
+        <td><button class="btn">6</button></td>
+        <td><button class="btn">/</button></td>
+    </tr>
+    <tr>
+        <td><button class="btn">1</button></td>
+        <td><button class="btn">2</button></td>
+        <td><button class="btn">3</button></td>
+        <td><button class="btn">-</button></td>
+    </tr>
+    <tr>
+        <td><button class="btn">0</button></td>
+        <td><button class="btn">.</button></td>
+        <td><button class="btn">+</button></td>
+        <td><button class="btn">=</button></td>
+    </tr>
+</table>
+<script>
+    //接收所有按钮的变量
+    var btnlist=null;
+    //接收所有屏幕上的值
+    var screenIpt=null;
+    //接收用户的屏幕值和符号值
+    var result="";
+    //设置一个Boolean类型的值
+    var ischange=null;
+    //浏览器加载完成事件
+    window.onload=function(){
+        //获取元素
+        btnlist=document.getElementsByClassName("btn");
+        screenIpt=document.getElementById("script");
+        //执行方法绑定事件
+        addBtnHandle();
+    }
+    //构建方法给所有的按钮添加事件监听
+    function addBtnHandle(){
+        for(var i=0;i<btnlist.length;i++){
+            btnlist[i].addEventListener("click",listen);
+        }
+    }
+    //所有按钮的事件回调函数
+    function listen(){
+        //点击事件触发该方法
+        //console.log(this);//this指向的是当前操作对象
+        //1.将获取的值给屏幕  2.只让数字和小数点显示到屏幕上
+        if(!isNaN(this.innerText)||this.innerText=='.'){
+            ischange=false;
+            //3.是数字的时候，考虑屏幕的值是否为0
+            if(screenIpt.value=='0'){
+                //5.如果用户按的是点，并且屏幕值为0
+                screenIpt.value=this.innerText=='.'?'0.':this.innerText;
+                screenIpt.value=this.innerText;
+            }
+            else{
+                //4.检测屏幕上只能有一个点
+                if(screenIpt.value.indexOf('.')!=-1){
+                    //有点，不能再有小数点
+                    if(this.innerText!='.'){
+                        screenIpt.value+=this.innerText;
+                    }
+                }
+                else{
+                    //没点，可以有小数点
+                    screenIpt.value+=this.innerText;
+                }
+
+            }
+        }
+        else{
+            //除数字和小数点的其他值
+            if(ischange){
+                var len=result.substring(0,result.length-1);
+                if(this.innerText=='='){
+                    var res=eval(len);
+                    //最后一位
+                    var lastchat=result.substr(result.length-1,1);
+                    screenIpt.value=eval(res+lastchat+res);
+                }
+                else{
+                    result=len+this.innerText;
+                }
+                return;
+            }
+            //输出表达式
+            console.log(result);
+            //记录屏幕当前值
+            result+=screenIpt.value;
+
+            switch (this.innerText){
+                case 'AC':
+                    screenIpt.value=0;
+                    result='';
+                    break;
+                case 'DEL':
+                    var val=screenIpt.value;
+                    screenIpt.value=val.length>1?val.substring(0,val.length-1):0;
+                    break;
+                case '=':
+                    //计算表达式eval()
+                    var res=eval(result);
+                    console.log(res);
+                    screenIpt.value=res;
+                    res="";
+                    break;
+                default :
+                    //先让屏幕清零
+                    screenIpt.value=0;
+                    //+-*/
+                    ischange=true;
+                    result+=this.innerHTML;
+                    break;
+            }
+        }
+
+    }
+</script>
+</body>
+</html>
