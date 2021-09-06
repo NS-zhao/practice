@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//    var str = "abcdef";
+//    //输出所有字符
+//    for(var i = 0;i<str.length;i++)
+//    {
+//        console.log(str[i]);//a b c d e f
+//    }
+//    console.log(str.indexOf('c'));//2
+//    console.log(str.lastIndexOf('a'));//0
+//    console.log(str.indexOf("a", 1));
+//    console.log(str.lastIndexOf('b', 4));
+//    console.log(str.search('m'));
+
+//    var str = "  abcde fg h ";
+//    console.log(str.length);//13
+//    console.log(str.trim().length);//10
+//    console.log(str.length);//13
+//    console.log(str.replace(/\s/g,''));//abcdefgh
+
+
+//    var str="abcde";
+//    console.log(str.codePointAt(0));//97--根据索引获取对应的字符，转ASCII值
+
+
+//var str = "abcdef";
+//console.log(str.substr(0, 5));//abcde
+//console.log(str.substr(4));//ef--写一个参数为索引，默认截取字符串该索引后面的所有字符
+
+    var str = "abcdef";
+    console.log(str.substring(0, 3));//abc
+    console.log(str.substring(3));//def---一个参数，从当前为索引开始直接截取完。
+console.log(str.slice(0, 4));//abcd
+console.log(str.slice(3));//def--等价于substring
+</script>
+</body>
+</html>
