@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+测试颜色
+<script>
+    //A-F 0-9
+    var item=[0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F'];
+    var color="#";
+    function randomColor(){
+        for(var i=0;i<6;i++){
+            var index=Math.floor(Math.random()*item.length);
+            color+=item[index];
+        }
+        return color;
+    }
+    console.log(randomColor());
+    document.body.style.color=color;
+</script>
+</body>
+</html>
