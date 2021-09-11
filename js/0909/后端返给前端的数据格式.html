@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    /*
+    json数据格式
+    数据格式：json、xml(树形结构文档，类似html)
+    json数据类型
+    数组型 对象型
+    object
+    key:value
+    **/
+    //单个json  --长的像对象
+    //json标准格式要求写双引号
+    //key可以不写引号
+    var stu={"name":"张三","age":18,"sex":"男"};
+    console.log(stu);//Object
+    console.log(stu.name);//张三
+    console.log(stu.age);//18
+    console.log(stu.sex);//男
+    //集合型json
+    //类似数组
+    var stu1=[
+        {"name":"张三","age":18},
+        {"name":"张三","age":18},
+        {"name":"张三","age":18},
+        {"name":"张三","age":18},
+        {"name":"张三","age":18},
+        {"name":"张三","age":18},
+        {"name":"张三","age":18},
+        {"name":"张三","age":18},
+        {"name":"张三","age":18},
+        {"name":"张三","age":18},
+        {"name":"张三","age":18},
+        {"name":"张三","age":18},
+    ]
+    console.log(stu1);
+    //对整个集合进行遍历
+    for(var i=0;i<stu1.length;i++){
+        console.log(stu1[i]);
+        console.log(stu1[i].name);
+    }
+    //json可以写嵌套型
+    var list=[
+        {
+            "name":"小黑",
+            "sex":"男",
+            "age":20,
+            "hobby":[
+                {"name":"听歌"},
+                {"name":"排球"},
+                {"name":"跑步"}
+            ]
+        }
+    ];
+    console.log(list);
+    for(var index in list){
+        console.log(list[index]);
+        console.log(list[index].name);
+        console.log(list[index].sex);
+        console.log(list[index].age);
+        console.log(list[index].hobby);
+    }
+
+
+    //json对象与字符串的相互转化
+    var str=JSON.stringify(list);
+    console.log(str);
+    console.log(JSON.parse(str));
+
+
+    var stus = [
+        {"name": "李四1", "age": 18},
+        {"name": "李四2", "age": 18},
+        {"name": "李四3", "age": 18},
+        {"name": "李四4", "age": 18},
+        {"name": "李四5", "age": 18},
+        {"name": "李四6", "age": 18},
+        {"name": "李四7", "age": 18},
+        {"name": "李四8", "age": 18},
+        {"name": "李四9", "age": 18},
+        {"name": "李四10", "age": 18}
+    ];
+    var nowpage=1;
+    var pageNum=3;
+    var totle=10;
+    for(var i=0;i<=Math.floor(totle/pageNum);i++){
+        console.log(stus.slice((nowpage - 1) * pageNum, pageNum * nowpage));
+        nowpage++;
+    }
+
+    console.log(eval(str));
+    console.log(list.toString());//[object Object]
+</script>
+</body>
+</html>
