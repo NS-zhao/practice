@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .menu{
+            margin: 10px 50px;
+            height: auto;
+        }
+        .menu *{
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .go-now{
+            width: 23px;
+            height: 23px;
+            outline: none;
+            text-align: center;
+            border: 1px solid #cbcbcb;
+        }
+        .btn{
+            height: 30px;
+        }
+        .nav-tab{
+            width: 25px;
+            height: 25px;
+            list-style: none;
+            border: 1px solid #cbcbcb;
+            display: inline-block;
+            line-height: 25px;
+            margin: 0 5px;
+        }
+        .ck{
+            background-color: #0000e8;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="menu">
+    <button class="btn goup">上一页</button>
+    <ul class="nav">
+
+    </ul>
+    <button class="btn godown">下一页</button>
+    <div>总共：<span class="totle">0</span>页</div>
+    <div>
+        跳转：<input class="go-now num" type="text"/>
+        <button class="btn go">跳转</button>
+    </div>
+</div>
+<script>
+    <!-- 分页的逻辑算法-->
+    //当前页和总页码
+    var nowPage=10;
+    var totlePage=20;
+    var navEle=null;
+    var up=null;
+    var down=null;
+    var totle=null;
+    var go=null;
+    var num=null;
+    var lilist=null;
+    window.onload=function(){
+        //用class属性获取的是一个集合 不能进行一堆操作 即使只有一个子集 也要使用[];
+        navEle=document.getElementsByClassName("nav")[0];
+        up=document.getElementsByClassName("goup")[0];
+        down=document.getElementsByClassName("godown")[0];
+        totle=document.getElementsByClassName("totle")[0];
+        go=document.getElementsByClassName("go")[0];
+        num=document.getElementsByClassName("num")[0];
+        lilist=document.getElementsByClassName("nav-tab");
+        //创建页数的标签
+        renderPage();
+        totle.innerText=totlePage;
+        //绑定事件
+        up.onclick=function(){
+            if(nowPage<=1){
+                return;
+            }
+            nowPage--;
+            renderPage();
+        }
+        down.onclick=function(){
+            if(nowPage>=totlePage){
+                return;
+            }
+            nowPage++;
+            renderPage();
+        }
+        //点击跳转
+        go.onclick=function(){
+            //检测num为空
+            var value=num.value;
+            if(!value.length){
+                alert("请输入值！");
+            }
+            else{
+                nowPage=parseInt(value);
+                renderPage();
+            }
+        }
+        num.value="";
+    }
+    //创建页数的标签
+    function createPage(currentPage,totle){
+        var str="";
+        for(var i=1;i<=totle;i++){
+            if(i==2&&currentPage-i>2){
+                //前缩
+                i=currentPage-3;
+                str+="<li>...</li>"
+            }
+            else if(i-currentPage>2&&i+3<totlePage){
+                //后缩
+                i=totlePage-2;
+                str+="<li>...</li>";
+            }
+            else{
+                if(i===currentPage){
+                    str+="<li class='nav-tab ck'>"+i+"</li>"
+                }
+                else{
+                    str+="<li class='nav-tab'>"+i+"</li>";
+                }
+            }
+        }
+        return str;
+    }
+    function renderPage(){
+        navEle.innerHTML=createPage(nowPage,totlePage);
+        addHandle();
+    }
+    function addHandle(){
+        //遍历所有的li，添加事件
+        for(var i=0;i<lilist.length;i++){
+            lilist[i].onclick=function(){
+                nowPage=parseInt(this.innerText);
+                renderPage();
+            }
+        }
+    }
+</script>
+</body>
+</html>
