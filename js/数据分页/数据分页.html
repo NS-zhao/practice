@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .menu{
+            text-align: center;
+            margin-top: 10px;
+        }
+        .menu *{
+            display: inline-block;
+            font-size: 14px;
+            height: 30px;
+            line-height: 30px;
+            vertical-align: middle;
+            color: #00aaff;
+        }
+        a{
+            text-decoration: none;
+            color: #000;
+        }
+        .c-list{
+            margin: 0 auto;
+            width: 722px;
+            border-top: 1px solid #879288;
+        }
+        .c-list>div{
+
+            border-bottom: 1px solid #879288;
+            border-right: 1px solid #879288;
+            border-left: 1px solid #879288;
+            line-height: 30px;
+        }
+        .c-list>div:hover{
+            background-color: #c5ffff;
+        }
+        .c-list>div span{
+            display: inline-block;
+            width: 120px;
+            text-align: center;
+        }
+        .menu input{
+            width: 30px;
+            height: 22px;
+            outline: none;
+            text-align: center;
+        }
+        .gobtn{
+            width: 40px;
+        }
+        .item-li {
+            list-style: none;
+            border: 1px solid #2ec7ff;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            line-height: 25px;
+            display: inline-block;
+            margin: 0 3px;
+            color: #2ec7ff;
+            font-size: 12px;
+        }
+        .nav > li.check-item {
+            color: #fff;
+            background-color: #00a0e8;
+        }
+    </style>
+</head>
+<body>
+<div class="c-list">
+
+</div>
+<div class="menu">
+    <select id="checkinfo">
+        <option value="5" selected>5条/页</option>
+        <option value="10">10条/页</option>
+        <option value="15">15条/页</option>
+    </select>
+    <a href="#" class="firstpage">首页</a>
+    <a href="#" class="up">上一页</a>
+    <ul class="nav">
+        <li class="item-li">1</li>
+        <li class="item-li">2</li>
+        <li class="item-li">3</li>
+        <li class="item-li">4</li>
+        <li class="item-li">5</li>
+        <li class="item-li">6</li>
+        <li class="item-li">7</li>
+        <li class="item-li">8</li>
+        <li class="item-li">9</li>
+        <li class="item-li">10</li>
+    </ul>
+    <a href="#" class="down">下一页</a>
+    <a href="#" class="lastpage">最后一页</a>
+    <span>跳转：</span>
+    <input type="text" id="gonum"/>
+    <button class="gobtn">按钮</button>
+</div>
+<script>
+    //模拟数据
+    var stulist=[
+        {"name": "小明1", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明2", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明3", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明4", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明5", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明6", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明7", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明8", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明9", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明10", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明11", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明12", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明13", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明14", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明15", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明16", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明17", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明18", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明19", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明20", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明21", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明22", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明23", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明24", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明25", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明26", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明27", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明28", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明29", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明30", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明31", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明32", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明33", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明34", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明35", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明36", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明37", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明38", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明39", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明40", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明41", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明42", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明43", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明44", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明45", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明46", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明47", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明48", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明49", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明50", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明51", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明52", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明53", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明54", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明55", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明56", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明57", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明58", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明59", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明60", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明61", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明62", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明63", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明64", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明65", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明66", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明67", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明68", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明69", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明70", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明71", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明72", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明73", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明74", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明75", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明76", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明77", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明78", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明79", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明80", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明81", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明82", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明83", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明84", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明85", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明86", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明87", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明88", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明89", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明90", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明91", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明92", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明93", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明94", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明95", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明96", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明97", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明98", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明99", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明100", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明11", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明12", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明13", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明14", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明15", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明16", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明17", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明18", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明19", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明110", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明111", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明112", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明113", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明114", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明115", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明116", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明117", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明118", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明119", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明120", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明121", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明122", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明123", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明124", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明125", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明126", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明127", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明128", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明129", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明130", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明131", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明132", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明133", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明134", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明135", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明136", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明137", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明138", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明139", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明140", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明141", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明142", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明143", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明144", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明145", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明146", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明147", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明148", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明149", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"},
+        {"name": "小明150", "sex": "男", "age": 12, "tel": "110", "address": "陕西省", "des": "聪明"}
+    ];
+    //获取元素
+    var clist = document.getElementsByClassName("c-list")[0];
+    var up = document.getElementsByClassName("up")[0];
+    var down = document.getElementsByClassName("down")[0];
+    var item = document.getElementsByClassName("item-li");
+    var lastpage = document.getElementsByClassName("lastpage")[0];
+    var firstpage = document.getElementsByClassName("firstpage")[0];
+    var gobtn = document.getElementsByClassName("gobtn")[0];
+    //获取下拉菜单
+    var menulist = document.getElementById("checkinfo");
+    var gonum = document.getElementById("gonum");
+    //记录默认状态值
+    var save=null;
+    //接收当前页的数据
+    var pageData = null;
+    //浏览器加载完成之后默认显示5条一页
+    var nowpage=1;
+    var pageNum=5;//默认一页显示5条
+    var totlepage=setTotle();
+    window.onload=function(){
+        //获取当前页的数据
+        pageData=getPageData();
+        renderPage();
+        //初始化分页
+        changeStatus();
+        up.onclick=function(){
+            if(nowpage<=1){
+                return;
+            }
+            nowpage--;
+            changeStatus(-1);
+            //获取当前页的数据
+            pageData=getPageData();
+            renderPage();
+        }
+        down.onclick=function(){
+            if(nowpage>=totlepage){
+                return;
+            }
+            nowpage++;
+            changeStatus(1);
+            //获取当前页的数据
+            pageData=getPageData();
+            renderPage();
+        }
+        lastpage.onclick=function(){
+            nowpage=totlepage;
+            gopage(nowpage-parseInt(item[item.length-1].innerText));
+        }
+        firstpage.onclick=function(){
+            nowpage=1;
+            gopage(-(parseInt(item[0].innerText-1)));
+        }
+        //文本发生变化事件
+        menulist.onchange = function () {
+            //获取的value是当前一页显示多少条
+            pageNum = this.value;
+            console.log(pageNum);
+            //重新计算总页数
+            totlepage = setTotle();
+            //重新加载数据
+            pageData = getPageData();
+            renderPage();
+        }
+        //给所有的li添加事件
+        for(var i=0;i<item.length;i++){
+            item[i].onclick=function(){
+                nowpage=parseInt(this.innerText);
+                //获取中间元素的文本值
+                var centerNum=item[5].innerText;
+                var num=nowpage-centerNum;
+                updateText(num);
+                changeStatus();
+                //重新加载数据
+                pageData = getPageData();
+                renderPage();
+            }
+        }
+        //跳转
+        gobtn.onclick=function(){
+            nowpage=parseInt(gonum.value);
+            //获取中间元素的文本值
+            var centerNum=item[5].innerText;
+            var num=nowpage-centerNum;
+            updateText(num);
+            changeStatus();
+            //重新加载数据
+            pageData = getPageData();
+            renderPage();
+            gonum.value="";
+        }
+    }
+    //计算总页码
+    function setTotle(){
+        //向上取整
+        return Math.ceil(stulist.length/pageNum);
+    }
+    //获取当前页的数据方法
+    function getPageData(){
+        return stulist.slice((nowpage-1)*pageNum,nowpage*pageNum);
+    }
+    //渲染当前页的数据到页面
+    function renderPage(){
+        var str="";
+        for(var index in pageData){
+            var one=pageData[index];
+            str+="<div><span>"+one.name+"</span>"+"<span>"+one.sex+"</span>"+"<span>"+one.age+"</span>"+"<span>"+one.tel+"</span>"+"<span>"+one.address+"</span>"+"<span>"+one.des+"</span></div>";
+        }
+        clist.innerHTML=str;
+    }
+    //分页逻辑算法
+    function changeStatus(params){
+        if(params>0){
+            //所有li文本+1
+            updateText(params);
+        }
+        if(params<0){
+            //所有li文本-1
+            updateText(params);
+        }
+        for(var i=0;i<item.length;i++){
+            var page=parseInt(item[i].innerText);
+            if(page===nowpage){
+                if(save){
+                    save.classList.remove('check-item');
+                }
+                item[i].classList.add('check-item');
+                //记录
+                save=item[i];
+            }
+        }
+    }
+    //所有li元素+1  -1 方法
+    function updateText(args){
+        for(var i=0;i<item.length;i++){
+            //当前页小于6  直接显示1-10
+            //当前页 大于19 全部显示
+            item[i].innerText=(nowpage<=item.length/2+1?(i+1):nowpage<totlepage-4?(parseInt(item[i].innerText)+args):(totlepage-item.length+1+i));
+        }
+    }
+    //最后一页和第一页的方法
+    function gopage(args){
+        //修改所有li的文本
+        updateText(args);
+        changeStatus();
+        pageData=getPageData();
+        renderPage();
+    }
+</script>
+</body>
+</html>
