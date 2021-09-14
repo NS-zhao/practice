@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .menu{
+            display: inline-block;
+        }
+        .menu>li,.btn{
+            list-style: none;
+            border: 1px solid #2ec7ff;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            line-height: 25px;
+            display: inline-block;
+            margin: 0 3px;
+            color: #2ec7ff;
+            font-size: 13px;
+        }
+        .btn{
+            width: 80px;
+            height: 27px;
+            outline: none;
+        }
+        .menu>li.check-item{
+            color: #fff;
+            background-color: #00a0e8;
+        }
+    </style>
+</head>
+<body>
+<button class="btn up">上一页</button>
+<ul class="menu">
+    <li class="item-li">1</li>
+    <li class="item-li">2</li>
+    <li class="item-li">3</li>
+    <li class="item-li">4</li>
+    <li class="item-li">5</li>
+    <li class="item-li">6</li>
+    <li class="item-li">7</li>
+    <li class="item-li">8</li>
+    <li class="item-li">9</li>
+    <li class="item-li">10</li>
+</ul>
+<button class="btn down">下一页</button>
+<script>
+    //百度分页算法
+    var nowPage=1;
+    var totlePage=30;
+    var save=null;
+    var item=document.getElementsByClassName("item-li");
+    var up=document.getElementsByClassName("up")[0];
+    var down=document.getElementsByClassName("down")[0];
+    window.onload=function(){
+        //修改所有的li
+        changeStatus();
+        //绑定事件
+        up.onclick=function(){
+            if(nowPage<=1){
+                return;
+            }
+            nowPage--;
+            changeStatus(-1);
+        }
+        down.onclick=function(){
+            if(nowPage>=totlePage){
+                return;
+            }
+            nowPage++;
+            changeStatus(1);
+        }
+    }
+    //修改所有li的状态
+    function changeStatus(params){
+        if(params>0&&nowPage>item.length/2+1&&nowPage+(item.length/2-1)<=totlePage){
+            //所有li文本+1
+            updateText(params);
+        }
+        if(params<0&&nowPage>=item.length/2+1&&nowPage+(item.length/2-1)<totlePage){
+            //所有li文本-1
+            updateText(params);
+        }
+        for(var i=0;i<item.length;i++){
+            var page=parseInt(item[i].innerText);
+            if(page===nowPage){
+                if(save){
+                    save.classList.remove('check-item');
+                }
+                item[i].classList.add('check-item');
+                //记录
+                save=item[i];
+            }
+        }
+    }
+    //所有li元素+1  -1 方法
+    function updateText(args){
+        for(var i=0;i<item.length;i++){
+            item[i].innerText=parseInt(item[i].innerText)+args;
+        }
+    }
+</script>
+</body>
+</html>
