@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<select id="s-1">
+    <option>--请选择--</option>
+</select>
+<select id="s-2">
+    <option>--请选择--</option>
+</select>
+<select id="s-3">
+    <option>--请选择--</option>
+</select>
+<script>
+    //三级联动简单写法
+    var city=[
+        {
+            id:1,
+            name:"陕西省",
+            child:[
+                {
+                    id:11,
+                    name:"西安市",
+                    child:[
+                        {
+                            id:111,
+                            name:"高新区"
+                        },
+                        {
+                            id:112,
+                            name:"长安区"
+                        }
+                    ]
+                },
+                {
+                    id:12,
+                    name:"咸阳市",
+                    child:[
+                        {
+                            id:111,
+                            name:"渭城区"
+                        },
+                        {
+                            id:112,
+                            name:"永寿县"
+                        }
+                    ]
+                },
+            ]
+        },
+        {
+            id:2,
+            name:"江苏省",
+            child:[
+                {
+                    id:21,
+                    name:"南京市",
+                    child:[
+                        {
+                            id:111,
+                            name:"高新区"
+                        },
+                        {
+                            id:112,
+                            name:"雁塔区"
+                        }
+                    ]
+                },
+                {
+                    id:12,
+                    name:"无锡市",
+                    child:[
+                        {
+                            id:211,
+                            name:"渭城区"
+                        },
+                        {
+                            id:212,
+                            name:"长安区"
+                        }
+                    ]
+                },
+            ]
+        }
+    ];
+    //记录第一个索引
+    var index1;
+    //记录第二个的索引
+    var index2;
+    //记录动态数据
+    var data1;
+    var data2;
+    //加载完成之后动态绑定数据
+    //获取上面三个元素
+    var s1=document.getElementById("s-1");
+    var s2=document.getElementById("s-2");
+    var s3=document.getElementById("s-3");
+    window.onload=function(){
+        //省数据绑定
+        addData(city,s1);
+        s1.onchange=function(){
+            console.log(s2.options.length);
+            console.log(this.value);
+            //每次执行该方法的时候直接让三个select全部清除option，只剩默认的请选择
+            s2.options.length=1;
+            s3.options.length=1;
+            index1=this.value;
+            if(index1){
+                //输出对应的数据
+                data1=city[index1].child;
+                console.log(data1);
+                addData(data1,s2);
+            }
+        }
+        s2.onchange=function(){
+            console.log(this.value);
+            index2=this.value;
+            //每次执行该方法的时候直接让三个select全部清除option，只剩默认的请选择
+            s3.options.length=1;
+            if(index2){
+                //输出对应的数据
+                data2=data1[index2].child;
+                console.log(data2);
+                addData(data2,s3);
+            }
+        }
+    }
+    //绑定省的数据
+    function addData(data,parent){
+        for(var i=0;i<data.length;i++)
+        {
+            //动态创建option标签
+            var opt=new Option(data[i].name,i);
+            parent.appendChild(opt);
+        }
+    }
+</script>
+</body>
+</html>
