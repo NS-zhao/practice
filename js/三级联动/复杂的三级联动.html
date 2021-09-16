@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/iconfont.css"/>
+    <link rel="stylesheet" href="css/city.css"/>
+</head>
+<body>
+<div class="par-info">
+    <div class="par-title">
+        <span class="default-info">请选择省/市/区</span>
+        <i class="iconfont icon-xiajiantou" id="menu"></i>
+    </div>
+    <div class="tab-list hide">
+        <div class="tab-menu">
+            <span class="tab-bar tab-bar-ck">省份</span>
+            <span class="tab-bar">城市</span>
+            <span class="tab-bar">区县</span>
+        </div>
+        <div class="tab-m-bar">
+
+        </div>
+    </div>
+</div>
+</body>
+<!--连接区域文件-->
+<script src="JSON/areaJSON.js"></script>
+<script>
+    //数据
+    var Data=citydata;
+    console.log(Data);
+    window.onload=function(){
+        //获取元素
+        var menu=document.getElementById("menu");
+        var tablist=document.getElementsByClassName("tab-list")[0];
+        var tabContent=document.getElementsByClassName("tab-m-bar")[0];
+        var tabBar=document.getElementsByClassName("tab-bar");
+        var defaultInfo = document.getElementsByClassName("default-info")[0];
+        var parTitle = document.getElementsByClassName("par-title")[0];
+        //动态获取创建的用户选择标签  span
+        var ckSpan = document.getElementsByClassName("bar-info");
+        //定义一个集合  存储当前的状态  //第一组数代表三个选项卡  第二组代表点的那个数据
+        var item = [];//[0, 0], [1, 0], [2, 0]
+        //创建一个索引变量，知道谁在高亮
+        var saveIndex;
+        //创建变量接收默认存在的tab-bar-ck元素
+        var savedefault;
+        //定义三个变量接收省市区对应的索引
+        var s1=0;
+        var s2=0;
+        //记录选中的span
+        var selectSpan;
+
+        //4.给tabContent添加点击事件，委托给子元素执行
+        tabContent.onclick=function(e){
+            if(e.target.nodeName.toLowerCase()=='span'){
+                //给defaultinfo添加隐藏类
+                if (!defaultInfo.classList.contains("hide"))
+                    defaultInfo.classList.add('hide');
+                //把其余的span的类tab-s-ck删除
+                if(selectSpan)
+                    selectSpan.classList.remove('tab-s-ck')
+                //e.target在这里指当前的span
+                e.target.classList.add('tab-s-ck');
+                selectSpan = e.target;
+                var nowIndex= e.target.getAttribute("data-index");
+                //点击的文本获取
+                addEle(e.target.innerText,saveIndex);
+                item[saveIndex]=[saveIndex++,nowIndex];
+                //item数组后边的元素清除
+                //数组删除方法 删除之后原数组受影响
+                item.splice(saveIndex);
+                for(var k=0;k<ckSpan.length;k++){
+                    if(k>=saveIndex){
+                        ckSpan[k].remove();
+                        k--;
+                    }
+                }
+                //存储当前栏位内部的选择状态
+                if(saveIndex>tabBar.length-1){
+                    tablist.classList.add('hide');
+                    saveIndex=tabBar.length-1;
+                }
+                if(saveIndex>=tabBar.length)
+                    return;
+                //自动触发tabbar的点击事件
+                tabBar[saveIndex].click();
+            }
+        }
+        //5.给tab-bar遍历添加事件
+        for(var i=0;i<tabBar.length;i++)
+        {
+            tabBar[i].index = i;
+            tabBar[i].onclick=function(){
+                if(savedefault)
+                    savedefault.classList.remove('tab-bar-ck');
+                this.classList.add('tab-bar-ck');
+                savedefault=this;
+                saveIndex = this.index;
+
+                //获取当前卡对应的数据
+                //3.根据当前卡  获取对应的数据
+                var nowHtml=null;
+                switch (saveIndex){
+                    case 0:
+                        //在绑定所有省的数据时检测是否存在之前的选中
+                        nowHtml=EachData(Data,'name',item[0]);//获取省的
+                        break;
+                    case 1:
+                        if(item[0]){
+                            //取(0,26)里面的0对应的第一位26
+                            s1=item[0][1];
+                            nowHtml=EachData(Data[s1].city,'name',item[1]);//获取省对应市的数据
+                        }
+                        else{
+                            nowHtml="";
+                        }
+                        break;
+                    case 2:
+                        if(item[1]){
+                            //获取城市对应的区县
+                            s2=item[1][1];
+                            nowHtml=EachData(Data[s1].city[s2].area,null,item[2]);//获取市对应区县的数据
+                        }
+                        else{
+                            nowHtml="";
+                        }
+                        break;
+                }
+                tabContent.innerHTML = nowHtml;
+            }
+        }
+        //用户点击添加元素
+        function addEle(txt,index){
+            if(ckSpan[index]){
+                ckSpan[index].innerText=txt+(index<2?"/":"");
+                return;
+            }
+            //创建元素添加到title中
+            var ckspan=document.createElement("span");
+            ckspan.innerText=txt+(index<2?"/":"");
+            ckspan.className="bar-info";
+            //ckspan添加事件
+            ckspan.index=index;
+            ckspan.addEventListener("click",function(){
+                //先展开下面的菜单
+                tablist.classList.remove('hide');
+                tabBar[this.index].click();
+            })
+            parTitle.appendChild(ckspan);
+        }
+        //1.实现点击上下箭头，切换元素显示隐藏
+        menu.onclick=function(){
+            if(tablist.classList.contains('hide')){
+                tablist.classList.remove('hide');
+                this.classList.add("icon-shangjiantou");
+            }
+            else{
+                tablist.classList.add('hide');
+                this.classList.remove("icon-shangjiantou");
+            }
+        }
+        //默认触发tabbar第一个span省的点击事件，获取相应的数据
+        tabBar[0].click();
+    }
+    //2.遍历整个数据的方法
+    //返回当前的数据对应的html元素
+    function EachData(params, args, dfck) {
+        var str = "";
+        for (var index in params) {
+            //第二次点击时将上次点击的红色类去掉  子子集数据形式与前两组不同没有name属性
+            str += "<span class='tab-s-name " + (dfck && dfck[1] == index ? 'tab-s-ck' : '') + "' data-index='" + index + "'>" + (args ? params[index][args] : params[index]) + "</span>";
+        }
+        return str;
+    }
+</script>
+</html>
