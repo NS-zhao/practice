@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #par-box{
+            padding: 0 10px;
+            min-height: 800px;
+        }
+        .nav {
+            position: relative;
+            background-color: #fff;
+        }
+
+        .nav > .li-item {
+            float: left;
+            overflow: hidden;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<div id="par-box">
+    <ul class="nav">
+
+    </ul>
+</div>
+<script>
+    //容器块 右下边距5px，不等高不等宽，父容器内间距左右10px
+    //动态计算生成几个li,每行等高，宽度不定
+    var sw;
+    var parBox;
+    var navParent;
+    //假设图片全在集合里面
+    var imageList=[
+        {src: '1.jpg', w: 500, h: 313},
+        {src: '2.jpg', w: 500, h: 453},
+        {src: '3.jpg', w: 500, h: 334},
+        {src: '4.jpg', w: 500, h: 388},
+        {src: '5.jpg', w: 500, h: 634},
+        {src: '6.jpg', w: 500, h: 364},
+        {src: '7.png', w: 421, h: 750}
+    ];
+    var rowsCount=[6,7,8];
+    //定义当前行的高变量
+    var rowsHeight;
+    var maright=5;
+    var height;
+    var show=4;
+    window.onload=function(){
+        //获取屏幕的尺寸
+        sw=document.documentElement.clientWidth-20;
+        parBox=document.getElementById("par-box");
+        navParent=document.getElementsByClassName("nav")[0];
+        parBox.style.width=sw+"px";
+        for(var i=0;i<show;i++){
+            createDom();
+        }
+        document.body.onscroll=function(){
+            if(this.scrollY+document.documentElement.clientHeight>=document.body.scrollHeight-5){
+                createDom();
+            }
+        }
+    }
+    //dom元素创建
+    function createDom(){
+        var all=0;
+        var count=rowsCount[Math.floor(Math.random()*rowsCount.length)];
+        var liarr=[];
+        var imgarr=[];
+        var self=[];
+        for(var i=0;i<count;i++){
+            var liele=document.createElement("li");
+            liele.className="li-item";
+            var img=document.createElement("img");
+            var imginfo=randomImg();
+            img.src="./img/"+imginfo.src;
+            liele.appendChild(img);
+            navParent.appendChild(liele);
+            var imgbili=imginfo.w/imginfo.h;
+            console.log(imginfo.w);
+            all+=imgbili;
+            //向数组添加元素
+            self.push(imgbili);
+            liarr.push(liele);
+            imgarr.push(img);
+        }
+        rowsHeight=(sw-count*maright)/all;
+        for(var i=0;i<liarr.length;i++){
+            imgarr[i].style.height=rowsHeight+"px";
+            imgarr[i].style.width=self[i]*rowsHeight+'px';
+            liarr[i].style.height=rowsHeight+'px';
+            liarr[i].style.width=self[i]*rowsHeight+'px';
+        }
+
+    }
+    //生成图片的方法
+    function randomImg(){
+        var index=Math.floor(Math.random()*imageList.length);
+        return imageList[index];
+    }
+
+</script>
+</body>
+</html>
