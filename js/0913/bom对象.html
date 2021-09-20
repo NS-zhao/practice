@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .copy{
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+是否可以复制
+<button id="btn">按钮</button>
+
+<button onclick="reload()">重新加载</button>
+<button onclick="replace()">替换</button>
+<script>
+//    window.confirm("确认是否提交？");
+//    if(window.confirm("确认是否提交？"))
+//    {
+//        console.log("确认");
+//    }
+//    else
+//    {
+//        console.log("用户拒绝");
+//    }
+//    var price = prompt("请输入价格","0");
+//    console.log(price);
+//    window.onresize = function(){
+//        console.log(3);
+//    }
+//    window.oncontextmenu = function(){
+//        return false;
+//    }
+
+//document.body.oncopy = function(){
+//    console.log("复制");
+//}
+//document.body.oncopy = function(){
+//    //根据浏览器的兼容写代码
+//    //document.selection.createRange().text 这个是IE识别
+//    var selection = window.getSelection()?
+//            window.getSelection():document.selection.createRange().text;
+//    var link = "---------------------------------------</br>"+
+//            "转载来源：</br>"+
+//            "原文链接："+document.location.href+
+//            "---------------------------------------</br>";
+//    var copytext = selection+link;
+//    if(window.clipboardData){
+//        window.clipboardData.setData("Text",copytext);
+//    }
+//    else{
+//        //使用元素创建
+//        var div = document.createElement("div");
+//        div.className = "copy";
+//        div.innerHTML = copytext;
+//        document.body.appendChild(div);
+//        selection.selectAllChildren(div);
+//        setTimeout(function(){
+//            div.remove();
+//        },0)
+//    }
+//}
+//    console.log(window);
+//    window.open("./index.html");
+//    btn.onclick = function(){
+//        window.location.reload();
+//        //关闭当前网页
+//        window.close();
+//        //打开网页
+//        window.open("www.baidu.com");
+//    }
+
+
+//    var mywindow=window.open("./index.html",'','width=200,height=200');
+//    mywindow.moveTo(100,100);
+
+
+//    //获取屏幕的宽高尺寸
+//console.log(window.innerHeight, window.innerHeight);//1438 1438
+//console.log(window.outerWidth,window.outerHeight);//1536 824
+//console.log(screen.width,screen.height);//1536 864
+//console.log(screen.availWidth,screen.availHeight);//1536 824
+//console.log(document.documentElement.clientWidth);//3072
+//console.log(document.documentElement.clientWidth);//3072
+//console.log(screen.availWidth,screen.availHeight);//1536 824
+//console.log(window.innerWidth,window.innerHeight);//3072 1438
+//
+//
+//    //返回目标设备或缓冲器上的调色板的比特深度
+//    console.log(screen.colorDepth);//24
+//    //返回屏幕的颜色分辨率（每象素的位数）
+//    console.log(screen.pixelDepth);//24
+//
+//console.log(location.host);//localhost:63342
+//console.log(location.hostname);//localhost
+//console.log(location.href);//http://localhost:63342/js/0913/bom%E5%AF%B9%E8%B1%A1.html
+//console.log(location.origin);//http://localhost:63342
+//console.log(location.pathname);///js/0913/bom%E5%AF%B9%E8%B1%A1.html
+//console.log(location.port);//63342
+//console.log(location.protocol);//http:
+//
+//    location.assign("https://www.baidu.com");
+
+//    function reload(){
+//        location.reload();
+//    }
+//
+//    function replace(){
+//        location.replace('./index.html');
+//    }
+//
+//console.log(history.length);//1
+
+console.log(navigator);
+console.log(navigator.appCodeName);//Mozilla
+console.log(navigator.appName);//Netscape
+console.log(navigator.appVersion);//5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36
+console.log(navigator.cookieEnabled);//true
+console.log(navigator.platform);//Win32
+console.log(navigator.userAgent);//Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36
+
+</script>
+</body>
+</html>
