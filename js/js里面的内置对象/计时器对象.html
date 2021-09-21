@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //计时器对象
+    //一次性计时器，循环计时器，帧计时器
+    //一次性计时器
+    //计时器的参数有string||function delay ms
+    //ms---延迟多少毫秒后执行
+//    window.setTimeout(function(){
+//        console.log("常规代码");
+//    },1000)
+//    //可以不写前缀window
+//    setTimeout(function(){
+//        console.log("常规代码");
+//    },1000)
+//
+//    //函数的提前声明
+//    setTimeout(loop,2000);
+//    function loop(){
+//        console.log("执行");
+//    }
+//
+//    //或者下面这种写法
+//    setTimeout("loop()",2000);
+
+
+    //使用变量接收计时器对象
+    //返回值是数值
+//    var timer=setTimeout(function(){
+//        console.log("执行");
+//    },1000);
+//    console.log(timer);//1
+//    //清除计时器
+//    clearTimeout(timer);
+
+
+//    setInterval(function(){
+//        console.log("执行");
+//    },1000)
+
+//    setInterval(loop,1000);
+//    function loop(){
+//        console.log("执行");
+//    }
+//    setInterval("loop()",1000);
+
+
+//    //清除计时器
+//    var count=0;
+//    var timer;
+//    timer=setInterval(function(){
+//        count++;
+//        console.log(count);
+//        if(count>9)
+//        {
+//            console.log(timer);//1
+//            clearInterval(timer);
+//        }
+//    },1000)
+
+//    var count=0;
+//    loop();
+//    function loop(){
+//        count++;
+//        console.log(count);
+//        window.requestAnimationFrame(loop);
+//    }
+
+    //设置兼容性
+    var requestFrame=window.requestAnimationFrame||window.mozRequestAnimationFrame||window.webkitRequestAnimationFrame ||window.msRequestAnimationFrame||function(callback){
+        setTimeout(callback,1000/60);
+    };
+    var cancelFrame=window.cancelAnimationFrame||window.mozCancelAnimationFrame||window.webkitCancelAnimationFrame||window.msCancelAnimationFrame||function(timer){
+        clearTimeout(timer);
+    };
+    //移除计时器
+    var timer;
+    var count=0;
+    loop();
+    function loop(){
+        count++;
+        console.log(count);
+        if(count>19){
+            cancelFrame(loop);
+            return;
+        }
+        timer=requestFrame(loop);
+    }
+
+
+
+//    var num=0;
+//    loop();
+//    function loop(){
+//        num++;
+//        console.log("输出", num);
+//        setTimeout(loop,1000);
+//    }
+
+//    var num=0;
+//    var timer;
+//    loop();
+//    function loop(){
+//        num++;
+//        console.log("输出", num);
+//        if(num>9){
+//            clearTimeout(timer);
+//            return;
+//        }
+//        timer=setTimeout(loop,1000);
+//    }
+</script>
+</body>
+</html>
