@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button id="btn" onclick="getData()">按钮</button>
+</body>
+<script>
+    //创建自定义事件
+    var events=document.createEvent("MouseEvent");
+    //初始化当前事件
+    // initEvent接受3个参数：
+    // 事件类型，是否冒泡，是否阻止浏览器的默认行为
+    events.initEvent('web',false,true);
+    function getData(){
+        console.log("执行自身的点击事件");
+        btn.dispatchEvent(events);
+    }
+    btn.addEventListener("web",function(){
+        console.log("执行我的自定义事件");
+    })
+</script>
+</html>
