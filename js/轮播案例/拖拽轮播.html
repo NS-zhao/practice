@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            position: relative;
+            width: 800px;
+            height: auto;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .box>ul{
+            overflow: hidden;
+            width: 4000px;
+        }
+        .translate{
+            transition: transform .5s ease-in;
+        }
+        .li-banner{
+            float: left;
+            width: 800px;
+            height: auto;
+        }
+        .li-banner>img{
+            vertical-align: middle;
+            width: 100%;
+            height: 350px;
+        }
+        .list{
+            position: absolute;
+            width: 100%;
+            left: 0;
+            bottom: 10px;
+            z-index: 10;
+            text-align: center;
+        }
+        .list>div{
+            width: 13px;
+            height: 13px;
+            display: inline-block;
+            border-radius: 50%;
+            border: 1px solid #fff;
+            background-color: rgba(102,102,102,0.64);
+        }
+        .list>div.ck{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <ul class="item translate">
+        <li class="li-banner"><img src="img1/b1.jpg" alt=""/></li>
+        <li class="li-banner"><img src="img1/b2.jpg" alt=""/></li>
+        <li class="li-banner"><img src="img1/b3.jpg" alt=""/></li>
+        <li class="li-banner"><img src="img1/b4.jpg" alt=""/></li>
+    </ul>
+    <div class="list">
+        <div class="ck"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<script>
+    var timer,Item,Box,sx,ex,cha,List;
+    var speed=3000;
+    //记录当前是哪一张
+    var count = 0;
+    //每一张动画的宽度
+    var maxWidth = 800;
+    var isup=false;
+    var isdefault;
+    window.onblur=function(){
+        clearInterval(timer);
+    }
+    window.onfocus=function(){
+        addAnimate();
+    }
+    window.onload=function(){
+        Item=document.querySelector(".item");
+        Box=document.querySelector(".box");
+        List=document.querySelector(".list").children;
+        //复制ul里面的第一个li添加进去
+        Item.appendChild(Item.children[0].cloneNode(true));
+        isdefault=List[0];
+        //默认启动动画
+        addAnimate();
+
+        //List遍历添加鼠标进入事件
+        for(var i=0;i<List.length;i++){
+            List[i].index=i;
+            List[i].onmouseenter=function(){
+                if(isdefault)
+                    isdefault.classList.remove("ck");
+                this.classList.add("ck");
+                isdefault=this;
+                count=this.index;
+                Item.style.transform="translateX("+(-count*maxWidth)+"px)";
+            }
+        }
+        //鼠标进入停止动画，离开添加动画
+        Box.onmouseenter=function(){
+            clearInterval(timer);
+        }
+        Box.onmouseleave=function(){
+            addAnimate();
+            if(isup){
+                //默认触发onmouseup事件
+                var event=document.createEvent("MouseEvents");
+                event.initEvent("mouseup",false,false);
+                this.dispatchEvent(event);
+            }
+        }
+        Box.onmousedown=function(e){
+            //移除动画类
+            Item.classList.remove("translate");
+            //记录初始点x坐标
+            sx= e.layerX;
+            isup=true;
+            e.preventDefault();
+            this.addEventListener("mousemove",moveHandle);
+        }
+        Box.onmouseup=function(){
+            //添加动画类
+            Item.classList.add("translate");
+            isup=false;
+            this.removeEventListener("mousemove",moveHandle);
+            //检测用户鼠标移动的差值  大于一半  直接下一张  小于一半直接回去
+            if(cha){
+                var absCha=Math.abs(cha);
+                if(absCha>=maxWidth/2){
+                    List[count>=Item.children.length-1?0:count].classList.remove("ck");
+                    if(cha<0){
+                        count++;
+                    }
+                    else{
+                        count--;
+                    }
+                }
+                animteLoad();
+            }
+        }
+        //move的方法
+        function moveHandle(e){
+            ex= e.layerX;
+            cha=ex-sx;
+            //根据差值检测处理
+            //大于0处理
+            if(cha>0&&count==0){
+                count=Item.children.length-1;
+            }
+            var trans=-count *maxWidth+cha;
+            Item.style.transform="translateX("+trans+"px)";
+        }
+    }
+    //计时器的动画方法
+    function addAnimate(){
+        timer=setInterval(function(){
+            //检测ul是否具有translate类
+            if(!Item.classList.contains("translate"))
+                Item.classList.add("translate");
+            //移除之前的ck类
+            List[count].classList.remove("ck");
+            count++;
+            animteLoad();
+        },speed)
+    }
+    //图片动画切换(动画完成)方法
+    function animteLoad(){
+        List[count >= Item.children.length - 1 ? 0 : count].classList.add("ck");
+        Item.style.transform="translateX("+(-count*maxWidth)+"px)";
+        //一次性计时器卡每张动画完成(每次最后一张刚出来，立马把整个ul重新放到最后)
+        setTimeout(function(){
+            if(count>=Item.children.length-1){
+                Item.classList.remove("translate");
+                count=0;
+                Item.style.transform="translateX(0px)";
+            }
+        },500);
+    }
+</script>
+</body>
+</html>
