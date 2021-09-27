@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//    var arr=[1,2,3,4];
+//    console.log(arr);//Array(4)
+//    var arr1 = new Array(5);
+//    console.log(arr1);
+//    var arr2 = new Array(1,2,3,4);
+//    console.log(arr2);
+//    var arr3 = new Array();
+//    arr3[0] = 1;
+//    arr3[1] = "a";
+//    arr3[2] = true;
+//    arr3[3] = function(){};
+//    console.log(arr3);
+//    console.log(arr3[2]);//true
+//
+//
+//    var a1=[1,2,3,4,5,6];
+//    console.log(a1.copyWithin(0, 1, 4));// [2, 3, 4, 4, 5, 6]
+//
+//
+//    var m1 = [1,2,3,4];
+//    var en = m1.entries();
+//    console.log(en.next());
+//    console.log(en.next());
+//    console.log(en.next());
+//    console.log(en.next());
+//    console.log(en.next());
+//
+//
+//    var f3 = [1,2,3];
+//    var has = f3.every(function(val,index,item){
+//        console.log(item);//[1,2,3]
+//        return val%2 == 0;
+//    });
+//    console.log(has);//false
+//
+//
+//    var a=[1,2,3,4,5,6];
+//    console.log(a.fill('a'));//["a", "a", "a", "a", "a", "a"]
+//    console.log(a);//["a", "a", "a", "a", "a", "a"]
+
+//    var f3 = [1,2,3];
+//    var has2 = f3.find(function(value){
+//        //如果没有传给定的值，函数内部的this由undefined代替
+//        return value>1;
+//    },10);
+//    console.log(has2);//2
+
+
+//    var f3 = [1,2,3];
+//    var index=f3.findIndex(function(value){
+//        return value%3==0;
+//    });
+//    console.log(index);//2
+
+
+//    var b=[1,2,3,4,5];
+//    console.log(b.indexOf(3));//2
+//    console.log(b.indexOf(3,3));//-1
+//    console.log(b.lastIndexOf(4));//3
+//    console.log(b.lastIndexOf(4,3));//3
+//    console.log(b.lastIndexOf(4,2));//-1
+
+
+//    var m = [1,2,3,4,'a','b'];
+//    var fk= m.some(function(value){
+//        if(typeof value==="string"){
+//            return value;
+//        }
+//    });
+//    console.log(fk);//true
+
+
+    var o=[1,2,3,4,5,6];
+    //map映射返回值是映射之后一个新的数组
+    var m= o.map(function(value,index){
+        return value*=value;
+    });
+    console.log(m);//[1, 4, 9, 16, 25, 36]
+
+    o.map(function (value,index) {
+        console.log(value);//1 2 3 4 5 6
+    })
+
+
+    Array.prototype.mymap=function(callback){
+        //this指向的是当前对象st
+        var arr=this;
+        var list=[];
+        for(var i=0;i<arr.length;i++){
+            list[i]=callback.apply(arr,[arr[i],i,arr]);
+        }
+        return list;
+    }
+    var st=[1,2,3,4,5];
+    var obj=st.mymap(function(value,index,array){
+        console.log(value, index, array);//输出值 索引 原数组
+        console.log(this);//[1, 2, 3, 4, 5]
+        return value*2;
+    });
+    console.log(obj)//[2, 4, 6, 8, 10];
+
+//var f3 = [1,2,3];
+//console.log(f3.push(20));//4--方法返回值为数组追加之后的长度
+//console.log(f3);//[1, 2, 3, 20]
+//var f3 = [1,2,3];
+//console.log(f3.unshift(0));//4---方法返回值为数组追加之后的长度
+//console.log(f3);
+
+
+//var f3 = [1,2,3];
+//console.log(f3.pop());//3  返回删除后的值
+//console.log(f3);//[1, 2]
+
+var f3 = [1,2,3];
+console.log(f3.shift());//1--返回删除后的值
+console.log(f3);//[2,3]
+</script>
+</body>
+</html>
