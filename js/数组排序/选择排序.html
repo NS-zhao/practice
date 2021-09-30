@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var arrinfo = [1,9,4,2,5,3,8,6,7];
+    function selectSort(array){
+        if(Array.isArray(array)){
+            if(array.length == 1){
+                return array;
+            }
+            for(var i = 0;i<array.length-1;i++){
+                var minIndex = i;//默认当前的i最小
+                for(var j = i+1;j<array.length;j++)
+                {
+                    minIndex = array[minIndex]>array[j]?j:minIndex;
+                }
+                //交换位置
+                [array[i],array[minIndex]] = [array[minIndex],array[i]];
+            }
+            return array;
+        }
+    }
+    console.log(selectSort(arrinfo));//[1, 2, 3, 4, 5, 6, 7, 8, 9]
+</script>
+</body>
+</html>
