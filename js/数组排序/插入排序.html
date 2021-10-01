@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var arrdata = [1,9,4,2,5,3,8,6,7];
+    function insertSort(arr){
+        if(Array.isArray(arr)){
+            if(arr.length == 1){
+                return arr;
+            }
+            for(var i = 1;i<arr.length;i++)
+            {
+                //取前面的索引
+                var preIndex=i-1;
+                var current = arr[i];//当前值
+                while(preIndex>=0&&arr[preIndex]>current)
+                {
+                    arr[preIndex+1] = arr[preIndex];
+                    preIndex--;
+                }
+                arr[preIndex+1] = current;
+            }
+            return arr;
+        }
+    }
+    console.log(insertSort(arrdata));// [1, 2, 3, 4, 5, 6, 7, 8, 9]
+</script>
+</body>
+</html>
