@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var sum=0;
+    for(var i=2;i<=100;i++){
+        for(var j=2;j<i;j++){
+            if(i%j==0){
+                break;
+            }
+
+        }
+        if(j>=i){
+            sum+=i;
+        }
+    }
+    console.log(sum);
+
+    function allCount(args){
+        if(typeof args=="number"){
+            var sum=0;
+            for(var i=0;i<=args;i++){
+                if(check(i)){
+                    sum+=i;
+                }
+            }
+            return sum;
+        }
+    }
+    function check(num){
+        if(num>=2){
+            var bool=true;
+            for (var k = 2; k < num; k++) {
+                if (num % k == 0) {
+                    bool = false;
+                    break;
+                }
+            }
+            return bool;
+        }
+    }
+    console.log(allCount(100));
+</script>
+</body>
+</html>
