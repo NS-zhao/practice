@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//    var obj={
+//        name:"张三",
+//        age:20
+//    };
+//    function method(){
+//        console.log(this);//window
+//    }
+//    method();
+
+
+    var obj={
+        name:"张三",
+        age:20
+    };
+    function method(a,b,c){
+        console.log(this,a,b,c);//{name: "张三", age: 20} 1 2 3
+    }
+    method.call(obj,1,2,3);
+
+    var obj={
+        name:"张三",
+        age:20
+    };
+    function method(a,b,c){
+        console.log(this,a,b,c);//{name: "张三", age: 20} 1 2 3
+    }
+    method.apply(obj,[1,2,3]);
+</script>
+</body>
+</html>
