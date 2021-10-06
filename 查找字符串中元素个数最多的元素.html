@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var str="aabbbccdddddjjjnnmaaa";
+    function findstr(args){
+        var arr=args.split("");
+        var num=0;//记录当前字符为几个
+        var list=[];
+        for(var i=0;i<arr.length;i++){
+            var count=1;
+            for(var k=i+1;k<arr.length;k++){
+                if(arr[i]===arr[k]){
+                    count++;
+                    arr.splice(k,1);
+                    k--;
+                }
+            }
+            if(count>num){
+                num=count;
+                list[0]=[arr[i],num];
+            }
+            else if(count==num){
+                list[list.length]=[arr[i],num];
+            }
+
+        }
+        return list;
+
+    }
+    console.log(findstr(str));
+</script>
+</body>
+</html>
