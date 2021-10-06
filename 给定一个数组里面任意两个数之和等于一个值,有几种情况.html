@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var info=[1,2,3,7,4,5,6,7,7,1,8,9];
+    var num=8;
+    function Count(array,n){
+        var list=[];
+        for(var i=0;i<array.length;i++){
+            //检测当前值是否已经存在
+            var ishas=true;
+            list.forEach(function(item){
+                if(item.indexOf(array[i])!=-1){
+                    ishas = false;
+                    return;
+                }
+            });
+            if(ishas){
+                var c=n-array[i];
+                if(array.indexOf(c,i+1)!=-1){
+                    list.push([array[i],c]);
+                }
+            }
+        }
+        console.log(list);//1 7;2 6;3 5
+    }
+    Count(info,num);
+
+</script>
+</body>
+</html>
