@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var arr=[1,2,3,4,1,2,3,4,1,2,3,4];
+    var num=4;
+    var list=[];
+    function checkIndex(array,n){
+        for(var i=0;i<array.length;i++){
+            if(array[i]==n){
+                list.push(i);
+            }
+        }
+        console.log(list);//[3, 7, 11]
+    }
+    checkIndex(arr,num);
+</script>
+</body>
+</html>
