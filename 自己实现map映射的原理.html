@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    Array.prototype.mymap=function(callback){
+        var arr=this;
+        var list=[];
+        for(var i=0;i<arr.length;i++){
+            list[i]=callback(arr[i],i,arr);
+        }
+        return list;
+    }
+    var st=[1,2,3,4,5];
+    var obj=st.mymap(function(value,index,item){
+        console.log(value, index, item);
+        return value*2;
+    });
+    console.log(obj);
+</script>
+</body>
+</html>
