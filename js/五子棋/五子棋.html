@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #eaeaea;
+        }
+
+        .box {
+            width: 450px;
+            height: 500px;
+            box-shadow: 0 0 5px #000;
+            border-radius: 10px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        .item-map, .item-child {
+            position: relative;
+            z-index: 10;
+            width: 450px;
+            height: 450px;
+            overflow: hidden;
+        }
+
+        .map {
+            position: absolute;
+            left: 30px;
+            top: 30px;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .item {
+            position: relative;
+            width: 440px;
+            height: 50px;
+        }
+
+        .user-T {
+            position: absolute;
+            left: 25px;
+            top: 7px;
+            width: 150px;
+            height: 36px;
+            border-radius: 50px;
+            box-shadow: 0 0 1px #000;
+        }
+
+        .yuan {
+            margin: 3px 10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .show-name {
+            color: #00aaff;
+            font-size: 14px;
+        }
+
+        .hei {
+            background: radial-gradient(#fff, #666 70%, #000);
+        }
+
+        .bai {
+            background: radial-gradient(#fff, #d8d8d8 40%, #bdbdbd);
+        }
+
+        .btnback, .btnrestart {
+            position: absolute;
+            width: 100px;
+            height: 30px;
+            border-radius: 50px;
+            border: none;
+            outline: none;
+            background-color: #00aaff;
+            color: #fff;
+        }
+
+        .btnback:hover, .btnrestart:hover {
+            background-color: #1dd3ff;
+        }
+
+        .btnback:active, .btnrestart:active {
+            background-color: #1353ff;
+        }
+
+        .btnback {
+            left: 185px;
+            top: 10px;
+        }
+
+        .btnrestart {
+            left: 295px;
+            top: 10px;
+        }
+
+        .qizi {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="item-map">
+        <div class="item-child">
+
+        </div>
+    </div>
+    <div class="item">
+        <div class="user-T">
+            <div class="yuan hei"></div>
+            <span class="show-name">当前：<span class="name">黑棋</span></span>
+        </div>
+        <button class="btnback">悔棋</button>
+        <button class="btnrestart">重新开始</button>
+    </div>
+</div>
+<script>
+    //1.创建棋盘
+    var item = document.querySelector(".item-map");
+    var itemchild = document.querySelector(".item-child");
+    var yuanele = document.querySelector(".yuan");
+    var nameele = document.querySelector(".name");
+    var btnback = document.querySelector(".btnback");
+    var btnrestart = document.querySelector(".btnrestart");
+    var Game = {
+        w: 30,
+        h: 30,
+        col: 13,
+        row: 13,
+        src: './img/bg.png',
+        _Map: null,//接收整个地图对象
+        ux: null,
+        uy: null,
+        mappos: [],//地图上每个点对应坐标数组
+        r: 14,
+        offset: 0,
+        ele: [{class: 'hei', name: "黑棋子"}, {class: 'bai', name: "白棋子"}],
+        index: 0,
+        nowEle: null,
+        saveEle: null,
+        listmap: [],
+        fx: 0,
+        fy: 0,
+        createMap: function () {
+            //创建地图的
+            if (this._Map == null) {
+                //使用dom元素创建
+                this._Map = document.createElement("div");
+                this._Map.className = "map";
+                this._Map.style.width = this.w * this.col + "px";
+                this._Map.style.height = this.h * this.row + "px";
+                this._Map.style.backgroundImage = "url('" + this.src + "')";
+                item.appendChild(this._Map);
+                //自动计算偏移
+                this.offset = this._Map.offsetLeft;
+                //生成数组坐标
+                this.createPos();
+            }
+        },
+        createPos: function () {
+            for (var i = 0; i <= this.row; i++) {
+                this.mappos.push([]);
+                this.listmap.push([]);
+                for (var k = 0; k <= this.col; k++) {
+                    this.mappos[i].push([k * this.w, i * this.h]);
+                    this.listmap[i].push(null);
+                }
+            }
+
+        },
+        checkPos: function () {
+            //检测到了返回当前点坐标
+            for (var i = 0; i < this.mappos.length; i++) {
+                for (var k = 0; k < this.mappos[i].length; k++) {
+                    var center = this.mappos[i][k];
+                    var cx = center[0] - this.ux;
+                    var cy = center[1] - this.uy;
+                    var ishas = this.r * this.r >= cx * cx + cy * cy;
+                    if (ishas) {
+                        this.fx=i;
+                        this.fy=k;
+                        return center;
+                    }
+                }
+            }
+        },
+        getNextEle: function () {
+            this.nowEle = this.ele[this.index];
+            yuanele.className = "yuan " + this.nowEle.class;
+            nameele.innerText = this.nowEle.name;
+            this.index = ++this.index >= this.ele.length ? 0 : this.index;
+            return this.nowEle;
+        },
+        createNowPosEle: function () {
+            //在当前的坐标位置创建一个元素
+            var arr = Game.checkPos();
+            if (arr)//[0,0]
+            {
+                //创建当前的棋子
+                var nowqizi = document.createElement("div");
+                nowqizi.style.width = this.r * 2 + "px";
+                nowqizi.style.height = this.r * 2 + "px";
+                nowqizi.className = "qizi " + this.nowEle.class;
+                nowqizi.style.left = arr[0] - this.r + this.offset + "px";
+                nowqizi.style.top = arr[1] - this.r + this.offset + "px";
+                //记录当前的棋子
+                this.saveEle = nowqizi;
+                itemchild.appendChild(nowqizi);
+                //给对应的集合对应位置添加对象
+                var s = 0;
+                if (this.nowEle.class == "hei") {
+                    s = 0;
+                }
+                else {
+                    s = 1;
+                }
+                this.listmap[this.fx][this.fy] = s;
+                //自动检测游戏是否结束
+                //以当前这个子，四周找五连子，确定输赢
+                this.checkWin();
+                Game.getNextEle();
+
+            }
+        },
+        checkWin:function () {
+            var win=null;
+            if(this.heng(this.listmap[this.fx])){
+                win=this.nowEle;
+            }
+            else if(this.zong(this.fx,this.fy)){
+                win=this.nowEle;
+            }
+            if(win){
+                setTimeout(function(){
+                    switch (win.class){
+                        case 'bai':
+                            alert("白棋赢了！");
+                            break;
+                        case 'hei':
+                            alert("黑棋赢了！");
+                            break;
+                    }
+                    btnrestart.click();
+                },500)
+            }
+        },
+        //纵向检测
+        zong:function(x,y){
+            for(var i=0;i<this.listmap.length;i++){
+                var iscome=true;
+                var n=this.listmap[i][y];
+                if(n==null)
+                continue;
+                var arr=[i];
+                for(var k=i+1;k<=i+5;k++){
+                    //后面k+5之后会超出map范围会报错
+                    if(this.listmap[k]==undefined)
+                        break;
+                    if(this.listmap[k][y]==null)
+                        continue;
+                    if(n!=this.listmap[k][y]){
+                        iscome=false;
+                        break;
+                    }
+                    else{
+                        arr.push(k);
+                    }
+                }
+                if(iscome&&arr.length==5){
+                    return iscome;
+                }
+            }
+        },
+        heng:function (h) {
+            //检测当前行上面是否存在连续的五个
+            for(var i=0;i< h.length;i++){
+                var iscome=true;
+                var n=h[i];
+                if(n==null)
+                    continue;
+                var arr=[i];
+                for(var k=i+1;k<=i+5;k++){
+                    //后面k+5之后会超出map范围会报错
+                    if(h[k]==null)
+                        continue;
+                    if(n!=h[k]){
+                        iscome=false;
+                        break;
+                    }
+                    else{
+                        arr.push(k);
+                    }
+                }
+                if(iscome&&arr.length==5){
+                    return iscome;
+                }
+            }
+        }
+    };
+    window.onload = function () {
+        Game.createMap();
+        //显示当前棋子
+        Game.getNextEle();
+
+
+        //给item添加鼠标点击事件
+        item.onclick = function (e) {
+            Game.ux = e.offsetX - Game.offset;
+            Game.uy = e.offsetY - Game.offset;
+            Game.createNowPosEle();
+        }
+        //悔棋事件
+        btnback.onclick = function () {
+            if (Game.saveEle) {
+                Game.getNextEle();
+                //删除之前的棋子
+                Game.saveEle.remove();
+                Game.saveEle = null;
+            }
+            else {
+                alert("不能在悔棋了！！");
+            }
+
+        }
+        //重新开始
+        btnrestart.onclick = function () {
+            //直接删除所有的棋子
+            itemchild.innerHTML = "";
+            Game.saveEle = null;
+            Game.index = 0;
+            Game.getNextEle();
+        }
+    }
+</script>
+</body>
+</html>
