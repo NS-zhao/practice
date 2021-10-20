@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var str="abc123abc";
+    var reg=/[0-9]+/;
+    console.log(str.match(reg));//["123", index: 3, input: "abc123abc", groups: undefined]
+    console.log(reg.test(str));//true
+
+    console.log("zooooood".match(/o+/));//["oooooo", index: 1, input: "zooooood", groups: undefined]
+    console.log("zooooood".match(/o+?/));//["o", index: 1, input: "zooooood", groups: undefined]
+
+    console.log("abc123def456\r".match(/.+/));//["abc123def456", index: 0, input: "abc123def456", groups: undefined]
+    console.log("abc123def456\\n".match(/.+|\n/));//["abc123def456\n", index: 0, input: "abc123def456\n", groups: undefined]
+
+    //匹配生日
+    var a="20000809";
+    console.log(/(19|20)[0-9]{2}(0[1-9])|(10|11|12)([0-2][1-9]|10|20|30|31)/.test(a));//true
+
+    var s="applies is a fun";
+    var s1="appliesis a fun";
+    console.log(s.match(/appl(?:y|ies)/));//["applies", index: 0, input: "applies is a fun", groups: undefined]
+    console.log(s.match(/applies(?= is)/));//["applies", index: 0, input: "applies is a fun", groups: undefined]
+    console.log(s1.match(/applies(?= is)/));//null
+
+
+    console.log(s1.match(/applies(?! is)/));//["applies", index: 0, input: "appliesis a fun", groups: undefined]
+    console.log(s.match(/applies(?! is)/));//null
+
+
+    var m="2000Windows";
+    var m1="3.1Windows";
+    console.log(m.match(/(?<=95|98|NT|2000)Windows/));//["Windows", index: 4, input: "2000Windows", groups: undefined]
+    console.log(m1.match(/(?<=95|98|NT|2000)Windows/));//null
+    console.log(m.match(/(?<!95|98|NT|2000)Windows/));//null
+    console.log(m1.match(/(?<!95|98|NT|2000)Windows/));//["Windows", index: 3, input: "3.1Windows", groups: undefined]
+
+    console.log("i am a student".match(/en\b/));//null
+    console.log("i am a student".match(/ent\b/));//["ent", index: 11, input: "i am a student", groups: undefined]
+    console.log("i am a student".match(/en\B/));//["en", index: 11, input: "i am a student", groups: undefined]
+    console.log("i am a student".match(/ent\B/));//null
+
+
+    var n="i amamama i amamam";
+    console.log(n.match(/\b([a-z]+)\1\1\b/gi));//["amamam"]
+
+    var href="https://www.runoob.com:8080/regexp/regexp-example.html";
+    console.log(href.match(/(\w+):\/\/([^/:]+)(:\d*)?([^# ]*)/));
+</script>
+</body>
+</html>
