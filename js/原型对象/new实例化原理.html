@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function Person(name,age,sex){
+        this.name=name||"";
+        this.age=age||"";
+        this.sex=sex||"";
+    }
+    Person.prototype.eat=function(){
+        return this.name+"吃饭";
+    }
+    Person.prototype.sleep=function(){
+        return this.name+ "睡觉";
+    }
+    var New=function(o){
+        //创建一个对象
+        var obj={};
+        //类的原型对象给到创建对象的原型链
+        obj.__proto__= o.prototype;
+        //原型对象上的构造指向函数类本身
+        o.prototype.constructor=o;
+        //函数本身的属性和方法传递
+        //获取传递的参数
+        var args=Array.prototype.slice.call(arguments,1);
+        o.apply(obj,args);
+        return obj;
+    }
+    //模拟底层实现
+    var stu=New(Person,'小明',20,'男');
+    console.log(stu);
+
+
+    var A = function() {};
+    A.prototype = {};
+    var B = {};
+    console.log(A.constructor);//Function
+    console.log(B.constructor);//Object
+    var a = new A();
+    A.prototype = {};
+    var b = new A();
+    b.constructor = A.constructor;
+    console.log(a);
+    console.log(b);
+    console.log(a.constructor);//object
+    console.log(a.constructor == A);//false
+    console.log(a.constructor == b.constructor);//false
+    console.log(a instanceof A);//false
+    console.log(b instanceof A);//true
+</script>
+</body>
+</html>
