@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: "微软雅黑";
+            color: #fff;
+            background: linear-gradient(-45deg, #231f6e, #20bdfe, #2600b4, #1d1a44);
+            background-size: 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0 50%;
+            }
+        }
+        .form-box{
+            margin:  0 auto;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 520px;
+            height: 500px;
+            background: url("./img/bg.png") no-repeat left top;
+            background-size: cover;
+            overflow: hidden;
+        }
+        .form-box h1{
+            font-size: 26px;
+            color: #fff;
+            letter-spacing: 7px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 90px;
+        }
+        .item{
+            position: relative;
+            margin: 0 auto;
+            width: 300px;
+            height: 45px;
+            margin-bottom:20px;
+            background-color: rgba(11,116,180,0.8);
+            border: 1px solid #1d90c5;
+            display: flex;
+        }
+        .icon{
+            float: left;
+            width: 45px;
+        }
+        .icon img{
+            margin: 12px;
+            width: 21px;
+        }
+        .txt{
+            flex: 1;
+        }
+        .txt>input{
+            border: none;
+            background: none;
+            height: 45px;
+            line-height: 45px;
+            width: 100%;
+            color: #fff;
+            letter-spacing: 1px;
+            font-size: 16px;
+            outline: none;
+        }
+        input::-webkit-input-placeholder{
+            color: #fff;
+
+        }
+        .item-2{
+            width: 300px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .item-2 input{
+            position: relative;
+            top: 3px;
+            float: left;
+            width: 12px;
+            height: 10px;
+            margin-right: 5px;
+        }
+        .item-2 input:after{
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 12px;
+            border: 1px solid #1d90c5;
+            padding: 0 3px;
+            background-color: rgba(11,116,180,1);
+            border-radius: 3px;
+            text-align: center;
+            line-height: 12px;
+        }
+        .item-2 input:checked:after{
+            content: "✓";
+            font-size: 12px;
+            color: #fff;
+        }
+        .item-2>span{
+            float: left;
+            font-size: 13px;
+            vertical-align: middle;
+        }
+        .item-2>a{
+            float: right;
+            color: #fff;
+            font-size: 13px;
+            text-decoration: none;
+        }
+        .item-2>a:hover{
+            text-decoration: underline;
+        }
+        .item-3{
+            margin-bottom: 10px;
+            width: 300px;
+            margin: 0 auto;
+        }
+        .item-3>button{
+            width: 300px;
+            height: 45px;
+            background: #3FB5E3;
+            color: #fff;
+            border: 1px solid #1d90c5;
+            outline: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .item-4{
+            width: 300px;
+            margin: 0 auto;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #fff;
+            letter-spacing: 0.5px;
+
+        }
+        .item-4 a{
+            color: #1d90c5;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="form-box">
+    <h1>欢迎登录</h1>
+    <div class="item">
+        <div class="icon">
+            <img src="./img/icon1.png" alt=""/>
+        </div>
+        <div class="txt">
+            <input type="text" placeholder="请输入用户名"/>
+        </div>
+    </div>
+    <div class="item">
+        <div class="icon">
+            <img src="./img/icon2.png" alt=""/>
+        </div>
+        <div class="txt">
+            <input type="password" placeholder="请输入您的密码"/>
+        </div>
+    </div>
+    <div class="item-2">
+        <input type="checkbox"/>
+        <span>记住密码</span>
+        <a href="#">忘记密码?</a>
+    </div>
+    <div class="item-3">
+        <button type="submit">登录</button>
+    </div>
+    <div class="item-4">
+        <span>还没有账号?<a href="./regest.html">立即注册</a></span>
+    </div>
+</div>
+</body>
+</html>
