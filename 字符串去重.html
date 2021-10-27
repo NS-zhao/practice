@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//    //方法1：es6写法
+//    var str="abcdabcdaaaabbbbccccdddd";
+//    function checkStr(){
+//        var arr=str.split("");
+//        return new Set(arr).join("");
+//    }
+//    console.log(checkStr(str));//abcd
+//
+//    var str="abcdabcdaaaabbbbccccdddd";
+//    function checkStr(){
+//        var arr=str.split("");
+//        for(var i=0;i<arr.length;i++){
+//            for(var k=i+1;k<arr.length;k++){
+//                if(arr[i]==arr[k]){
+//                    arr.splice(k,1);
+//                    k--;
+//                }
+//            }
+//        }
+//        return arr.join("");
+//    }
+//    console.log(checkStr(str));//abcd
+
+
+
+    var a=[1,1,2,2,3,4,5,5];
+    function unique(args){
+        var item=[];
+        var obj={};
+        for(var i=0;i<args.length;i++){
+            if(!obj[args[i]]){
+                obj[args[i]]=1;
+                item.push(args[i]);
+            }
+        }
+        return item;
+    }
+    console.log(unique(a));// [1, 2, 3, 4, 5]
+
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .main{
+            width: 650px;
+            height: 765px;
+            margin: 0 auto;
+        }
+        .main>img{
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+        }
+        .time-b{
+            z-index: 2;
+            position: absolute;
+            top: 100px;
+            left: 680px;
+        }
+        .ju,.sheng{
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: #ffbbd2;
+            margin-bottom: 25px;
+        }
+        .bb{
+            width: 180px;
+            height: 180px;
+            vertical-align: middle;
+            margin-bottom: 25px;
+        }
+        .sheng{
+            color: #e25243;
+        }
+        .dao{
+            position: absolute;
+            width: 600px;
+            height: 300px;
+            vertical-align: middle;
+            top: 470px;
+            left: 645px;
+            font-size: 32px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="main">
+        <img src="./img/bir.jpg" alt=""/>
+        <div class="time-b">
+            <div class="ju">距离</div>
+            <img class="bb" src="./img/bb.jpg" alt=""/>
+            <div class="sheng">生日</div>
+        </div>
+        <div class="dao">
+            <span id="a"></span>
+            <span id="b"></span>
+            <span id="d"></span>
+            <span id="e"></span>
+        </div>
+    </div>
+
+</div>
+<script>
+    window.onload=function(){
+        //倒计时的时间
+        var dtime=new Date("2021/11/29 00:00:00");
+        time=setInterval(function(){
+            //获取当前的时间
+            var ntime=new Date();
+            var c=dtime.getTime()-ntime.getTime();
+            //总差进行换算
+            var day = parseInt(c / (1000 * 60 * 60 * 24));
+            var hour=parseInt((c % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var min=parseInt((c % (1000 * 60 * 60)) / (1000 * 60));
+            var sec=parseInt((c % (1000 * 60)) / 1000);
+            a.innerHTML = day + "日";
+            b.innerHTML = hour + "时";
+            d.innerHTML = min + "分";
+            e.innerHTML = sec + "秒";
+        },1000)
+    }
+</script>
+</body>
+</html>

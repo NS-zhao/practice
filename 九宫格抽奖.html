@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=320,minimum-scale=1.0,maximum-scale=4.0,user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+            box-shadow: 0 0 10px #000;
+        }
+        .box>div{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            box-sizing: border-box;
+            border: 3px solid deeppink;
+            text-align: center;
+            line-height: 100px;
+        }
+        .item-1{
+            left: 0;
+            top: 0;
+        }
+        .item-2{
+            left: 100px;
+            top: 0;
+        }
+        .item-3{
+            left: 200px;
+            top: 0;
+        }
+        .item-4{
+            left: 200px;
+            top: 100px;
+        }
+        .item-5{
+            left: 200px;
+            top: 200px;
+        }
+        .item-6{
+            left: 100px;
+            top: 200px;
+        }
+        .item-7{
+            left: 0;
+            top: 200px;
+        }
+        .item-8{
+            left: 0;
+            top: 100px;
+        }
+        .item-9{
+            left: 100px;
+            top: 100px;
+        }
+        .item {
+            background-color: #00aaff;
+            color: #fff;
+        }
+        .ck {
+            background-color: deeppink;
+            color: #0000e8;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="item item-1">笔记本</div>
+    <div class="item item-2">电冰箱</div>
+    <div class="item item-3">谢谢惠顾</div>
+    <div class="item item-4">10元代金券</div>
+    <div class="item item-5">5元代金券</div>
+    <div class="item item-6">2元代金券</div>
+    <div class="item item-7">谢谢惠顾</div>
+    <div class="item item-8">水杯(高级)</div>
+    <div class="item-9">抽奖</div>
+</div>
+<script>
+    //点击开始抽奖
+    var item9=document.querySelector(".item-9");
+    var item=document.querySelectorAll(".item");
+    var isStart=true;
+    var time=null;
+    var speed=100;
+    var index = 0;//随机奖项的索引
+    var save=null;
+    var count = 0;
+    var num = 0;
+    var arr = ["笔记本", '电冰箱', '谢谢惠顾', '10元代金券', '5元代金券', '2元代金券', '谢谢惠顾', '水杯(高级)'];
+    item9.onclick=function(){
+        if(isStart){
+            isStart=false;
+            index=Math.floor(Math.random()*arr.length);
+            Rotate();
+        }
+    }
+    function Rotate(){
+        if(num>=item.length){
+            num=0;
+            count++;
+        }
+        if(save){
+            save.classList.remove("ck");
+        }
+        item[num].classList.add("ck");
+        save=item[num];
+        //对speed速度进行设置
+        if(count<6){
+            speed-=2;//提速
+        }
+        else{
+            //大于等于5圈,开始减速
+            speed+=30;
+        }
+        //限制speed最小值
+        if(speed<=10){
+            speed=10;
+        }
+        if(count>=8&&num==index){
+            clearTimeout(time);
+            return;
+        }
+        num++;
+        time=setTimeout(Rotate,speed);
+    }
+</script>
+</body>
+</html>
