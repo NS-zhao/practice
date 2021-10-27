@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //获取或者设置日期的
+    console.log(Date);//ƒ Date() { [native code] }
+    //直接new对象，输出就是中国标准时间
+    console.log(new Date());//Fri Oct 01 2021 16:38:10 GMT+0800 (中国标准时间)
+
+    //Date日期对象方法
+    //获取对应日期的方法
+    var time=new Date();
+    console.log(time);//Fri Oct 01 2021 16:38:10 GMT+0800 (中国标准时间)
+    //获取对应的数值
+    //获取日
+    console.log(time.getDate());//1
+    //获取星期
+    console.log(time.getDay());//5
+    //获取总年数，计算方法：1900年开始计算的
+    console.log(time.getYear());//121
+    //获取今年的日期
+    console.log(time.getFullYear());//2021
+    //获取月(会少一个)
+    console.log(time.getMonth());//9
+    //获取时
+    console.log(time.getHours());//16
+    //获取分
+    console.log(time.getMinutes());//38
+    //获取秒
+    console.log(time.getSeconds());//10
+    //获取毫秒
+    console.log(time.getMilliseconds());//517
+    //获取当前时间的总毫秒数，也就是当前时间到1970年1月1日的总毫秒数
+    console.log(time.getTime());//1633077490517
+
+
+    //日期的转化方法
+    //把Date对象的日期部分转换为字符串
+    console.log(time.toDateString());//Fri Oct 01 2021
+    //使用ISO标准返回Date对象的字符串格式
+    console.log(time.toISOString());//2021-10-01T08:38:10.517Z
+    //根据本地时间把Date对象转换为字符串
+    console.log(time.toLocaleString());//2021/10/1 下午4:38:10
+    //根据本地时间把Date对象的日期部分转换为字符串
+    console.log(time.toLocaleDateString());//2021/10/1
+    //把本地时间的时间部分转为字符串格式
+    console.log(time.toLocaleTimeString());//下午4:38:10
+    //把Date对象的时间部分转换为字符串
+    console.log(time.toTimeString());//16:38:10 GMT+0800 (中国标准时间)
+    //根据国际标准时间(UTC)把Date对象转换为字符串
+    console.log(time.toUTCString());//Fri, 01 Oct 2021 08:38:10 GMT
+
+
+    //设置对应日期的方法
+    //设置时间为2021 0809 12:00:00
+    //纯数字设置(需要考虑月数减一的问题)
+    var stime=new Date(2021,7,9,12,0,0);
+    console.log(stime);//Mon Aug 09 2021 12:00:00 GMT+0800 (中国标准时间)
+    //以字符串形式设置
+    var atime=new Date("2021-08-09 12:00:00");
+    console.log(atime);//Mon Aug 09 2021 12:00:00 GMT+0800 (中国标准时间)
+
+
+    //以日期对象里面的set方法去设置
+    var htime=new Date();
+    //设置年
+    htime.setFullYear(2021);
+    //设置月(要考虑月数减一的问题)
+    htime.setMonth(7);
+    //设置日
+    htime.setDate(9);
+    //设置时
+    htime.setHours(12);
+    //设置分
+    htime.setMinutes(0);
+    //设置秒
+    htime.setSeconds(0);
+    console.log(htime);//Mon Aug 09 2021 12:00:00 GMT+0800 (中国标准时间)
+
+    //以毫秒设置时间
+    var btime=new Date();
+    btime.setTime(1628481600206);
+    console.log(btime);//Mon Aug 09 2021 12:00:00 GMT+0800 (中国标准时间)
+</script>
+</body>
+</html>
