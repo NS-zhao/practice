@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function Ajax(method,url,data,callback){
+        var http;
+        if(window.XMLHttpRequest){
+            http=new XMLHttpRequest();
+        }
+        else{
+            http=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        if(method=="get"){
+            if(data){
+                url+="?";
+                url+=data;
+            }
+            http.open(method,url);
+            http.send();
+        }
+        else{
+            http.open(method,url);
+            if(data){
+                http.send(data);
+            }
+            else{
+                http.send();
+            }
+        }
+        http.onreadystatechange=function(){
+            if(http.readyState==4&&http.status==200){
+                callback(http.response);
+            }
+        }
+    }
+    Ajax("get",'http://127.0.0.1:8080/findUser',null,function(res){
+        console.log(JSON.parse(res));
+    });
+    Ajax("post",'http://localhost:8080/getList',null,function(res){
+        console.log(JSON.parse(res));
+    });
+    Ajax("get",'http://localhost:8080/insertUser','id=10086&name=小李',function(res){
+        console.log(JSON.parse(res));
+    });
+    Ajax("post",'http://localhost:8080/insert',"id=10086&name=张三",function(res){
+        console.log(res);
+    });
+</script>
+</body>
+</html>
