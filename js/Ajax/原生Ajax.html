@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //定义变量接收整个请求对象
+    var http;
+    //是否存在兼容性问题
+    if(window.XMLHttpRequest){
+        http=new XMLHttpRequest();
+    }
+    else{
+        //不存在使用ActiveXObject对象(IE5和IE6使用)
+        http=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    console.log(http);//输出的是XMLHttpRequest对象
+
+    http.open('get','');
+    http.send();
+
+    http.onreadystatechange=function(){
+        if(http.readyState==4&&http.status==200)
+        {
+            //数据渲染
+            console.log(http.response);
+        }
+    }
+</script>
+</body>
+</html>
