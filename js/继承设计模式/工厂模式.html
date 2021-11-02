@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //工厂模式
+    //避免多次创建对象
+    function Factory(name,age){
+        var obj={};
+        obj.name=name;
+        obj.age=age;
+        obj.sleep=function(){
+            console.log("睡觉");
+        }
+        return obj;
+    }
+    var s1=Factory('小赵',21);
+    var s2=Factory('小阮',80);
+    console.log(s1, s2);
+</script>
+</body>
+</html>
