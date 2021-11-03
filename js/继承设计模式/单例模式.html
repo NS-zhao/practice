@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //产生唯一实例 返回单个对象
+    //简单单例
+//    var sign=(function(){
+//        var instance;
+//        if(instance==undefined){
+//            instance=new Instance('小赵');
+//        }
+//        //构造函数代码
+//        function Instance(name){
+//            this.name=name;
+//        }
+//        Instance.prototype={
+//            sleep:function (){
+//                console.log(this.name+"睡觉");
+//            }
+//        };
+//        return instance;
+//    })();
+//    console.log(sign);
+
+    //使用闭包写单例模式
+//    var instance=(function(){
+//        var ins;
+//        var instance=function(name){
+//            if(ins){
+//                return ins;
+//            }
+//            this.name=name;
+//            return ins=this;
+//        };
+//        instance.prototype={
+//            sleep:function(){
+//                console.log(this.name + "睡觉");
+//            }
+//        };
+//        return instance;
+//    })();
+//    var stu=new instance('小明');
+//    var stu1=new instance('小花');
+//    console.log(stu);
+//    console.log(stu1);
+//    console.log(stu1 == stu1);//true
+//    stu.sleep();
+//    stu1.sleep();
+
+
+
+    var instance=(function(){
+        function method(name){
+            this.name=name;
+        }
+        method.prototype={
+            sleep:function(){
+                console.log(this.name + "睡觉");
+            }
+        };
+        var ins;
+        return function(name){
+            if(ins){
+                return ins;
+            }
+            ins=new method(name);
+            return ins;
+        }
+    })();
+    var stu=new instance('小明');
+    var stu1=new instance('小花');
+    console.log(stu == stu1);//true
+    console.log(stu);
+    console.log(stu1);
+    stu.sleep();
+    stu1.sleep();
+</script>
+</body>
+</html>
