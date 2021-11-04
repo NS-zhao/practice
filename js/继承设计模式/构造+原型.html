@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function Person(name,age){
+        this.name=name||"";
+        this.age=age||"";
+    }
+    Person.prototype={
+        constructor:Person,
+        sleep:function(){
+            console.log("睡觉");
+        }
+    }
+    var p=new Person('小赵',21);
+    console.log(p);
+    p.sleep();
+</script>
+</body>
+</html>
