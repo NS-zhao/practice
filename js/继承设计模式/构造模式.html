@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function Person(name,age,sex){
+        this.name=name||"";
+        this.age=age||"";
+        this.sex=sex||"";
+        this.sleep=function(){
+            console.log("睡觉");
+        }
+        this.eat=function(){
+            console.log("吃饭");
+        }
+    }
+    var p=new Person('小赵',21,'女');
+    console.log(p);
+    p.sleep();
+    p.eat();
+</script>
+</body>
+</html>
