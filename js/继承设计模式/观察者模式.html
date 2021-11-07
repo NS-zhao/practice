@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //先建立一个观察者的操作类
+    var Subject={
+        observer:[],//存储所有的观察者列表
+        add:function(observe){
+            //添加方法
+            this.observer.push(observe);
+        },
+        remove:function(observer){
+            //移除方法
+            //找到匹配的人移除
+            var index=this.observer.findIndex(function(item){
+                return item===observer;
+            });
+            //删除这个人
+            this.observer.splice(index,1);
+            //通知这个人
+            observer.update();
+        },
+        send:function(msg){
+            //通知方法
+            //通知当前每个update
+            for(var index in this.observer){
+                this.observer[index].update(msg);
+            }
+        }
+    }
+    //建立观察者对象
+    //订阅页存在添加 修改 删除
+    function Observer(name){
+        this.name=name;
+        this.subscrib={};//存储当前这个观察者的订阅
+        this.update=function(msg){
+            console.log(this.name + msg);
+        };
+        this.addsubscrib=function(key,fn){
+            //添加订阅
+            //检查订阅是否存在
+            if(!this.subscrib[key]){
+                this.subscrib[key]=[];
+            }
+            this.subscrib[key].push(fn);
+        };
+        this.publish=function(key){
+            //发布 执行每个订阅
+            for(var index in this.subscrib[key]){
+                this.subscrib[key][index].call(this);//执行当前订阅函数
+            }
+        }
+    }
+    //实例化观察者
+    var per1=new Observer('小赵');
+    var per2=new Observer('小阮');
+    per1.addsubscrib('object1',function(){
+        console.log(this.name + "执行任务完成");
+    });
+    per1.addsubscrib('message',function(){
+        console.log(this.name + "跳舞");
+    });
+    //执行任务
+    per1.publish('object1');
+    per1.publish('message');
+    per2.addsubscrib('object2',function(){
+        console.log(this.name + "执行任务完成");
+    });
+    per2.addsubscrib('message',function(){
+        console.log(this.name + "跳舞");
+    });
+    //执行任务
+    per2.publish('object2');
+    per2.publish('message');
+    console.log(per1, per2);
+</script>
+</body>
+</html>
