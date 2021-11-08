@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function Animal(name){
+        this.name=name||"";
+        this.eat=function(){
+            console.log("吃饭");
+        }
+    }
+    Animal.prototype={
+        sleep:function(){
+            return "睡觉";
+        }
+    }
+    function Cat(obj){
+        function fun(){
+
+        }
+        //寄生  父类对象寄生在fun的原型对象上
+        fun.prototype=obj;
+        return new fun();
+    }
+    var animal=new Animal("猫");
+    var cat=new Cat(animal);
+    console.log(cat);
+    console.log(cat instanceof Animal);//true
+    console.log(cat instanceof Cat);//false
+
+</script>
+</body>
+</html>
