@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function Handle(){
+        this.events={};
+        this.addEventListener=function(type,fn){
+            //添加订阅
+            if(!this.events[type]){
+                this.events[type]=[];
+            }
+            this.events[type].push(fn);
+        };
+        this.click=function(){
+            //模拟click方法
+            this.publish("click");
+        };
+        this.publish=function(type){
+            for(var index in this.events[type])
+            {
+                this.events[type][index].call(this);
+            }
+        };
+        this.removeEventListener=function(type,fn){
+            if(arguments.length==1){
+                throw new Error("该方法必须存在两个参数！");
+                return;
+            }
+            //删除订阅
+            var fnlist=this.events[type];
+            var funindex=fnlist.findIndex(function(item){
+                return item.name===fn;
+            });
+            fnlist.splice(funindex,1);
+        }
+    }
+    var myEvent=new Handle();
+    myEvent.addEventListener("click",function(){
+        console.log("函数1");
+    });
+    myEvent.addEventListener("click",method);
+    function method(){
+        console.log("函数2");
+    }
+    myEvent.removeEventListener("click",method);
+    myEvent.click();
+</script>
+</body>
+</html>
