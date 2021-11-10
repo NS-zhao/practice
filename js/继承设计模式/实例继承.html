@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function Animal(name){
+        this.name=name||"";
+        this.eat=function(){
+            console.log("吃饭");
+        }
+    }
+    Animal.prototype={
+        sleep:function(){
+            console.log("睡觉");
+        }
+    }
+    function Cat(name){
+        var animal=new Animal(name);
+        return animal;
+    }
+    var cat=Cat('小花');
+    console.log(cat);//Animal {name: "小花", eat: ƒ}
+    console.log(cat instanceof Cat);//false
+    console.log(cat instanceof Animal);//true
+</script>
+</body>
+</html>
