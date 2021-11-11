@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function Animal(name,age){
+        this.name=name||"";
+        this.age=age||"";
+        this.eat=function(){
+            console.log("吃饭");
+        };
+        this.sleep=function(){
+            console.log("睡觉");
+        }
+    }
+    Animal.prototype={
+        constructor:Animal,
+        play:function(){
+            console.log("玩");
+        }
+
+    }
+    function Type(type){
+        this.type=type||"";
+    }
+    function Dog(){
+
+    }
+    Dog.prototype=new Animal('小赵',21);
+    Dog.prototype=new Type("人类");
+    var dog=new Dog();
+
+    console.log(dog);
+    console.log(dog.name);//undefined
+
+    console.log(dog instanceof Dog);//true
+    console.log(dog instanceof Animal);//false
+</script>
+</body>
+</html>
