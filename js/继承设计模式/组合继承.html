@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function Animal(name){
+        this.name=name||"";
+        this.eat=function(){
+            console.log("吃饭");
+        }
+    }
+    Animal.prototype={
+        sleep:function(){
+            return "睡觉";
+        }
+    }
+    function Cat(name){
+        Animal.call(this,name);
+    }
+    Cat.prototype=new Animal();
+    var cat=new Cat("小赵");
+    console.log(cat);//Cat {name: "小赵", eat: ƒ}
+    console.log(cat.name);//小赵
+    console.log(cat.sleep());//睡觉
+
+
+    console.log(cat instanceof Animal);//true
+    console.log(cat instanceof Cat);//true
+</script>
+</body>
+</html>
