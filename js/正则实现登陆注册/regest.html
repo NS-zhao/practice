@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: "微软雅黑";
+            color: #fff;
+            background: linear-gradient(-45deg, #231f6e, #20bdfe, #2600b4, #1d1a44);
+            background-size: 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0 50%;
+            }
+        }
+
+        .form-box {
+            margin: 0 auto;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 520px;
+            height: 500px;
+            background: url("./img/bg.png") no-repeat left top;
+            background-size: cover;
+            overflow: hidden;
+        }
+
+        .form-box h1 {
+            font-size: 26px;
+            color: #fff;
+            letter-spacing: 7px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 70px;
+        }
+
+        .item {
+            position: relative;
+            margin: 0 auto;
+            width: 300px;
+            height: 45px;
+            margin-bottom: 30px;
+            background-color: rgba(11, 116, 180, 0.8);
+            border: 1px solid #1d90c5;
+            display: flex;
+        }
+
+        .icon {
+            float: left;
+            width: 45px;
+        }
+
+        .icon img {
+            margin: 12px;
+            width: 21px;
+        }
+
+        .txt {
+            flex: 1;
+        }
+
+        .txt > input {
+            border: none;
+            background: none;
+            height: 45px;
+            line-height: 45px;
+            width: 100%;
+            color: #fff;
+            letter-spacing: 1px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input::-webkit-input-placeholder {
+            color: #fff;
+
+        }
+
+        .item-2 {
+            width: 300px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .item-2 input {
+            position: relative;
+            top: 3px;
+            float: left;
+            width: 12px;
+            height: 10px;
+            margin-right: 5px;
+        }
+
+        .item-2 input:after {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 12px;
+            border: 1px solid #1d90c5;
+            padding: 0 3px;
+            background-color: rgba(11, 116, 180, 1);
+            border-radius: 3px;
+            text-align: center;
+            line-height: 12px;
+        }
+
+        .item-2 input:checked:after {
+            content: "✓";
+            font-size: 12px;
+            color: #fff;
+        }
+
+        .item-2 > span {
+            float: left;
+            font-size: 13px;
+            vertical-align: middle;
+        }
+
+        .item-2 > a {
+            float: right;
+            color: #fff;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .item-2 > a:hover {
+            text-decoration: underline;
+        }
+
+        .item-3 {
+            margin-bottom: 10px;
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        .item-3 > button {
+            width: 300px;
+            height: 45px;
+            background: #3FB5E3;
+            color: #fff;
+            border: 1px solid #1d90c5;
+            outline: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .item-4 {
+            width: 300px;
+            margin: 0 auto;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #fff;
+            letter-spacing: 0.5px;
+
+        }
+
+        .item-4 a {
+            color: #1d90c5;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .random {
+            float: right;
+            width: 100px;
+            margin-left: 10px;
+            height: 45px;
+            background-color: #fff;
+        }
+
+        .random > img {
+            width: 100px;
+        }
+
+        .info {
+            position: absolute;
+            left: 0;
+            top: 50px;
+            font-size: 12px;
+            color: #fff;
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .error {
+            color: #ff7cfa;
+        }
+
+        .success {
+            color: #6dff7c;
+        }
+    </style>
+</head>
+<body>
+<div class="form-box">
+    <form id="formRegest" action="" method="get">
+        <h1>注册</h1>
+
+        <div class="item">
+            <div class="icon">
+                <img src="./img/icon1.png" alt=""/>
+            </div>
+            <div class="txt">
+                <input id="admin" class="ipt" name="id" type="text" placeholder="请输入您的用户名"/>
+            </div>
+            <div class="info">
+                <span class="msg"></span>
+            </div>
+        </div>
+        <div class="item">
+            <div class="icon">
+                <img src="./img/icon2.png" alt=""/>
+            </div>
+            <div class="txt">
+                <input id="password" name="pwd" class="ipt" type="password" placeholder="请输入您的密码"/>
+            </div>
+            <div class="info">
+                <span class="msg"></span>
+            </div>
+        </div>
+        <div class="item">
+            <div class="icon">
+                <img src="./img/icon3.png" alt=""/>
+            </div>
+            <div class="txt">
+                <input id="yzm" class="ipt" type="text" placeholder="请输入验证码"/>
+            </div>
+            <div class="random">
+                <img src="./img/yzm.jpg" alt=""/>
+            </div>
+            <div class="info">
+                <span class="msg"></span>
+            </div>
+        </div>
+        <div class="item-3">
+            <button id="btnsub" type="submit">注册</button>
+        </div>
+        <div class="item-4">
+            <span>已注册?<a href="./login.html">返回登录</a></span>
+        </div>
+    </form>
+</div>
+</body>
+<script>
+    <!-- 表单验证-->
+    //所有的值全部输入完毕，点击注册，开始验证
+    var ipt=document.querySelectorAll(".ipt");
+    var info=document.querySelectorAll(".info");
+    var msg=document.querySelectorAll(".msg");
+    //修改error
+    function changeError(index,args,classname){
+        msg[index].className="msg "+classname;
+        msg[index].innerText=args;
+    }
+    var validater={
+        admin:function(index){
+            info[index].classList.add("show");
+            //做用户账号验证的
+            var value=this.value.replace(/\s/g,"");
+            if(value.length){
+                if(/^[a-zA-Z][a-zA-Z0-9_]{4,15}$/.test(value)){
+                    changeError(index,"* 正确！",'success');
+                }
+                else{
+                    changeError(index,"* 账号以字母开头,5-16位,允许字母数字下划线！","error");
+                }
+            }
+            else{
+                changeError(index,"* 账号不能为空！","error");
+            }
+        },
+        password:function(index){
+            //做用户密码验证的
+            info[index].classList.add("show");
+            var value=this.value.replace(/\s/g,"");
+            if(value.length){
+                if(/^[a-zA-Z][a-zA-Z0-9_]{4,10}$/.test(value)){
+                    changeError(index,"* 正确！","success");
+                }
+                else{
+                    changeError(index,"* 密码以字母开头,5-10位,允许字母数字下划线！","error");
+                }
+            }
+            else{
+                changeError(index,"* 密码不能为空！","error");
+            }
+        },
+        yzm:function(index){
+            //做验证码验证的
+            info[index].classList.add("show");
+            var value=this.value.replace(/\s/g,"");
+            if(value.length){
+                if(value=="7364"){
+                    changeError(index,"* 正确！","success");
+                }
+                else{
+                    changeError(index,"* 验证码输入不正确！","error");
+                }
+            }
+            else{
+                changeError(index,"* 验证码不能为空！","error");
+            }
+        }
+    }
+    for(var i=0;i<ipt.length;i++){
+        ipt[i].index=i;
+        ipt[i].onblur=function(){
+            console.log(this.id);
+            validater[this.id].call(this,this.index);
+        }
+        ipt[i].onfocus=function(){
+            //移除当前的error
+            removealert(this.index)
+        }
+    }
+    function removealert(index){
+        msg[index].className="msg";
+        msg[index].innerText="";
+        info[index].classList.remove("show");
+    }
+    //阻止表单提交  return true/false
+    formRegest.onsubmit=function(){
+        for(var i=0;i<ipt.length;i++){
+            ipt[i].focus();
+        }
+        btnsub.focus();
+        //检测页面是否存在错误
+        //获取错误元素
+        var len=document.getElementsByClassName("error").length;
+        if(!len){
+            return true;
+        }
+        return false;
+    }
+</script>
+</html>
