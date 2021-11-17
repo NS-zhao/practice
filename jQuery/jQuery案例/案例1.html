@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        ul > li {
+            width: 100px;
+            height: 30px;
+            background: linear-gradient(to right, #bfbfbf, #fff, #bfbfbf);
+            list-style: none;
+            color: #000;
+            font-size: 13px;
+            margin: 5px 0;
+            line-height: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>javascript</li>
+    <li>jQuery</li>
+    <li>vue</li>
+    <li>less</li>
+    <li>es6</li>
+    <li>node.js</li>
+</ul>
+<button id="start">开始</button>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+    $(function(){
+        var speed=1000;
+        var way=true;//正向
+        var width=200;
+        $("#start").click(function(){
+            animate();
+        });
+        function animate(){
+            $("ul>li").each(function(index){
+                var delay;
+                if(way){
+                    delay=speed/9*index;//正向延迟
+                }
+                else{
+                    delay=speed-speed/9*index;//反向延迟
+                }
+                $(this).delay(delay).animate({
+                    width:width
+                },speed);
+            });
+            if(way){
+                $("ul>li").last().queue(function(){
+                    way=false;
+                    width=100;
+                    animate();
+                    $(this).dequeue();
+                });
+            }
+            else{
+                $("ul>li").first().queue(function(){
+                    way=true;
+                    width=200;
+                    animate();
+                    $(this).dequeue();
+                });
+            }
+        }
+    })
+</script>
+</body>
+</html>
