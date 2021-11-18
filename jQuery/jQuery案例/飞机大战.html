@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=320,minimum-scale=1.0,maximum-scale=3.0,user-scalable=no"/>
+    <title>飞机大战</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        #map{
+            position: relative;
+            margin: 0 auto;
+            width: 320px;
+        }
+        .bgmap{
+            position: absolute;
+            z-index: 0;
+            background-size: 100% 100%;
+            background-image: url("./img/map.jpg");
+            background-repeat: repeat-y;
+        }
+        .user_check{
+            position: absolute;
+            left: 60px;
+            top: 50%;
+            transform: translatey(-60px);
+            z-index: 1;
+            width: 200px;
+            height: 120px;
+            border-radius: 10px;
+            background-color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .plane1,.plane2{
+            float: left;
+            width: 80px;
+            height:80px;
+            margin: 0 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .check{
+            background-color: #00aaff;
+        }
+        .plane1>img,.plane2>img{
+            width: 80px;
+            height: 80px;
+        }
+        .start,.close{
+            width: 70px;
+            height: 26px;
+            margin: 0 10px;
+        }
+        .user{
+            position: absolute;
+            z-index: 2;
+            width: 60px;
+            height: 60px;
+            left: 50%;
+        }
+        .bullet{
+            position: absolute;
+            z-index: 2;
+        }
+        .enemy{
+            position: absolute;
+            z-index: 3;
+        }
+        select{
+            position: absolute;
+            z-index: 10;
+        }
+        .blow{
+            position: absolute;
+            z-index: 3;
+        }
+        .score{
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            color: #fff;
+            font-size: 18px;
+        }
+        .score:before{
+            content: "score:";
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+<select id="gun">
+    <option value="one">单发</option>
+    <option value="two">双发</option>
+    <option value="three">三发</option>
+</select>
+<div id="map">
+
+</div>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+    (function (window){
+        var instance,
+            mapEle,
+            sw,
+            sh,
+            allEnemy=[],//存储所有的敌机
+            allsc=0;
+        sw=$("body").width();
+        sh=$("body").height();
+        $.fn.extend({
+            initPlane:function(settings){
+                //记录父容器
+                mapEle=$(this);
+                mapEle.height(sh);
+                if(instance){
+                    return instance;
+                }
+                //实例化整个游戏类对象
+                instance=new Game().init(settings);
+            }
+        });
+
+        //map地图对象
+        function Map(){
+            this._bg;//背景
+            this._userPage;//整个界面
+            this._userplane = [];//飞机
+            this._start;
+            this._close;
+            this._userFeisrc;//存储飞机图片的src路径
+            this.score;//存储分数
+            //创建地图
+            this.createMap = function () {
+                var that = this;
+                that._bg = $("<div class='bgmap'></div>");
+                that._bg.css({
+                    width: sw,
+                    height: sh,
+                    backgroundPosition: '0px ' + (-sh) + 'px'
+                });
+                mapEle.append(that._bg);
+                this.startAnimate();
+                //创建分数
+                that.score=$("<span class='score'>0</span>");
+                mapEle.append(that.score);
+            };
+            //用户选择飞机界面
+            this.createPage=function(){
+                var that=this;
+                that._userPage=$("<div class='user_check'></div>");
+                that._userplane[0]=$("<div class='plane1'><img src='./img/my_1.png'></div>");
+                that._userplane[1]=$("<div class='plane2'><img src='./img/my_2.png'></div>");
+                that._userplane.map(function (item,index){
+                    !index?item.addClass("check"):'';//默认第一个选中
+                    that._userPage.append(item);
+                    item.on("click",function(){
+                        //设置二选一
+                        $(this).addClass("check").siblings().removeClass("check");
+                    });
+                });
+                that._start = $("<button class='start'>开始</button>");
+                that._start.on("click",function(){
+                    that._userplane.map(function(item,index){
+                        if(item.hasClass("check")){
+                            that._userPage.hide();
+                            //开启背景动画
+                            that.startAnimate();
+                            //获取用户选择的飞机的图片路径
+                            that._userFeisrc=item.find("img").attr("src");
+                            that._plane.createUser(that._userFeisrc);
+                        }
+                    })
+                });
+                that._close = $("<button class='start'>关闭</button>");
+                that._close.on("click",function(){
+                    //浏览器关闭
+                    window.close();
+                })
+                that._userPage.append(that._start);
+                that._userPage.append(that._close);
+                mapEle.append(that._userPage);
+            }
+            //设置背景循环
+            this.startAnimate=function(){
+                var that=this;
+                that._bg.animate({
+                    backgroundPositionY:0
+                },5000,'linear').queue(function(){
+                    $(this).css({
+                        backgroundPosition:'0px '+(-sh)+'px'
+                    }).dequeue();
+                    that.startAnimate();
+                });
+            };
+        }
+        //创建用户飞机类
+        function Plane(){
+            this._user;//当前飞机
+            this.pos={left:130,top:460};//飞机开始的坐标
+            this.bulletlist=[];//默认枪口
+            this.timer;
+            this.speed=100;
+            this.numgun="one";//默认子弹为1发
+            this.enemyinfo=[];//存储所有的敌机
+            this.enemytimer;
+            //创建用户飞机类开始往上走
+            this.createUser=function(src){
+                var that=this;
+                that._user=$("<img class='user' src="+src+"/>");
+                mapEle.append(that._user);
+                that._user.css({
+                    top:sh,
+                    left: sw / 2 - 30
+                }).animate({
+                    top:that.pos.top
+                },1000,function(){
+                    //动画执行完成之后用户开始操作
+                    console.log("开始触屏");
+                    //给当前飞机添加触屏事件
+                    that.addTouch();
+                    //设置子弹几发，并且开始发射
+                    that.gun();
+                    //敌机开始动
+                    that.randomEnemy();
+                });
+            };
+            this.addTouch=function(){
+                var that=this;
+                that._user.on("touchmove",function(e){
+                    //飞机移动
+                    var touches= e.originalEvent.touches[0];
+                    var x=touches.pageX;
+                    var y=touches.pageY;
+                    that.pos={
+                        left:x-30<=0?0:x-30>=260?260:x-30,
+                        top:y-30<=0?0:y-30>=sh-60?sh-60:y-30
+                    };
+                    $(this).css({
+                        left:that.pos.left,
+                        top:that.pos.top
+                    });
+                });
+            };
+            this.gun=function(){
+                //开火
+                var that=this;
+                //考虑单开、2开、3开
+                switch (that.numgun){
+                    case "one":
+                        var bullet=new that._bullet();
+                        bullet.createBullet(that.pos, that.pos.left + 30);
+                        break;
+                    case "two":
+                        var bulletleft=new that._bullet();
+                        bulletleft.createBullet(that.pos, that.pos.left);
+                        var bulletright=new that._bullet();
+                        bulletright.createBullet(that.pos, that.pos.left + 60);
+                        break;
+                    case "three":
+                        var bulletleft=new that._bullet();
+                        bulletleft.createBullet(that.pos, that.pos.left);
+                        var bulletcenter=new that._bullet();
+                        bulletcenter.createBullet(that.pos, that.pos.left + 30);
+                        var bulletright=new that._bullet();
+                        bulletright.createBullet(that.pos, that.pos.left + 60);
+                        break;
+                }
+                that.timer = setTimeout(function (args) {
+                    args.gun();
+                }, that.speed, that);
+            };
+            this.randomEnemy = function () {
+                var that = this;
+                var enemy = new that._enemy();
+                enemy.createEnemy();
+                allEnemy.push(enemy);//产生敌机存储
+                that.enemytimer = setTimeout(function (args) {
+                    args.randomEnemy();
+                }, 500, that);
+            }
+        }
+        //子弹类
+        function Bullet(){
+            this.img="./img/myb_1.png";
+            this._bullet=null;//存储所有子弹
+            this.speed=10;
+            this.w=20;
+            this.h=36;
+            this.top=0;
+            this.left=0;
+            this.dus=5;//子弹高度每次减的值
+            this.timer;
+            this.createBullet=function(pos,left){
+                this._bullet = $("<img class='bullet' src='" + this.img + "'/>");
+                mapEle.append(this._bullet);
+                //设置当前子弹的坐标
+                this.top = pos.top - 20;
+                this.left = left - this.w / 2;
+                this._bullet.css({
+                    width: this.w,
+                    height: this.h,
+                    left: this.left,
+                    top: this.top
+                });
+                this.move();
+            }
+            this.move=function(){
+                var that=this;
+                that.top-=that.dus;
+                if(that.top<=0){
+                    that._bullet.remove();
+                    return;
+                }
+                //在子弹里面去检测  是否打到敌机
+                that = that.checkEnemy();
+                //检测子弹如果为null  直接出
+                if (that == null)
+                    return;
+                that._bullet.css({
+                    top: that.top
+                });
+                that.timer=setTimeout(function(args){
+                    args.move();
+                },that.speed,that);
+            };
+            this.checkEnemy = function () {
+                var that = this;
+                //left  top
+                for (var i = 0; i < allEnemy.length; i++) {
+                    var item = allEnemy[i];
+                    //检测条件
+                    if (item.blowool == false && that.left + that.w >= item.left && that.left <= item.left + item.w && that.top <= item.top + item.h && that.top + that.h >= item.top) {
+                        //开始血量减少
+                        item.blood -= 1;
+                        if (item.blood <= 0) {
+                            //敌机移除
+                            item.blow(i);
+                        }
+                        //子弹移除
+                        that._bullet.remove();
+                        //移除子弹对象
+                        return null;
+                    }
+
+                }
+                return that;
+            }
+        }
+        //创建敌机对象
+        function Enemy(){
+            this.enemylist = [
+                {
+                    'name': 'ep_1',
+                    'src': './img/ep_1.png',
+                    'w': 60,
+                    'h': 60,
+                    'blood': 2,
+                    'score': 10,
+                    'direct': 'todown',
+                    'speed': 3
+                },
+                {
+                    'name': 'ep_2',
+                    'src': './img/ep_2.png',
+                    'w': 60,
+                    'h': 60,
+                    'blood': 5,
+                    'score': 10,
+                    'direct': 'todown',
+                    'speed': 3
+                },
+                {
+                    'name': 'ep_3',
+                    'src': './img/ep_3.png',
+                    'w': 60,
+                    'h': 60,
+                    'blood': 5,
+                    'score': 10,
+                    'direct': 'todown',
+                    'speed': 3
+                },
+                {
+                    'name': 'ep_4',
+                    'src': './img/ep_4.png',
+                    'w': 60,
+                    'h': 60,
+                    'blood': 5,
+                    'score': 10,
+                    'direct': 'todown',
+                    'speed': 3
+                },
+                {
+                    'name': 'ep_5',
+                    'src': './img/ep_5.png',
+                    'w': 60,
+                    'h': 60,
+                    'blood': 5,
+                    'score': 10,
+                    'direct': 'todown',
+                    'speed': 3
+                },
+                {
+                    'name': 'ep_6',
+                    'src': './img/ep_6.png',
+                    'w': 60,
+                    'h': 60,
+                    'blood': 5,
+                    'score': 10,
+                    'direct': 'todown',
+                    'speed': 3
+                },
+                {
+                    'name': 'ep_7',
+                    'src': './img/ep_7.png',
+                    'w': 60,
+                    'h': 60,
+                    'blood': 5,
+                    'score': 10,
+                    'direct': 'todown',
+                    'speed': 3
+                },
+                {
+                    'name': 'ep_8',
+                    'src': './img/ep_8.png',
+                    'w': 60,
+                    'h': 60,
+                    'blood': 5,
+                    'score': 10,
+                    'direct': 'todown',
+                    'speed': 3
+                },
+                {
+                    'name': 'ep_9',
+                    'src': './img/ep_9.png',
+                    'w': 60,
+                    'h': 60,
+                    'blood': 5,
+                    'score': 10,
+                    'direct': 'todown',
+                    'speed': 3
+                },
+                {
+                    'name': 'ep_10',
+                    'src': './img/ep_10.png',
+                    'w': 60,
+                    'h': 60,
+                    'blood': 5,
+                    'score': 10,
+                    'direct': 'todown',
+                    'speed': 3
+                },
+                {
+                    'name': 'ep_11',
+                    'src': './img/ep_11.png',
+                    'w': 60,
+                    'h': 60,
+                    'blood': 5,
+                    'score': 10,
+                    'direct': 'todown',
+                    'speed': 3
+                },
+                {
+                    'name': 'ep_12',
+                    'src': './img/ep_12.png',
+                    'w': 60,
+                    'h': 60,
+                    'blood': 5,
+                    'score': 10,
+                    'direct': 'todown',
+                    'speed': 3
+                },
+                {
+                    'name': 'ep_14',
+                    'src': './img/ep_14.png',
+                    'w': 80,
+                    'h': 60,
+                    'blood': 8,
+                    'score': 20,
+                    'direct': 'toup',
+                    'speed': 1
+                },
+                {
+                    'name': 'ep_15',
+                    'src': './img/ep_15.png',
+                    'w': 80,
+                    'h': 60,
+                    'blood': 8,
+                    'score': 20,
+                    'direct': 'toup',
+                    'speed': 1
+                },
+            ];
+            this.enemy=null;
+            this.index=0;
+            this.blood = 0;//血量
+            this.score = 0;//分数
+            this.way;//方向
+            this.speed;//敌机的速度
+            this.top;
+            this.left;
+            this.w;
+            this.h;
+            this.timer;
+            this.blowool = false;
+            this.tspeed = 15;
+            this.createEnemy = function () {
+                var that = this;
+                that.index = Math.floor(Math.random() * that.enemylist.length);
+                var wrandom = Math.random() * sw;
+                var ele = that.enemylist[that.index];//获取当前的敌机
+                that.enemy = $("<img class='enemy'/>");
+                mapEle.append(that.enemy);
+                that.top = ele.direct == 'todown' ? -ele.h : sh + ele.h;
+                that.left = wrandom - ele.w < 0 ? 0 : wrandom + ele.w > sw ? sw - ele.w : wrandom;
+                that.w = ele.w;
+                that.h = ele.h;
+                that.enemy.css({
+                    width: that.w,
+                    height: that.h,
+                    left: that.left,
+                    top: that.top
+                }).attr("src", ele.src);
+                that.blood = ele.blood;
+                that.score = ele.score;
+                that.way = ele.direct;
+                that.speed = ele.speed;
+                //敌机移动
+                that.move();
+            };
+            this.blow = function (index) {
+                var that = this;
+                //开始爆炸
+                that.blowool = true;
+                that.enemy.remove();
+                //加分
+                allsc+=that.score;
+                $(".score").text(allsc);
+                //在原位置创建爆炸
+                var b = $("<img class='blow' src='./img/blow.gif'/>");
+                b.css({
+                    left: that.left,
+                    top: that.top,
+                    width: that.w,
+                    height: that.h
+                });
+                b.timer = setTimeout(function (arg) {
+                    arg.remove();
+                }, 300, b)
+                mapEle.append(b);
+                allEnemy.splice(index, 1);
+            };
+            this.move=function(){
+                var that=this;
+                if(that.way=="todown"){
+                    that.top+=that.speed;
+                    if(that.top>=sh){
+                        that.enemy.remove();
+                        return;
+                    }
+                }
+                else{
+                    that.top-=that.speed;
+                    if(that.top<=0){
+                        that.enemy.remove();
+                        return;
+                    }
+                }
+                that.enemy.css({
+                    top: that.top
+                });
+                that.timer=setTimeout(function(args){
+                    args.move();
+                },that.tspeed,that)
+            }
+        }
+        //整个游戏类
+        function Game(){
+            this.map;
+            this.plane;
+        }
+        Game.prototype = {
+            constructor: Game,
+            init: function (settings) {
+                //初始化方法
+                this.map = new Map();
+                //创建map
+                this.map.createMap();
+                //创建用户选择界面
+                this.map.createPage();
+                //实例化用户飞机类
+                this.plane = new Plane();
+                //把用户飞机对象关联到map对象上
+                this.map._plane = this.plane;
+                //把子弹对象关联到飞机上
+                this.plane._bullet = Bullet;
+                this.plane._enemy = Enemy;
+                //选择开火
+                var that = this;
+                settings.select.change(function(){
+                    that.plane.numgun=$(this).val();
+                })
+            }
+        }
+        $("#map").initPlane({
+            select:$("#gun")
+        })
+    })(window)
+</script>
+</body>
+</html>
