@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            position: relative;
+            width: 400px;
+            height: 500px;
+            margin: 0 auto;
+        }
+        .tree{
+            width: 190px;
+            height: 500px;
+            float: left;
+        }
+        .ck{
+            float: right;
+            width: 190px;
+            height: 500px;
+            border: 1px solid #000;
+        }
+        .tree-list{
+            height: 450px;
+            border: 1px solid #000;
+            background: #f0f6e4;
+        }
+        .search{
+            width: 190px;
+            height: 40px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .search>input{
+            width: 120px;
+            height: 21px;
+            outline: none;
+        }
+        .search>button{
+            width: 70px;
+            height: 25px;
+        }
+        li{
+            list-style: none;
+        }
+        .treemenu{
+            background: #f0f6e4;
+            padding: 5px;
+            color: #333;
+        }
+        .treemenu>li{
+            line-height: 14px;
+            text-align: left;
+            white-space: nowrap;
+            font-size: 13px;
+        }
+        .treemenu>li>span{
+            vertical-align: middle;
+        }
+        .icon{
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            background-image: url("./image/zTreeStandard.png");
+        }
+        .icon_close{
+            background-position: -74px 0;
+        }
+        .icon_tree{
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-image: url("./image/dept.png");
+            margin-right: 5px;
+        }
+        .c_menu{
+            padding-left: 18px;
+            background-image: url("./image/line_conn.gif");
+            background-position: 0 0;
+            background-repeat: repeat-y;
+            display: none;
+        }
+        .c_menu>li>span{
+            vertical-align: middle;
+        }
+        .line{
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            background-image: url("./image/zTreeStandard.png");
+            background-position: -56px -18px;
+        }
+        .icon_check {
+            display: inline-block;
+            margin-right: 3px;
+            width: 13px;
+            height: 13px;
+            background-image: url("./image/zTreeStandard.png");
+            background-position: 0 0;
+        }
+        .icon_check:hover {
+            background-position: -14px -14px;
+        }
+        .icon_check_ck {
+            background-position: -14px 0;
+        }
+        .cklist {
+            display: block;
+            font-size: 13px;
+            padding: 3px 10px;
+        }
+        .red{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="tree">
+        <div class="search">
+            <input type="text" class="ipt"/>
+            <button class="btn">搜索</button>
+        </div>
+        <div class="tree-list">
+            <ul class="treemenu">
+
+            </ul>
+        </div>
+    </div>
+    <div class="ck"></div>
+</div>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+    var list = [
+        {
+            name: "技术部",
+            child: [
+                {
+                    name: "用户一"
+                },
+                {
+                    name: "用户二"
+                },
+                {
+                    name: "用户三"
+                }
+            ]
+        },
+        {
+            name: "人事部",
+            child: [
+                {
+                    name: "人事一"
+                },
+                {
+                    name: "人事二"
+                },
+                {
+                    name: "人事三"
+                }
+            ]
+        },
+        {
+            name: "财务部",
+            child: [
+                {
+                    name: "财务一"
+                },
+                {
+                    name: "财务二"
+                },
+                {
+                    name: "财务三"
+                }
+            ]
+        },
+        {
+            name: "项目部",
+            child: [
+                {
+                    name: "项目一"
+                },
+                {
+                    name: "项目二"
+                },
+                {
+                    name: "项目三"
+                }
+            ]
+        }
+    ];
+    $(function(){
+        list.forEach(function(item,index){
+            var li=$("<li class='plist' data-p='"+index+"'><span class='icon icon_close'></span><span class='icon_tree'></span><span>"+item.name+"</span></li>");
+            li.append(setchild(item.child));
+            $(".treemenu").append(li);
+        })
+        function setchild(child){
+            var str="<ul class='c_menu'>";
+            for(var i=0;i<child.length;i++){
+                str+="<li><span class='line'></span><span class='icon_check'></span><span class='cname'>"+child[i].name+"</span></li>"
+            }
+            str+="</ul>";
+            return str;
+        }
+        $(".icon").each(function(pindex){
+            $(this).click(function(){
+                $(".c_menu").eq(pindex).slideToggle();
+            });
+        });
+        $(".icon_check").each(function(chindex){
+            $(this).click(function(){
+                //点击时添加或移除选中符号
+                $(this).toggleClass("icon_check_ck");
+                //定义变量是否被选中
+                var ishas=$(this).hasClass("icon_check_ck");
+                //查找外层父元素对应的索引
+                var parentIndex=$(this).parents(".plist").attr('data-p');
+                //自身索引
+                var childIndex=chindex;
+                //如果被选中
+                if(ishas){
+                    //查找同胞兄弟元素cname的文本值
+                    var txt=$(this).siblings(".cname").text();
+                    var app=$("<span class='cklist' data-p="+parentIndex+" data-c="+childIndex+">"+txt+"</span>");
+                    $(".ck").append(app);
+                }
+                else{
+                    $(".cklist").each(function(index){
+                        var pindex=$(this).attr("data-p");
+                        var cindex=$(this).attr("data-c");
+                        if(pindex==parentIndex&&cindex==childIndex){
+                            $(this).remove();
+                        }
+                    });
+                }
+            });
+        });
+        //点击按钮事件
+        $(".btn").click(function(){
+            var txt=$(".ipt").val();
+            if(txt){
+                //遍历list
+                list.forEach(function(item,index){
+                    item.child.map(function(it,id){
+                        if(txt==it.name){
+                            $(".c_menu").eq(index).slideToggle().find(".cname").eq(id).addClass("red");
+                        }
+                    });
+                });
+            }
+            else{
+                $(".c_menu").slideUp();
+                $(".cname").removeClass("red");
+            }
+        })
+    })
+
+</script>
+</body>
+</html>
