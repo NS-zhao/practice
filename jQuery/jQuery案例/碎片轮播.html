@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        .box{
+            position: relative;
+            margin: 0 auto;
+            background: #000;
+        }
+        .itemImage{
+            width: 100%;
+            height: 100%;
+        }
+        .itemImage>a{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+        .itemImage>a>img{
+            width: 100%;
+            height: 100%;
+        }
+        .suiItem{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            overflow: hidden;
+        }
+        .suiItem>div{
+            position: absolute;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/suiBanner.js"></script>
+<script>
+    //实例化整个对象
+    var suiBanner=$('.box').initBanner({
+        imgs: ['images/1.jpg', 'images/2.jpg', 'images/4.jpg'], //图片集合 必选
+        size: {
+            width: 1000,
+            height: 560
+        }, //容器的大小 可选
+        //行数与列数 可选
+        grid: {
+            line: 15,
+            list: 18
+        },
+        index: 0, //图片集合的索引位置 可选
+        boxTime: 1000, //小方块来回运动的时长 可选
+        fnTime: 500 //banner切换的时长 可选
+    })
+</script>
+</body>
+</html>
