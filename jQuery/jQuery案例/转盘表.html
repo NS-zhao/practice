@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .box{
+            font-size: 13px;
+            margin: 0 auto;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 500px;
+            height: 500px;
+        }
+        .box>div:not(.date){
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid #000;
+        }
+        .trans {
+            transition: all .3s linear;
+        }
+        .seconds{
+            width: 500px;
+            height: 500px;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            color: #ff434d;
+            background: radial-gradient(at 50% 50%,#fff,#00aaff);
+        }
+        .minutes{
+            width: 380px;
+            height: 380px;
+            z-index: 2;
+            left: 60px;
+            top: 60px;
+            color: #6016ff;
+            background: radial-gradient(at 50% 50%,#fff, #bfffc7);
+        }
+        .hours{
+            width: 260px;
+            height: 260px;
+            z-index: 3;
+            left: 120px;
+            top: 120px;
+            color: #ffe66c;
+            background: radial-gradient(at 50% 50%,#fff,#00aaff);
+        }
+        .date {
+            position: absolute;
+            z-index: 4;
+            width: 140px;
+            height: 30px;
+            left: 180px;
+            top: 235px;
+            line-height: 30px;
+            padding-left: 15px;
+            font-size: 0;
+            text-align: center;
+        }
+        .date:before{
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #000;
+            left: 0;
+            bottom: -4px;
+        }
+        .date:after{
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 1px;
+            background-color: #000;
+            left: 0;
+            bottom: 0;
+        }
+        .hour_list{
+            position: absolute;
+            top: 115px;
+            width: 260px;
+            height: 30px;
+            line-height: 30px;
+            text-align: right;
+            transform-origin: 50% 50%;
+        }
+        .minute_list{
+            position: absolute;
+            top: 175px;
+            width: 380px;
+            height: 30px;
+            line-height: 30px;
+            text-align: right;
+            transform-origin: 50% 50%;
+        }
+        .second_list {
+            position: absolute;
+            top: 235px;
+            width: 500px;
+            height: 30px;
+            line-height: 30px;
+            text-align: right;
+            transform-origin: 50% 50%;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="pan trans seconds"></div>
+    <div class="pan trans minutes"></div>
+    <div class="pan trans hours"></div>
+    <div class="date"></div>
+</div>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+    //先构造方法，转化数字为汉字
+    $(function(){
+        //声明对象（数字转汉字对象）
+        var time={
+            0:'',
+            1:'一',
+            2:'二',
+            3:'三',
+            4:'四',
+            5:'五',
+            6:'六',
+            7:'七',
+            8:'八',
+            9:'九',
+            10:'十'
+        }
+        //转化的通用方法
+        function getHan(num,dan){
+            var arr=[];
+            for(var i=1;i<=num;i++){
+                if(i<10){
+                    arr.push(time[i]+dan);
+                }
+                else{
+                    if(i<20){
+                        arr.push(time[10]+time[i.toString().charAt(1)]+dan);
+                    }
+                    else{
+                        arr.push(time[i.toString().charAt(0)]+time[10]+time[i.toString().charAt(1)]+dan);
+                    }
+                }
+            }
+            return arr;
+        }
+
+        //获取当前的时间
+        var timearr=[];
+        function getNowTime(){
+            timearr=[];
+            var nowtime=new Date();
+            var year=nowtime.getFullYear()+"年";
+            var month=nowtime.getMonth()+1+"月";
+            var day=nowtime.getDate()+"日";
+            var centerTime=year+month+day;
+            timearr.push(centerTime);
+            timearr.push(nowtime.getHours());
+            timearr.push(nowtime.getMinutes());
+            timearr.push(nowtime.getSeconds());
+        }
+        getNowTime();
+
+        //显示中间日期
+        $(".date").text(timearr[0]).animate({
+            fontSize:13,
+        },500);
+        //小时
+        var hour=getHan(24,"时");
+        hour.map(function(item){
+            var dom=$("<div class='hour_list'><span>"+item+"</span></div>");
+            $(".hours").append(dom);
+        });
+        //分钟
+        var minutes=getHan(60,"分");
+        minutes.map(function(item){
+            var dom=$("<div class='minute_list'><span>"+item+"</span></div>");
+            $(".minutes").append(dom);
+        });
+        //秒
+        var second=getHan(60,"秒");
+        second.map(function(item){
+            var dom=$("<div class='second_list'><span>"+item+"</span></div>");
+            $(".seconds").append(dom);
+        });
+        //所有时元素的动画
+        $('.hour_list').each(function(index){
+            var delay=index*(600/24);
+            $(this).delay(delay).animate({color:'#000'},500,function(){
+                $(this).css({
+                    transform:"rotatez("+(-index*15)+"deg)"
+                })
+            });
+        });
+        //所有分元素的动画
+        $('.minute_list').each(function(index){
+            var delay=index*(800/60);
+            $(this).delay(delay).animate({color:'#000'},500,function(){
+                $(this).css({
+                    transform:"rotatez("+(-index*6)+"deg)"
+                })
+            });
+        });
+        //所有秒元素的动画
+        $('.second_list').each(function(index){
+            var delay=index*(1000/60);
+            $(this).delay(delay).animate({color:'#000'},500,function(){
+                $(this).css({
+                    transform:"rotatez("+(-index*6)+"deg)"
+                })
+            });
+        }).last().queue(function(){
+            //获取当前时间
+            getNowTime();
+
+            //让时分秒转到相对应的位置
+            $(".seconds").animate({color:"#000"},500,function(){
+                //时间看的是水平线上方，所以要-1
+                $(this).css({transform:'rotatez('+((timearr[3]-1)/60*360)+'deg)'})
+            });
+            $(".minutes").animate({color:"#000"},500,function(){
+                //时间看的是水平线上方，所以要-1
+                $(this).css({transform:'rotatez('+((timearr[2]-1)/60*360)+'deg)'})
+            });
+            $(".hours").animate({color:"#000"},500,function(){
+                //时间看的是水平线上方，所以要-1
+                $(this).css({transform:'rotatez('+((timearr[1]-1)/24*360)+'deg)'});
+                //下次动画
+                setAnimate();
+            });
+        })
+        //动画循环的方法
+        function setAnimate(){
+            $(".seconds").animate({
+                color:"#000"
+            },1000,function(){
+                getNowTime();
+                $(".pan").addClass("trans");
+                console.log(timearr);
+                //秒转
+                //当这个值转到60时，即0时，timearr[3]-1为负数，所以要设置当秒为0时，设置他为60
+                $(this).css({transform:'rotatez('+((timearr[3]==0?60:timearr[3])-1)/60*360+'deg)'});
+                $(this).css({transform:'rotatez('+((timearr[3]==0?60:timearr[3])-1)/60*360+'deg)'});
+                //分转
+                $(".minutes").css({transform:'rotatez('+((timearr[2]==0?60:timearr[2])-1)/60*360+'deg)'});
+                //时转
+                $(".hours").css({transform:'rotatez('+((timearr[1]==0?24:timearr[1])-1)/24*360+'deg)'});
+
+                //可以转到60，转到60的时候她有反着转转到了1，因为60已经转到了360度，到1的时候又是6度，所以就得反着转，所以这个时候要把过渡类移除，等转过去之后再把过渡类加上
+                setTimeout(function(){
+                    //移除过渡类的情况
+                    if(timearr[3]==0){
+                        $(".seconds").removeClass("trans").css({transform:"rotatez(-6deg)"});
+                    }
+                    if(timearr[2]==0){
+                        $(".minutes").removeClass("trans").css({transform:"rotatez(-6deg)"});
+                    }
+                    if(timearr[1]==0){
+                        $(".hours").removeClass("trans").css({transform:"rotatez(-6deg)"});
+                    }
+                },300)
+            }).last().queue(function(){
+                $(this).dequeue();
+                setAnimate();
+            });
+        }
+    })
+</script>
+</body>
+</html>
