@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            border: 10px solid red;
+            width: 100px;
+            height: 100px;
+            padding: 10px;
+            margin: 20px;
+        }
+        .parent{
+            width: 200px;
+            height: 300px;
+            border: 1px solid #000;
+            overflow-y: scroll;
+            overflow-x: scroll;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+<button class="btn">按钮</button>
+<div class="box"></div>
+<div class="parent">
+    css(name pro [,val fn]<br/>访问匹配元素的样式属性。<br/>
+    height([val fn])<br/>取得匹配元素当前计算的高度值（px）<br/>
+    width([val fn])<br/>取得第一个匹配元素当前计算的宽度值（px）<br/>
+    innerHeight()<br/>获取第一个匹配元素内部区域高度（包括补白、内间>距、内容、不包括边框） <br/>
+    innerWidth()<br/>获取第一个匹配元素内部区域宽度（包括补白、内间>距、内容、不包括边框） <br/>
+    outerHeight([options])<br/>获取第一个匹配元素外部高度（包括内间>距、内容、边框）参数默认时false，若为true时，计算边距在内 <br/>
+    outerWidth([options])<br/>获取第一个匹配元素外部宽度（包括内间距、>内容、边框）参数默认时false，若为true时，计算边距在内<br/>
+    offset([coordinates]<br/>获取匹配元素在当前视口的相对偏移。 <br/>
+    position()<br/>获取匹配元素相对父元素的偏移.<br/>
+    scrollTop([val])<br/>获取匹配元素相对滚动条顶部的偏移。 <br/>
+    scrollLeft([val])<br/>获取匹配元素相对滚动条左侧的偏移<br/>
+</div>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+//    $('.btn').css('width','100px').css('height','30px').css('color','red');
+//    $('.btn').css({
+//        width:'100px',
+//        height:'30px',
+//        color:'#fff',
+//        backgroundColor:'#000',
+//        fontSize:'13px'
+//    });
+//    $('.btn').css("color",function(index){
+//        console.log(index);//当前对象的索引
+//        return 'blue';
+//    })
+//    console.log($('.btn').css('width'));
+//    console.log($('.box').width());
+//    console.log($('.box').height());
+//    console.log($('.box').innerWidth());
+//    console.log($('.box').innerHeight());
+//    console.log($('.box').outerWidth(true));
+//    console.log($('.box').outerHeight(true));
+//
+//    console.log($('.box').offset());//{top: 50, left: 20}
+//    //设置偏移，会让元素默认相对定位
+//    $('.box').offset({left:0,top:10});
+//    //获取的是相对父容器的偏移
+//    console.log($('.box').position());//{top: -10, left: -20}
+//
+//    //获取上滑距
+//    console.log($('.parent').scrollTop());//0
+//    //设置上滑距
+//    $('.parent').scrollTop(100);
+//    console.log($('.parent').scrollTop());//100
+//
+//    //获取左滑距
+//    console.log($('.parent').scrollLeft());//0
+//    //设置上滑距
+//    $('.parent').scrollLeft(100);
+//    console.log($('.parent').scrollLeft());//100
+//
+//    $("#btn").offset(function (index, oldvalue) {
+//        console.log(index, oldvalue);//当前元素的索引和 原始偏移值
+//        //这里必须返回
+//        return {left: 100, top: 100};
+//    });
+
+    $("button").width(function (index){
+        console.log(index);//0
+        return 100;
+    });
+</script>
+</body>
+</html>
