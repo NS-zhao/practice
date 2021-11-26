@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button class="btn">按钮</button>
+<button class="btn">按钮</button>
+<button class="btn">按钮</button>
+<button class="all">全选</button>
+<button class="fall">反选</button>
+<button class="check">选择</button>
+<br/>
+<input type="checkbox" class="ck"/>篮球
+<input type="checkbox" class="ck"/>足球
+<input type="checkbox" class="ck"/>羽毛球
+<input type="checkbox" class="ck"/>乒乓球
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+//    $(".btn").attr('title','标题');
+//    $(".btn").attr('title',function(index){
+//        return '我是按钮'+index;
+//    })
+//    $(".btn").attr('data-title','标题');
+//    $(".btn").attr('title','标题');
+//    $(".btn").removeAttr('title');
+//    console.log($(".btn").attr('title'));
+
+
+//    $(".btn").prop('title','标题');
+//    //方法2
+//    $(".btn").prop('title',function(index){
+//        return '标题'+index;
+//    })
+//    $('.btn').prop('data-index',0);
+//    console.log($('.btn').prop('data-index'));
+//
+//    $(".btn").prop('title','标题');
+//    $(".btn").removeProp('title');
+//
+//    console.log($(".btn").prop('title'));
+
+
+//    $('.btn').prop('title','标题');
+//    $('.btn').attr('name','名字');
+//    $('.btn').removeAttr('name');
+//    $('.btn').removeProp('title');
+
+
+//    $('.ck').attr('checked',true);
+//    $('.all').click(function(){
+//        $('.ck').prop('checked',true);
+//    });
+//    $('.fall').click(function(){
+//        $('.ck').attr('checked',function(){
+//            var isture = $(this).prop('checked');
+//            if(isture){
+//                $(this).prop('checked',false);
+//            }
+//            else{
+//                $(this).prop('checked',true);
+//            }
+//        });
+//    });
+
+//    $("input:checkbox").attr("checked",true);
+//    var change=false;
+//    $(".check").click(function(){
+//        if(change){
+//            $("input:checkbox").removeProp("checked");
+//        }
+//        else{
+//            $("input:checkbox").prop("checked",'checked');
+//        }
+//        change=!change;
+//    })
+
+
+    $('.btn').attr('title','name');
+    console.log($('.btn').prop('title'));
+    $('.btn').removeProp('title');
+</script>
+</body>
+</html>
