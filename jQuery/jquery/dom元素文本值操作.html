@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button class="btn" value="123"><span>按钮</span></button>
+<input type="text" class="ipt" value="请输入..."/>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+    console.log($('.btn').html());//<span>按钮</span>
+    console.log($('.btn').text());//按钮
+    console.log($('.btn').val());//123
+
+    var str = '<h3>按钮</h3>';
+//    $('.btn').html(str);//自动解析
+//    $('.btn').text(str);//直接赋值
+//    $('.btn').val(str);
+
+
+//    $('.btn').html(function(index){
+//        return '<p>文本</p>'+index;
+//    });
+//    $('.btn').text(function(index){
+//        return '<p>文本</p>'+index;
+//    });
+    $('.btn').val(function(index){
+        return 'value';
+    });
+</script>
+</body>
+</html>
