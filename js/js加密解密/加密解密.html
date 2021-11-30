@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="js/md5.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.6.0/base64.min.js"></script>
+<script src="https://cdn.bootcss.com/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+<script>
+    console.log(b64_md5('abc'));//kAFQmDzST7DWlj99KOF/cg
+    console.log(hex_md5('abc'));//900150983cd24fb0d6963f7d28e17f72
+    console.log(str_md5('abc'));//P<ÒO°Ö?}(ár
+
+    var s = escape("删除");
+    console.log(s);//%u5220%u9664
+    console.log(unescape(s));//删除
+
+    var t = encodeURIComponent("删除");
+    console.log(t);
+    console.log(decodeURIComponent(t));
+
+
+    var num = Base64.btoa("nan chu 123");
+    console.log(num);
+    console.log(Base64.atob(num));
+    var num1 = Base64.encode("nan chu 64");
+    console.log(num1);
+    console.log(Base64.decode(num));
+
+    //加密
+    console.log(CryptoJS.MD5("你好").toString());//7eca689f0d3389d9dea66ae112e5cfd7
+    var key="12345";
+    var msg="我abc";
+    //加密
+    console.log(CryptoJS.AES.encrypt(msg, key).toString());//U2FsdGVkX1+j873Bzg4w7onvkXM48Cpe9sq25ScfsSA=
+    //解密
+    console.log(CryptoJS.AES.decrypt("U2FsdGVkX1+j873Bzg4w7onvkXM48Cpe9sq25ScfsSA=", key).toString(CryptoJS.enc.Utf8));//我abc
+
+
+    var t = encodeURIComponent("删除");
+    console.log(t);//%E5%88%A0%E9%99%A4
+    console.log(decodeURIComponent(t));//删除
+</script>
+</body>
+</html>
