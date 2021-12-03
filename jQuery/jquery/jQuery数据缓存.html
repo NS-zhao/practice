@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+</ul>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+    //给元素上添加属性给值
+    $('li').eq(0).data("key","abc");
+    console.log($('li').eq(0).data("key"));//abc
+    //移除属性
+    $('li').eq(0).removeData("key");
+    console.log($('li').eq(0).data("key"));//undefined
+</script>
+</body>
+</html>
