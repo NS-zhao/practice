@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        button {
+            width: 50px;
+            line-height: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+<button class="btn">按钮</button>
+<br/>
+<button class="btn">按钮</button>
+<br/>
+<button class="btn">按钮</button>
+<br/>
+<button class="btn">按钮</button>
+<br/>
+<button class="btn">按钮</button>
+<br/>
+<button class="btn">按钮</button>
+<br/>
+<button class="btn">按钮</button>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+//    //对按钮集合进行遍历
+//    var speed=500;
+//    animate();
+//    function animate(){
+//        $(".btn").each(function(index){
+//            var delay=index*speed;
+//            $(this).delay(delay).animate({
+//                width:(index+1)*60
+//            },speed);
+//        }).last().queue(function(){
+//            //清除动画队列
+//            $('.btn').clearQueue().css('width','50px');
+//            animate();
+//        })
+//    }
+
+//    $('.btn').animate({width:200},200);
+//    $('.btn').animate({height:200},200);
+//    $('.btn').queue(function(){
+//        console.log("当前动画执行完成");
+//        $(this).dequeue();
+//    });
+//    $('.btn').animate({width:50},500);
+//    $('.btn').animate({height:50},500);
+
+    //默认动画队列fx
+    var animateArr=[
+        function(){
+            $(this).animate({width:200},500,fun);
+        },
+        function(){
+            $(this).animate({height:200},500,fun);
+        },
+        function(){
+            $(this).animate({width:50},500,fun);
+        },
+        function(){
+            $(this).animate({height:50},500,fun);
+        }
+    ]
+    $('.btn').queue('myanimate', animateArr);
+    var fun=function(){
+        $('.btn').dequeue('myanimate');
+    }
+</script>
+</body>
+</html>
