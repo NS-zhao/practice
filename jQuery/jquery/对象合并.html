@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+    //对象合并
+    var a={
+        a:1,
+        b:2
+    };
+    var b={
+        b:3,
+        c:4
+    }
+    var c={};
+    console.log($.extend(c, a, b));//{a: 1, b: 3, c: 4}
+    console.log(c);//{a: 1, b: 3, c: 4}
+    //原生js里面的对象合并
+    console.log(Object.assign({}, a, b));//{a: 1, b: 3, c: 4}
+    //$.fn.extend
+    console.log($.fn.jquery);//1.9.1
+    //给整个jquery对象上合并属性和方法
+    console.log($.fn);//Object [jquery: "1.9.1", constructor: ƒ, init: ƒ, selector: "", size: ƒ, …]
+    $.fn.extend({
+        sleep:function(){
+            console.log("111");//111
+        }
+    });
+    $("#map").sleep();
+</script>
+</body>
+</html>
