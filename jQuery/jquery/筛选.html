@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button class="btn" id="btninfo">按钮</button>
+<button class="btn">按钮</button>
+<button class="btn">按钮</button>
+<button class="btn list">按钮</button>
+<button class="btn ">按钮</button>
+<button class="btn info">按钮</button>
+<ul class="menu">
+    <li class="info">1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <h3 class="h3">标题</h3>
+    <li>5</li>
+    <li>6</li>
+    <span>审判</span>
+</ul>
+<!--<dl>-->
+    <!--<dt id="term-1" >term 1</dt>-->
+    <!--<dd>definition 1-a</dd>-->
+    <!--<dd>definition 1-b</dd>-->
+    <!--<dd>definition 1-c</dd>-->
+    <!--<dd>definition 1-d</dd>-->
+
+    <!--<dt id="term-2">term 2</dt>-->
+    <!--<dd>definition 2-a</dd>-->
+    <!--<dd>definition 2-b</dd>-->
+    <!--<dd>definition 2-c</dd>-->
+
+    <!--<dt id="term-3" >term 3</dt>-->
+    <!--<dd>definition 3-a</dd>-->
+    <!--<dd>definition 3-b</dd>-->
+<!--</dl>-->
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+    console.log($('.btn').eq(-1));
+    console.log($('.btn').first());
+    console.log($('.btn').last());
+    console.log($('.btn').hasClass('btn'));
+    console.log($('.btn').is('.list'));
+    console.log($('.btn').is(function(index){
+        console.log(index, $(this));
+        return index == 0;
+    }));
+
+    console.log($('ul').has('li'));
+    console.log($('.btn').filter('.list'));
+
+    var arr = $('.btn').map(function(){
+        console.log($(this), this);
+        return this;
+        return $(this).text();
+    })
+    console.log(arr);
+    console.log($('.btn').not('.list'));
+    console.log($('.btn').not($('.list')[0]));
+    console.log($('.btn').slice(0, 2));
+
+    console.log($('ul').children());
+    console.log($('ul').children('h3'));
+    console.log($('.btn').closest('.list'));
+    console.log($('ul').find('h3'));
+    console.log($('.list').next());
+    console.log($('.list').next('.info'));
+    console.log($('.list').nextAll());
+    console.log($('.list').nextAll('button'));
+    console.log($('.list').prev());
+    console.log($('.list').prevAll());
+    console.log($('.list').nextUntil('.info'));
+    console.log($('#btninfo').nextUntil('.info','list'));
+    console.log($('.h3').siblings());
+    console.log($('.h3').siblings('span'));
+    console.log($('.h3').parent());
+    console.log($('.h3').parents());
+    console.log($('.h3').offsetParent());
+
+
+    console.log($('.h3').add('.info'));
+    console.log($('.btn').eq(0).addBack());
+    console.log($('.btn').eq(0).siblings('.info').prevAll('.list').siblings('.menu').addBack());
+</script>
+</body>
+</html>
