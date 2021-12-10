@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button class="btn">按钮</button>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+//    $('.btn').click(function(){
+//        return false;
+//    })
+//    $('.btn').click(function(e){
+//        var event = window.event||e;
+//        console.log(e);
+//        console.log(e.data);
+//        console.log(e.currentTarget);
+//        console.log(e.toElement);
+//        //e.data:事件传递参数
+//        //e.currentTarget等价js的e.target触发的目标元素
+//        console.log(e.delegateTarget);//等价于e.currentTarget
+//    })
+
+    $('.btn').click(function(e){
+        //检测是否调用过e.preventDefault()
+        console.log(e.isDefaultPrevented());
+        //检测是否调用过e.stopPropagation()
+        console.log(e.isPropagationStopped());
+        //事件执行函数返回值（之前的）
+        console.log(e.result);
+        //触发事件的时间  ms
+        console.log(e.timeStamp);
+        //用户知道按键的键值   鼠标事件全是1   键盘事件是对应的键值
+        $(document).keypress(function(e){
+            console.log(e.keyCode);
+        })
+    })
+</script>
+</body>
+</html>
