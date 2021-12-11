@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+    //无论什么接口都涉及跨域问题
+    //get
+    //只是获取数据，不需要传递数据
+    var url="http://127.0.0.1:8080/getUser";
+    $.get(url,function(res){
+        console.log(res);
+    });
+
+    //获取数据需要传递数据的api
+    var src="http://127.0.0.1:8080/sendparams";
+    var info={id:"asd_1234",pwd:'abc_1234'};
+    $.get(src,info,function(res){
+        console.log(res);
+    });
+
+    //post
+    var url="http://127.0.0.1:8080/getUser";
+    $.post(url,function(res){
+        console.log(res);
+    });
+
+    $.post(src,info,function(res){
+        console.log(res);
+    });
+    //dataType类似type存在一个值jsonp
+    $.ajax({
+        method:'post',
+        url:src,
+        data:info,
+        contentType:'application/x-www-form-urlencoded',
+        success:function(res){
+            console.log(res);
+        },
+        error:function(err){
+
+        },
+        async:true
+    });
+
+    //dataType值设置jsonp，涉及jsonp跨域
+    //jsonp跨域只能是get请求
+    $.ajax({
+        method:'get',
+        url:'http://127.0.0.1:8080/getUserJsonp',
+        dataType:'jsonp',//形式是jsonp跨域请求
+        jsonp:'cb',
+        jsonpCallback:'getData',//设置jsonp的回调函数
+        success:function(res){
+            console.log(res);//a
+        }
+    });
+
+
+    $.ajax({
+        method:'get',
+        url:'http://127.0.0.1:8080/getUser',
+        headers:{
+            userid:'abc123',
+            userpwd:'abc'
+        },
+        success:function(res){
+            console.log(res);
+        }
+    })
+    //getJSON,返回json
+    $.getJSON('http://127.0.0.1:8080/stu',function(res){
+        console.log(res);
+    })
+
+
+    $.getScript("./js/test.js", function(){
+        alert("Script loaded and executed.");
+    });
+</script>
+</body>
+</html>
