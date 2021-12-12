@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 1000px;
+            height: auto;
+        }
+        .file{
+            width: 100px;
+            height: 30px;
+            position: relative;
+            text-align: center;
+            line-height: 30px;
+        }
+        .file>input{
+            position: absolute;
+            opacity: 0;
+            width: 100px;
+            height: 30px;
+            z-index: 2;
+            left: 0;
+            top: 0;
+        }
+        .file>span{
+            position: absolute;
+            width: 100px;
+            height: 30px;
+            z-index: 1;
+            left: 0;
+            top: 0;
+        }
+        #start{
+            width: 100px;
+            height: 30px;
+        }
+        .filelist_info{
+            line-height: 30px;
+        }
+        .filelist_info>span{
+            margin: 0 10px;
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 14px;
+        }
+        .filelist_info meter{
+            width: 120px;
+        }
+        .fileid{
+            display: inline-block;
+            width: 15px;
+        }
+        .filename{
+            display: inline-block;
+            width: 120px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .dirlist a{
+            color: blue;
+            margin-left: 20px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div>
+        <div class="file">
+            <input class="filelist" name="avatar" type="file" multiple/>
+            <span>文件选择</span>
+        </div>
+        <div class="allfile"></div>
+        <button id="start">开始上传</button>
+    </div>
+</div>
+<div>
+    <h3>目录</h3>
+    <div class="dirlist"></div>
+</div>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+    var fileData;
+    $(function () {
+        $(".filelist").change(function () {
+            $('.file').hide();
+            fileData = this.files;
+            createPage(this.files);
+        });
+        //创建元素的方法
+        function createPage(files) {
+            for (var i = 0; i < files.length; i++) {
+                var fileList = $("<div class='filelist_info'></div>");
+                var id = $("<span class='fileid'>" + (i + 1) + ".</span>");
+                var name = $("<span class='filename'>" + files[i].name + "</span>");
+                var meter = $("<meter class='meter' value='0' min='0' max='" + files[i].size + "'>");
+                fileList.append(id);
+                fileList.append(name);
+                fileList.append(meter);
+                $(".allfile").append(fileList);
+            }
+        }
+
+        //点击开始上传
+        $("#start").click(function () {
+            if (!$(".allfile").children().length) {
+                alert("请选择上传文件！");
+                return;
+            }
+            //这里发送请求  上传
+            var url = "http://127.0.0.1:8080/upload";
+            //把上传的文件转成表单数据
+            for (var i = 0; i < fileData.length; i++) {
+                var formData = new FormData();
+                formData.append('avatar', fileData[i]);
+                $.ajax({
+                    method: 'post',
+                    url: url,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    xhr: function () {
+                        var xhr = new XMLHttpRequest();
+                        xhr.upload.addEventListener("progress", progress(i));
+                        return xhr;
+                    },
+                    success: function (res) {
+                        console.log(res);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+            function progress(index) {
+                var count = 0;
+                return function (e) {
+                    var nowload = e.loaded;
+                    var totle = e.total;
+                    $('.meter').eq(index).attr("value", nowload);
+                    if (nowload / totle == 1) {
+                        $('.filelist_info').eq(index).hide();
+                        count++;
+                    }
+                    if (count >= fileData.length) {
+                        $('.filelist_info').remove();
+                        $('.file').show();
+                        getdir();
+                    }
+
+                }
+            }
+        });
+
+        getdir();
+        //获取上传的目录
+        function getdir() {
+            $(".dirlist").html("");
+            $.ajax({
+                method: 'get',
+                url: "http://127.0.0.1:8080/downfile",
+                success: function (res) {
+                    res.map(function (item) {
+                        var str = $("<div>" + item + "<a href='http://127.0.0.1:8080/down?name="+item+"'>下载</a></div>");
+                        $(".dirlist").append(str);
+                    });
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>
