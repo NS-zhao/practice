@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//    {
+//        //console.log(a);//Cannot access 'a' before initialization会报错，不能被提前声明
+//        let a = 20;
+//        console.log(a);//20
+//    }
+//    console.log(a);//a is not defined
+
+//    {
+//        let a=10;
+//    }
+//    console.log(a);//a is not defined
+
+
+//    const a = 10;
+//    a = 20;
+//    console.log(a);//Assignment to constant variable.会报错，常量只能读取，不能修改。
+
+
+//    console.log(a);//Cannot access 'a' before initialization会报错，不能提前声明
+//    const a = 10;
+//    a = 20;
+
+
+//    var tmp = 123;
+//    if (true) {
+//        tmp = 'abc';//Cannot access 'tmp' before initialization
+//        let tmp;
+//    }
+
+
+//    if (true) {
+//        // TDZ开始
+//        tmp = 'abc';//Cannot access 'tmp' before initialization
+//        console.log(tmp);//Cannot access 'tmp' before initialization
+//        let tmp; // TDZ结束
+//        console.log(tmp);//undefined
+//        tmp = 123;
+//        console.log(tmp);//123
+//    }
+
+//    typeof x;//Cannot access 'x' before initialization
+//    let x;
+
+//    function bar(x = y, y = 2) {// Cannot access 'y' before initialization
+//        return [x, y];
+//    }
+//    bar();
+
+//    function bar(x = 2, y = x) {
+//        return [x, y];
+//    }
+//    console.log(bar());//[2, 2]
+
+//    var x = x;
+//    let x = x;//Identifier 'x' has already been declared标识符“x”已被声明
+
+//    let a = 10;
+//    let a = 20;//Identifier 'a' has already been declared标识符“a”已声明
+//    console.log(a);
+
+//    var tmp = new Date();
+//    function f() {
+//        console.log(tmp);
+//        if (false) {
+//            var tmp = 'hello world';
+//        }
+//    }
+//    f();//undefined
+
+
+//    var s = 'hello';
+//    for (var i = 0; i < s.length; i++) {
+//        console.log(s[i]);//h e l l o
+//    }
+//    console.log(i);//5
+
+//    function f1() {
+//        let n = 5;
+//        if (true) {
+//            let n = 10;
+//        }
+//        console.log(n);//5
+//    }
+//    f1();
+
+//{{{{
+//    {let insane = 'Hello World'}
+//    console.log(insane);// insane is not defined
+//}}}};
+
+//{{{{
+//    let insane = 'Hello World';
+//    {let insane = 'Hello World'}
+//}}}};
+
+//    function f() { console.log('I am outside!'); }
+//    (function () {
+//        if (false) {
+//            // 重复声明一次函数f
+//            function f() { console.log('I am inside!'); }
+//        }
+//        f();//f is not a function
+//    }());
+
+
+//    window.a = 1;
+//    console.log(a);//1
+//    a = 2;
+//    console.log(window.a);//2
+
+
+    var a = 1;
+    // 如果在 Node的REPL环境，可以写成 global.a
+    // 或者采用通用方法，写成this.a
+    console.log(window.a);// 1
+    let b = 1;
+    console.log(window.b);//undefined
+
+
+
+
+</script>
+</body>
+</html>
