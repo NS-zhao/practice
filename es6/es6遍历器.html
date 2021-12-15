@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//    function makeInterator(array){
+//        let startIndex=0;
+//        return {
+//            next:function(){
+//                return startIndex<array.length?{value:array[startIndex++],done:false}:{value:undefined,done:true}
+//            }
+//        }
+//    }
+//    let inter=makeInterator([1,2,3,4]);
+//    console.log(inter.next());
+//    console.log(inter.next());
+//    console.log(inter.next());
+//    console.log(inter.next());
+//    console.log(inter.next());
+
+
+
+//    let arr=[1,2,3,4];
+//    let inter=arr[Symbol.iterator]();
+//    console.log(inter.next());
+//    console.log(inter.next());
+//    console.log(inter.next());
+//    console.log(inter.next());
+//    console.log(inter.next());
+//    for(let key of arr){
+//        console.log(key);//1 2 3 4
+//    }
+
+
+//    let obj = {
+//        data: [ 'hello', 'world' ],
+//        [Symbol.iterator]() {
+//        const self = this;
+//        let index = 0;
+//        return {
+//            next() {
+//                if (index < self.data.length) {
+//                    return {value: self.data[index++], done: false};
+//                }
+//                return { value: undefined, done: true };
+//            }
+//        };
+//        }
+//    };
+//    let iterator=obj[Symbol.iterator]();
+//    console.log(iterator.next());
+//    console.log(iterator.next());
+//    console.log(iterator.next());
+//    for(let key of obj){
+//        console.log(key);//hello world
+//    }
+
+
+//    let obj={
+//        0:'a',
+//        1:'b',
+//        2:'c',
+//        3:'d',
+//        length:4,
+//        [Symbol.iterator]:Array.prototype[Symbol.iterator]
+//    }
+//    for(let value of obj){
+//        console.log(value);//a b c d
+//    }
+
+
+//    let iterable = {
+//        a: 'a',
+//        b: 'b',
+//        c: 'c',
+//        length: 3,
+//            [Symbol.iterator]: Array.prototype[Symbol.iterator]
+//    };
+//    for (let item of iterable) {
+//        console.log(item);//undefined,undefined,undefined
+//    }
+
+
+//    {
+//        class Range{
+//            start;
+//            end;
+//            constructor(start,end){
+//                this.start=start;
+//                this.end=end;
+//            }
+//            [Symbol.iterator](){
+//                return this;
+//            }
+//            next(){
+//                let startValue=this.start;
+//                if(startValue<this.end){
+//                    this.start++;
+//                    return {value:startValue,done:false};
+//                }
+//                return {value:undefined,done:true};
+//            }
+//        }
+//        let range=new Range(0,5);
+//        console.log(range.next());//{value: 0, done: false}
+//        console.log(range.next());//{value: 1, done: false}
+//        console.log(range.next());//{value: 2, done: false}
+//        console.log(range.next());//{value: 3, done: false}
+//        console.log(range.next());//{value: 4, done: false}
+//        console.log(range.next());//{value: undefined, done: true}
+//        for(let value of range){
+//            console.log(value);//0 1 2 3 4
+//        }
+//    }
+
+
+//    {
+//        function Range(start,stop){
+//            this.start=start;
+//            this.end=stop;
+//        }
+//        Range.prototype[Symbol.iterator]=function(){
+//            return this;
+//        }
+//        Range.prototype.next=function(){
+//            let startValue=this.start;
+//            if(startValue<this.end){
+//                this.start++;
+//                return {value:startValue,done:false};
+//            }
+//            return {value:undefined,done:true};
+//        }
+//        let range=new Range(0,10);
+//        for(let value of range){
+//            console.log(value);//0 1 2 3 4 5 6 7 8 9
+//        }
+//    }
+
+
+
+    {
+        let str="Hello world!";
+        let inter=str[Symbol.iterator]();
+        for(let value of inter){
+            console.log(value);//H e l l o   w o r l d !
+        }
+    }
+</script>
+</body>
+</html>
