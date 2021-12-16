@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//    console.log(Object.is('abc','abc'));//true
+//    console.log(Object.is({},{}));//false
+//    console.log(Object.is(+0,-0));//false
+//    console.log(Object.is(NaN,NaN));//true
+//
+//    const target = { a: 1 };
+//    const source1 = { b: 2 };
+//    const source2 = { c: 3 };
+//    Object.assign(target, source1, source2);
+//    console.log(target);//{a:1, b:2, c:3}
+//
+//    const obj = {a: 1};
+//    console.log(Object.assign(obj));//{a: 1}
+//
+//
+//    console.log(Object.assign(2));//Number {2}
+//    console.log(typeof Object.assign(2));//object
+
+
+//    console.log(Object.assign(undefined));//TypeError: Cannot convert undefined or null to object
+//    console.log(Object.assign(null));//TypeError: Cannot convert undefined or null to object
+//    let obj = {a: 1};
+//    console.log(Object.assign(obj, undefined));//{a: 1}
+//    console.log(Object.assign(obj, null));//{a: 1}
+
+//    const a = 'abc';
+//    const b = true;
+//    const c = 10;
+//    const obj = Object.assign({}, a, b, c);
+//    console.log(obj);//{0: "a", 1: "b", 2: "c"}
+
+
+//    const obj1 = {a:{b:1}};
+//    const obj2 = Object.assign({},obj1);
+//    obj1.a.b = 2;
+//    console.log(obj2.a.b);//2
+
+//    let o1 = {a:1,b:2,c:3};
+//    let o2 = {a:'abc',b:'def'};
+//    console.log(Object.assign(o1,o2));//{a: "abc", b: "def", c: 3}
+//
+//    const source = {
+//        get foo() { return 1 }
+//    };
+//    const target = {};
+//    console.log(Object.assign(target, source));//{foo: 1}
+//
+//
+//    let work = {};
+//    console.log(Object.assign(work,{a:1,b:2}));//{a: 1, b: 2}
+
+
+//    Array.prototype.mySort = function(){
+//        mySort = function(){
+//
+//        }
+//    }
+//    Object.assign(Array.prototype,{
+//        myPai:function(){
+//
+//        }
+//    })
+//    console.log(Array.prototype);
+
+
+//    function clone(origin) {
+//        return Object.assign({}, origin);
+//    }
+//    console.log(clone({a:1,b:2,c:3}));//{a: 1, b: 2, c: 3}
+//
+//    function clone(origin) {
+//        let originProto = Object.getPrototypeOf(origin);
+//        return Object.assign(Object.create(originProto), origin);
+//    }
+//    console.log(clone({a:1,b:2,c:3}));//{a: 1, b: 2, c: 3}
+
+
+//    const obj={
+//        foo:123,
+//        get bar(){
+//            return 'abc'
+//        }
+//    };
+//    console.log(Object.getOwnPropertyDescriptors(obj));
+
+
+//    function getOwnPropertyDescriptors(obj) {
+//        const result = {};
+//        for (let key of Reflect.ownKeys(obj)) {
+//            result[key] = Object.getOwnPropertyDescriptor(obj, key);
+//        }
+//        return result;
+//    }
+//    console.log(getOwnPropertyDescriptors({
+//        foo: 123, get bar() {
+//            return 'abc'
+//        }
+//    }));
+
+
+//    //es5 的写法
+//    const obj = {
+//        method: function() {}
+//    };
+//    obj.__proto__ = someOtherObj;
+//    //es6 的写法
+//    var obj = Object.create(someOtherObj);
+//    obj.method = function(){};
+
+//    let proto={};
+//    let obj={x:10};
+//    Object.setPrototypeOf(obj,proto);
+//    proto.y=20;
+//    proto.z=40;
+//    console.log(obj.x);//10
+//    console.log(obj.y);//20
+//    console.log(obj.z);//40
+
+//    let proto={};
+//    let a=1;
+//    Object.setPrototypeOf(a,proto);
+//    proto.y=20;
+//    proto.z=40;
+//    console.log(a.x);//undefined
+//    console.log(a.y);//undefined
+//    console.log(a.z);//undefined
+
+//    console.log(Object.setPrototypeOf(1, {}));//1
+//    console.log(Object.setPrototypeOf('abc', {}));//abc
+//    console.log(Object.setPrototypeOf(true, {}));//true
+
+//    console.log(Object.setPrototypeOf(undefined, {}));//TypeError: Object.setPrototypeOf called on null or undefined
+//    console.log(Object.setPrototypeOf(null, {}));//TypeError: Object.setPrototypeOf called on null or undefined
+
+//    function Rect(){
+//
+//    }
+//    const  rec=new Rect();
+//    console.log(Object.getPrototypeOf(rec)===Rect.prototype);//true
+//    console.log(Object.setPrototypeOf(rec, Object.prototype));
+//    console.log(Object.getPrototypeOf(rec)===Rect.prototype);//false
+
+
+//    //等同于Object.getPrototypeOf(Number(1))
+//    console.log(Object.getPrototypeOf(1));
+//    console.log(typeof Object.getPrototypeOf(1));//object
+//    //等同于Object.getPrototypeOf(String('foo'))
+//    console.log(Object.getPrototypeOf('foo'));
+//    console.log(typeof Object.getPrototypeOf('foo'));//object
+//    //等同于Object.getPrototypeOf(Boolean(true))
+//    console.log(Object.getPrototypeOf(true));
+//    console.log(typeof Object.getPrototypeOf(true));//object
+//    console.log(Object.getPrototypeOf(1) === Number.prototype);//true
+//    console.log(Object.getPrototypeOf('foo') === String.prototype);//true
+//    console.log(Object.getPrototypeOf(true) === Boolean.prototype);//true
+
+
+//    //返回的是key的集合
+//    console.log(Object.keys({a:1,b:2,c:3}));//(3) ["a", "b", "c"]
+//
+//
+//    //返回值的集合
+//    console.log(Object.values({a:1,b:2,c:3}));//(3) [1, 2, 3]
+//    //返回顺序：属性名为数值的属性，是按照数值大小，从小到大遍历的
+//    const obj={100:'a',2:'b',7:'c'};
+//    console.log(Object.values(obj));//(3) ["b", "c", "a"]
+//    //Object.values只返回对象自身的可遍历属性。
+//    const obj1=Object.create({},{p:{value:42}});
+//    console.log(Object.values(obj1));//[]
+//    const obj2=Object.create({},{p:{value:42,enumerable:true}});
+//    console.log(Object.values(obj2));//[42]
+//    //Object.values会过滤属性名为Symbol值的属性
+//    console.log(Object.values({[Symbol()]:123,foo:'abc'}));//["abc"]
+//    //如果Object.values方法的参数是一个字符串，会返回各个字符组成的一个数组
+//    //字符串会先转成一个类似数组的对象。字符串的每个字符，就是该对象的一个属性。
+//    //因此，Object.values返回每个属性的键值，就是各个字符组成的一个数组。
+//    console.log(Object.values('foo'));//(3) ["f", "o", "o"]
+//    //如果参数不是对象，Object.values会先将其转为对象。
+//    //由于数值和布尔值的包装对象，都不会为实例添加非继承的属性。所以，Object.values会返回空数组。
+//    console.log(Object.values(42));//[]
+//    console.log(Object.values(true));//[]
+
+
+//    //返回的是key:value的二维数组
+//    console.log(Object.entries({a:1,b:2,c:3}));//[Array(2), Array(2), Array(2)]
+//    //如果原对象的属性名是一个 Symbol 值，该属性会被忽略
+//    console.log(Object.entries({[Symbol()]:123,foo:'abc'}));
+//    //Object.entries的基本用途是遍历对象的属性
+//    let obj={one:1,two:2};
+//    for(let [k,v] of Object.entries(obj)){
+//        console.log(`${JSON.stringify(k)}:${JSON.stringify(v)}`);
+//    }
+//    //Object.entries方法的另一个用处是，将对象转为真正的Map结构。
+//    const obj1={foo:'bar',baz:42};
+//    const map=new Map(Object.entries(obj1));
+//    console.log(map);
+
+
+//    function entries(obj){
+//        let arr=[];
+//        for(let key of Object.keys(obj)){
+//            arr.push([key,obj[key]]);
+//        }
+//        return arr;
+//    }
+
+//    //遍历
+//    let obj={a:1,b:2,c:3};
+//    for(let key of Object.keys(obj)){
+//        console.log(key);
+//    }
+//    for(let value of Object.values(obj)){
+//        console.log(value);
+//    }
+//    for(let [key,value] of Object.entries(obj)){
+//        console.log([key, value]);
+//    }
+
+    console.log(Object.fromEntries([
+        ['foo', 'bar'],
+        ['baz', 42]
+    ]));//{foo: "bar", baz: 42}
+
+
+    const entries=new Map([
+        ['foo', 'bar'],
+        ['baz', 42]
+    ]);
+    console.log(Object.fromEntries(entries));//{foo: "bar", baz: 42}
+    const map=new Map().set('foo', true).set('bar', false);
+    console.log(Object.fromEntries(map));//{foo: true, bar: false}
+</script>
+</body>
+</html>
