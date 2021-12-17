@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    let sm = [
+        ["name","zhaojiamin"],
+        ["sex","女"]
+    ]
+    let maparr = new Map(sm);
+    console.log(maparr);//Map(2) {"name" => "zhaojiamin", "sex" => "女"}
+    console.log(maparr.size);//2
+    let obj={a:1};
+    maparr.set("age",20);
+    maparr.set({a:1},'asd');
+    maparr.set(obj,'asd');
+    maparr.set(1,'zjm');
+    console.log(maparr);//Map(6) {"name" => "zhaojiamin", "sex" => "女", "age" => 20, {…} => "asd", {…} => "asd", …}
+    console.log(maparr.get("name"));//zhaojiamin
+    console.log(maparr.get("age"));//20
+    //因为对象是引用类型，两个分别占了不同的内存，所以输出undefined
+    console.log(maparr.get({a:1}));//undefined
+    console.log(maparr.get(obj));//asd
+    console.log(maparr.get(1));//zjm
+    console.log(maparr.has("sex"));//true
+    console.log(maparr.delete("age"));//true
+    console.log(maparr);//Map(5) {"name" => "zhaojiamin", "sex" => "女", {…} => "asd", {…} => "asd", 1 => "zjm"}
+//    maparr.clear();
+//    console.log(maparr);//Map(0) {}
+
+
+    console.log(maparr.keys());
+    for(let key of maparr.keys()){
+        console.log(key);
+    }
+
+    console.log(maparr.values());
+    for(let value of maparr.values()){
+        console.log(value);
+    }
+
+    console.log(maparr.entries());
+    for(let item of maparr.entries()){
+        console.log(item);
+    }
+
+
+    maparr.forEach((item)=>{
+        console.log(item);
+    })
+
+
+    maparr.forEach((value,key,map)=>{
+        console.log(value,key,map);
+    })
+
+    for(let item of maparr){
+        console.log(item);
+    }
+
+    var array = [["key1", "value1"], ["key2", "value2"]];
+    console.log(array);
+    // Map 构造函数可以将一个 二维 键值对数组转换成一个 Map 对象
+    var myMap = new Map(array);
+    console.log(myMap);
+    // 使用 Array.from 函数可以将一个 Map 对象转换成一个二维键值对数组
+    var outArray = Array.from(myMap);
+    console.log(outArray);
+
+
+    var myMap1 = new Map([["key1", "value1"], ["key2", "value2"]]);
+    var myMap2 = new Map(myMap1);
+    console.log(myMap2);
+
+    var a = new Map([[1, 'one'], [2, 'two'], [3, 'three'],]);
+    var b = new Map([[1, 'uno'], [2, 'dos']]);
+    // 合并两个 Map 对象时，如果有重复的键值，则后面的会覆盖前面的，对应值即
+    console.log(new Map([...a, ...b]));
+</script>
+</body>
+</html>
