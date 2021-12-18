@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    let setarr = new Set([1,2,3,4,5]);
+    //返回集合的key
+    console.log(setarr.keys());//SetIterator {1, 2, 3, 4, 5}
+    for(let key of setarr.keys()){
+        //遍历集合的值
+        console.log(key);//1 2 3 4 5
+    }
+
+    console.log(setarr.values());//SetIterator {1, 2, 3, 4, 5}
+    for(let key of setarr.values()){
+        console.log(key);//1 2 3 4 5
+    }
+
+    console.log(setarr.entries());//SetIterator {1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}
+    for(let key of setarr.entries()){
+        console.log(key);//[1, 1] [2, 2] [3, 3] [4, 4] [5, 5]
+    }
+
+    console.log(setarr.entries());//SetIterator {1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}
+    setarr.forEach(function(value,key,map){
+        console.log(value,key,map)
+    })
+
+    console.log(...setarr);
+
+    // Array 转 Set
+    var mySet = new Set(["value1", "value2", "value3"]);
+    console.log(mySet);
+    // 用...操作符，将 Set 转 Array
+    var myArray = [...mySet];
+    console.log(myArray);
+    // String 转 Set
+    var mySet = new Set('hello');
+    console.log(mySet);
+    // 注：Set 中 toString 方法是不能将 Set 转换成 String
+
+    let m = [1,2,3,4,5,4,5,6];
+    let m1 = [...new Set(m)];
+    console.log(m1);//(6) [1, 2, 3, 4, 5, 6]
+
+
+    var a = new Set([1, 2, 3]);
+    var b = new Set([4, 3, 2]);
+    console.log(new Set([...a, ...b]));//Set(4) {1, 2, 3, 4}
+
+
+    var a = new Set([1, 2, 3]);
+    var b = new Set([4, 3, 2]);
+    console.log(new Set([...a].filter(x => b.has(x))));//Set(2) {2, 3}
+
+
+    var a = new Set([1, 2, 3]);
+    var b = new Set([4, 3, 2]);
+    console.log(new Set([...a].filter(x => !b.has(x))));//Set(1) {1}
+
+
+</script>
+</body>
+</html>
