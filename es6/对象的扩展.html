@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //对象里面的getter、setter访问器,这两个访问器是操作属性的
+    //至于属性的可读可写，只读和getter、setter访问器有关
+    //getter访问器获取值，setter访问器是设置值
+//    let person={
+//        init(){
+//
+//        },
+//        get name(){
+//            console.log("获取name属性");
+//            return this._name;
+//        },
+//        set name(n){
+//            console.log("设置name属性");
+//            this._name=n;
+//        }
+//    }
+//    console.log(person);
+//    person.name="张三";
+//    console.log(person.name);
+//    //对象中简写的方法不能当作构造函数来使用，会报错
+//    new person.init();
+
+
+//
+//    let ani = {
+//        _name:'',
+//        set name(n){
+//            console.log('设置');//设置
+//            this._name = n;
+//        },
+//        get name(){
+//            console.log('获取');//获取
+//            return this._name;
+//        }
+//    }
+//    console.log(ani);//{_name: ""}
+//    ani.name = '赵';
+//    console.log(ani.name);//赵
+
+
+    //对象取值
+    //可以对象点    对象[key] （不只可以取值  检测属性是否存在）
+//    //es6允许对象的属性可以是变量，变量添加[]----字面量解析
+//    let key="name";
+//    let obj1={
+//        [key]:'张三'
+//    }
+//    console.log(obj1);//{name: "张三"}
+//    console.log(obj1[key]);//张三
+
+
+//    let o = {};
+//    o.age = 18;
+//    o['sex'] = '男';
+//    console.log(o);//{age: 18, sex: "男"}
+
+
+//    let person = "name";
+//    let per = "eat";
+//    //解析属性变量使用[]包变量
+//    let list = {
+//            [person]:'',
+//            [per](){
+//        console.log('执行函数');//执行函数
+//    }
+//    }
+//    console.log(list);//{name: "", eat: ƒ}
+//    console.log(list[per]());//undefined
+//    //对象属性上的name属性，获取的是函数名称
+//    console.log(list[per].name);//eat
+
+
+//    let a = {
+//        set age(n){
+//            this._age = n;
+//        },
+//        get age(){
+//            return _age;
+//        }
+//    }
+//    console.log(a.age.name);
+
+
+
+//    //函数的name属性
+//    function method(){
+//        console.log(method.name);
+//    }
+//    //直接获取getter、setter访问器的函数名称undefined
+//    let obj={
+//        get sex(){return this._sex;},
+//        set sex(n){this._sex=n;}
+//    }
+//    //console.log(obj.sex.name);//TypeError: Cannot read property 'name' of undefined
+//    //获取getter、setter访问器的函数名称
+//    let descr=Object.getOwnPropertyDescriptor(obj,'sex');
+//    console.log(descr);
+//    console.log(descr.get.name);
+
+
+//    let a = {
+//        set age(n){
+//            this._age = n;
+//        },
+//        get age(){
+//            return _age;
+//        }
+//    }
+//    //console.log(a.age.name);//ReferenceError: _age is not defined
+//
+//    //首先得获取整个访问器
+//    let descript = Object.getOwnPropertyDescriptor(a,'age');
+//    console.log(descript);//{get: ƒ, set: ƒ, enumerable: true, configurable: true}
+//    console.log(descript.set.name);//set age
+//    console.log(descript.get.name);//get age
+
+
+    //使用原生js设置getter、setter访问器
+    //设置多个属性
+    //设置get、set访问器不能配置value、writeable属性
+//    let obj={
+//        get sex(){return this._sex;},
+//        set sex(n){this._sex=n;}
+//    }
+//    Object.defineProperty(obj,'age',{
+//        enumerable:false,
+//        configurable:true,
+//        get:function(){
+//            return this._age;
+//        },
+//        set:function(n){
+//            this._age=n;
+//        },
+//    });
+//    obj.sex="男";
+//    obj.age=10;
+//    console.log(obj);
+//    console.log(Object.getOwnPropertyDescriptor(obj,'age'));
+//    console.log(obj.age);
+//    console.log(obj.sex);
+
+
+//    Object.defineProperties(obj,{
+//        name:{
+//            enumerable:true,
+//            configurable:true,
+//            get:function(){
+//                return this._name;
+//            },
+//            set:function(n){
+//                this._name=n;
+//            },
+//        }
+//    });
+//    obj.name="张三";
+//    obj.sex="女";
+//    console.log(obj.name);
+//    console.log(obj.sex);
+//    console.log(obj);
+
+
+//    let people = {
+//        name:"赵佳敏",
+//        age:20
+//    }
+//    var desc = Object.getOwnPropertyDescriptor(people,'name');
+//    console.log(desc);//{value: "赵佳敏", writable: true, enumerable: true, configurable: true}
+//    Object.defineProperty(people,'name',{
+//        enumerable:false
+//    });
+//    var desc1 = Object.getOwnPropertyDescriptor(people,'name');
+//    console.log(desc1);//{value: "赵佳敏", writable: true, enumerable: false, configurable: true}
+//
+//    for(let key in people){
+//        console.log(key);//age
+//    }
+//    //configurable 默认true，允许删除对象属性，false不允许
+//    console.log(delete people.age);//true
+//    console.log(people);//{name: "赵佳敏"}
+
+
+//    console.log(Reflect.ownKeys({ [Symbol()]:0, b:0, 10:0, 2:0, a:0 }));//(5) ["2", "10", "b", "a", Symbol()]
+
+//    let person={
+//        name(){
+//            console.log("全名称");
+//        },
+//    }
+//    let student={
+//        sleep(){
+//            console.log(this);
+//            super.name();
+//        }
+//    }
+//    //设置原型对象
+//    Object.setPrototypeOf(student,person);
+//    student.sleep();
+//    console.log(student);
+
+
+//    let a1={a:1};
+//    let {...x}=a1;
+//    a1.a=2;
+//    console.log(x.a);//1
+    let a2={a:{b:1}};
+    let {...x1}=a2;
+    a2.a.b=2;
+    console.log(x1.a.b);//2
+</script>
+</body>
+</html>
