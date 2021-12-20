@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//    function method(x,y=10){
+//        console.log(x, y);
+//    }
+//    method(20);//20 10
+
+    //参数变量x是默认声明的，在函数体中，不能用let或const再次声明，否则会报错。
+//    function fn(x=10){
+//        let x=20;
+//        console.log(x);//SyntaxError: Identifier 'x' has already been declared
+//    }
+//    fn();
+
+
+//    //函数上传递参数，解构赋值
+//    function fn({x,y,z}){
+//        console.log(x, y, z);
+//    }
+//    fn({x:1,y:2,z:3});//1 2 3
+//
+//    function foo([x,y=2,z]){
+//        console.log(x, y, z);
+//    }
+//    foo([1,,3]);//1 2 3
+//    foo([]);//undefined 2 undefined
+//    foo([1,,]);//1 2 undefined
+//    foo([2,3,4]);//2 3 4
+//    //foo();
+//
+//
+//    function fetch(url,{body,method="get",headers={}}={}){
+//        console.log(method);
+//    }
+//    fetch("http://www.baidu.com",{});//get
+//    fetch("http://www.baidu.com");//get
+
+//    function f(x=1,y){
+//        return [x,y];
+//    }
+//    console.log(f());//[1, undefined]
+//    console.log(f(2));//[2, undefined]
+//    console.log(f(,1));//报错SyntaxError: Unexpected token ,
+//    console.log(f(undefined, 1));//[1, 1]
+//    console.log(f(1, null));//[1, null]
+
+
+//    function f(x,y=5,z){
+//        return [x,y,z];
+//    }
+//    console.log(f());//[undefined, 5, undefined]
+//    console.log(f(1));//[1, 5, undefined]
+//    //console.log(f(1,,2));//报错SyntaxError: Unexpected token ,
+//    console.log(f(1,undefined,2));//[1, 5, 2]
+//    console.log(f(1,null,2));//[1, null, 2]
+
+
+//    console.log((function(a){}).length);//1
+//    console.log((function(a=5){}).length);//0
+//    console.log((function(a,b,c=5){}).length);//2
+
+//    function f(...args){
+//        console.log(args);
+//    }
+//    console.log(f.length);//0
+
+//    var x=1;
+//    function f(x,y=x){
+//        console.log(y);
+//    }
+//    f(2);//2
+
+//    let x=1;
+//    function f(y=x){
+//        let x=2;
+//        console.log(y);
+//    }
+//    f();//1
+
+//    function f(y=x){
+//        let x=2;
+//        console.log(y);
+//    }
+//    f();//ReferenceError: x is not defined
+
+//    var x=1;
+//    function f(x=x){
+//
+//    }
+//    f();//ReferenceError: Cannot access 'x' before initialization
+
+
+    //let foo='outer';
+//    function bar(func=()=>foo){
+//        let foo='inner';
+//        console.log(func());
+//    }
+//    bar();//ReferenceError: foo is not defined
+
+
+//    var x=1;
+//    function f(x,y=function(){x=2;}){
+//        x=3;
+//        y();
+//        console.log(x);
+//    }
+//    f();//2
+//    console.log(x);//1
+
+//    function push(array,...items){
+//        items.forEach(function(item){
+//            array.push(item);
+//        });
+//        console.log(array);
+//    }
+//    var a=[];
+//    push(a,1,2,3);//[1, 2, 3]
+
+
+//    function f(a,...b,c){}//SyntaxError: Rest parameter must be last formal parameter
+//    console.log((function(a){}).length);//1
+//    console.log((function(...a){}).length);//0
+//    console.log((function(a,...b){}).length);//1
+
+
+//    var f=function(){};
+//    console.log(f.name);//f
+
+
+//    Array.prototype.fakeMap = function(fn,context){
+//        console.log(context);//undefined
+//        let arr = this;//this是当前对象数组
+//        let temp = [];
+//        for(let i = 0;i<arr.length;i++){
+//            let result = fn.call(context,arr[i],i,arr);
+//            temp.push(result);
+//        }
+//        return temp;
+//    }
+//    var st=[1,2,3,4,5];
+//    var obj=st.fakeMap(function(value,index,array){
+//        console.log(value, index, array);//输出值 索引 原数组
+//        return value*2;
+//    });
+//    console.log(obj);//[2, 4, 6, 8, 10];
+
+
+Array.prototype.mymap=function(callback){
+    //this指向的是window
+    var arr=this;
+
+    var list=[];
+    for(var i=0;i<arr.length;i++){
+        list[i]=callback(arr[i],i,arr);
+    }
+    return list;
+}
+var st=[1,2,3,4,5];
+var obj=st.mymap(function(value,index,array){
+    console.log(this);//window
+    console.log(value, index, array);//输出值 索引 原数组
+    return value*2;
+});
+console.log(obj)//[2, 4, 6, 8, 10];
+</script>
+</body>
+</html>
