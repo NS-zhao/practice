@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//    let [a,b] = [2,3];
+//    console.log(a,b);//2 3
+//    let [c,d,e] = [2,3]
+//    console.log(c,d,e);//2 3 undefined
+//    let [a,[b,c],[[d,e]]] = [0,[1,2],[[3,4]]];
+//    console.log(a,b,c,d,e);//0 1 2 3 4
+//    let [a,[b,c],[[d,e]]] = [0,1,2,3,4];
+//    console.log(a,b,c,d,e);//undefined is not a function
+//    let [,,z] = [1,2,3,4,5];
+//    console.log(z);//3
+
+
+//    let [a = 0,b = 1] = [2,3];
+//    console.log(a,b);//2 3
+//    let [c,d] = [];
+//    console.log(c,d);//undefined undefined
+//    let [e = 0,f = 1] = [];
+//    console.log(e,f);//0 1
+//    let [g=0,h]=[1,2];
+//    console.log(g, h);//1 2
+
+//    let a = [1,2,3];
+//    let b = a;
+//    b[0] = 0;
+//    console.log(a);// [0, 2, 3]
+
+//    let a = [1,2,3];
+//    let b = [...a];
+//    b[0] = 0;
+//    console.log(a);//[1, 2, 3]
+
+
+//    let a = [1,2,3];
+//    console.log(...a);//1 2 3
+//    let [b,c,...d] = [1,2,3,4,5,6];
+//    console.log(b,c,d);//1 2 [3, 4, 5, 6]
+//    let [...e,f,g] = [1,2,3,4,5];
+//    console.log(e,f,g);//Rest element must be last element
+
+
+//    let {id,name} = {id:10086,name:"张三"};
+//    console.log(id,name);//10086 "张三"
+//    let {id,name,sex} = {id:10086,name:"张三"};
+//    console.log(sex);//undefined
+//    let {id:num,name:nickname} = {id:10086,name:"张三"};
+//    console.log(num,nickname);//10086 "张三"
+//    console.log(id,name);//id is not defined
+//    let {length} = 'abcdef';
+//    console.log(length);//6
+//    let [a,b,c,d,e,f] = 'abcdef';
+//    console.log(a,b,c,d,e,f);//a b c d e f
+//    let {a,b,c,d,e,f} = 'abcdef';
+//    console.log(a,b,c,d,e,f);//undefined undefined undefined undefined undefined undefined
+//    let { foo, bar } = { foo: 'aaa', bar: 'bbb' };
+//    console.log(foo, bar);//aaa bbb
+//    let { pery: x } = undefined;//Cannot destructure property `prop` of 'undefined' or 'null'
+//    let { prey: y } = null;//Cannot destructure property `prop` of 'undefined' or 'null'
+
+
+
+
+//    function move({x = 0, y = 0} = {}) {
+//        console.log([x, y]);
+//    }
+//    move({x: 3, y: 8}); // [3, 8]
+//    move({x: 3});//[3, 0]
+//    move({});//[0, 0]
+//    move();//[0, 0]
+
+//    function move({x, y} = {x:0,y:0}) {
+//        console.log([x, y]);
+//    }
+//    move({x: 3, y: 8});//[3, 8]
+//    move({x: 3});//[3, undefined]
+//    move({});//[undefined, undefined]
+//    move();//[0, 0]
+
+
+//    let [(a)] = [1];//Invalid destructuring assignment target
+//    let {x: (c)} = {};//Invalid destructuring assignment target
+//    let ({x: c}) = {};//Invalid destructuring assignment target
+//    let {(x: c)} = {};//Invalid destructuring assignment target
+//    let {(x): c} = {};//Invalid destructuring assignment target
+//    let { o: ({ p: p }) } = { o: { p: 2 } };//Invalid destructuring assignment target
+
+
+//    function f([(z)]) { return z; }//Invalid destructuring assignment target
+//    function f([z,(x)]) { return x; }//Invalid destructuring assignment target
+
+
+//    ({ p: a }) = { p: 42 };//Invalid left-hand side in assignment
+//    ([a]) = [5];//Invalid left-hand side in assignment
+
+
+    [(b)] = [3];
+    console.log(b);//3
+    ({ p: (d) } = {p:1});
+    console.log(d);//1
+    [(parseInt.prop)] = [3];
+    console.log(parseInt.prop);//3
+</script>
+</body>
+</html>
