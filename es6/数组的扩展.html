@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="btn">1</div>
+<div class="btn">2</div>
+
+<script>
+//    let arr=[];
+//    function method(item){
+//        arr.push(...item);
+//    }
+//    method([1,2,3,4]);
+//    console.log(arr);//(4) [1, 2, 3, 4]
+//
+//    function f(x,y){
+//        console.log(x, y);
+//    }
+//    f(...[1,2]);//1 2
+//    f.apply(null,[1,2]);//1 2
+//
+//    //扩展运算符，后面可以跟表达式
+//    let x=1;
+//    console.log(...(x>0?[1,2,3]:[-1,-2,-3]));//1 2 3
+//
+//    //扩展运算符 后边如果数组空的  则无效
+//    console.log(...[]);
+//    //扩展运算符  在函数参数的时候  可以写在括号中
+//    //(...[1,2,3])//报错 SyntaxError: Unexpected token ...
+//
+//
+//    let fun1 = function(){
+//        console.log(this);
+//    }
+//    let stu = {name:"赵"};
+//    fun1.call(stu,1,2,3);// [1, 2, 3]
+//    fun1.apply(stu,[1,2,3]);//undefined
+//    fun1(...[1,2,3]);//undefined
+
+
+    let a1 = [1,2,3];
+    let b1 = [...a1];
+    b1[0]=10;
+    console.log(a1);//[1, 2, 3]
+
+
+    let a3 = [1, 2, 3];
+    let a4 = [4, 5, 6];
+    let a5 = [7, 8, 9];
+    //es5  合并
+    console.log(a3.concat(a4, a5));// [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    console.log(a3.concat(a4).concat(a5));// [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+    const [a,...b]=[1,2,3,4,5,6];
+    console.log(a);//1
+    console.log(b);//[2,3,4,5,6]
+    const [c,...d]=[];
+    console.log(c);//undefined
+    console.log(d);//[]
+    const [e,...f]=['foo'];
+    console.log(e);//foo
+    console.log(f);//[]
+
+    console.log(...'hello');//h e l l o
+
+    let nodeList = document.querySelectorAll('div');
+    let array = [...nodeList];
+    console.log(array);//[div, div, div, div, div]
+
+    let btn = document.getElementsByClassName('btn');
+    console.log(...btn);
+
+
+
+//    let obj={
+//        '0':'a',
+//        '1':'b',
+//        '2':'c',
+//        '3':'d',
+//        length:4
+//    }
+//    console.log([...obj]);//obj is not iterable
+//    let obj={
+//        '0':'a',
+//        '1':'b',
+//        '2':'c',
+//        '3':'d',
+//        length:4,
+//        Symbol.iterator]:Array.prototype[Symbol.iterator]
+//    }
+//    console.log([...obj]);//["a", "b", "c", "d"]
+
+
+//    let set=new Set([1,2,3,4]);
+//    console.log(...set);//1 2 3 4
+//    let list=[["name","zhangsan"],["sex","男"]];
+//    let map=new Map(list);
+//    console.log(...map);//(2) ["name", "zhangsan"] (2) ["sex", "男"]
+
+
+//    let k={
+//        0:'a',
+//        1:'b',
+//        length:2
+//    }
+//    console.log(Array.from(k));//["a", "b"]
+//
+//
+//    console.log(Array.from('hello'));// ["h", "e", "l", "l", "o"]
+//    let namesSet = new Set(['a', 'b']);
+//    console.log(Array.from(namesSet));//["a", "b"]
+//
+//    console.log(Array.from([1, 2, 3]));//[1, 2, 3]
+//
+//    console.log(Array.from([1,2,3],(x)=>x*x));//[1, 4, 9]
+//    //将数组中布尔值为false的成员转为0
+//    console.log(Array.from([1, ,2, ,3, ],(n)=>n||0));//[1, 0, 2, 0, 3]
+//    //返回各种数据的类型
+//    function type(){
+//        return Array.from(arguments,value=>typeof value)
+//    }
+//    console.log(type(null, [], NaN));//["object", "object", "number"]
+
+
+//    class Person{
+//        constructor(){
+//
+//        }
+//        static getSex(){
+//            console.log('获取性别');
+//        }
+//        eat(){
+//            console.log('吃饭');
+//        }
+//    }
+//    //实例化类对象
+//    let stuinfo = new Person();
+//    stuinfo.eat();//对象点
+//    Person.getSex();//类点
+//    console.log(stuinfo);//Person {}
+//
+//
+//    console.log(Array.of(3, 11, 8));
+//    console.log(Array.of(3));
+//    console.log(Array.of(3).length);
+//
+//
+//    let list = [1,2,3,4,5];
+//    let info = list.copyWithin(0,2,4);
+//    console.log(info);//[3, 4, 3, 4, 5]
+//    let info1 = info.copyWithin(0,-2,-1);
+//    console.log(info1);//[4, 4, 3, 4, 5]
+//
+//    let item = [1,2,3,4,5,6];
+//    let result = item.find((value,index,arr) => {
+//                return value%2 == 0;
+//    });
+//    console.log(result);//2
+//    let index = item.findIndex((item,index,arr) => {
+//                return item%2 == 0;
+//    });
+//    console.log(index);//1
+//
+//    console.log([1, 2, 3].includes(1, -2));//false
+//    console.log([1, 2, 3].includes(1, -3));//true
+
+
+
+    let k = [1,2,3,[4,5],[[5,6,7],[8,9,[10,11,[12,13]]]]];
+    console.log(k.flat(4));//[1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    console.log(k.flat(Infinity));//[1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+
+    console.log([1, 2, , 4, 5].flat());//[1, 2, 4, 5]
+
+    function ArrayOf(){
+        return [].slice.call(arguments);
+    }
+    console.log(ArrayOf(1, 2, 3, 4));//[1,2,3,4]
+</script>
+</body>
+</html>
