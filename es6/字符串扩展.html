@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//    let str= "abcdefg abc";
+//    console.log(str.includes("abc"));//true
+//    console.log(str.startsWith("a"));//true
+//    console.log(str.startsWith("a",8));//true
+//    console.log(str.endsWith("fg"));//false
+//    console.log(str.startsWith("g", 6));//true
+//
+//    console.log("Hello".repeat(2));//HelloHello
+//    console.log("Hello".repeat(3.2));//HelloHelloHello
+//    console.log("Hello,".repeat(-0.5));//
+//    console.log("Hello,".repeat(NaN));//
+//    console.log("Hello,".repeat(-1));//RangeError: Invalid count value无效的计数值
+//    console.log("Hello,".repeat(Infinity));//RangeError: Invalid count value无效的计数值
+
+//    console.log("Hello".repeat("hh"));//
+//    console.log("Hello".repeat(true));//Hello
+//    console.log("Hello".repeat(false));//
+
+
+//    console.log("z".padStart(5, "o"));//ooooz
+//    console.log("z".padEnd(5, "o"));//zoooo
+//    console.log("z".padStart(5));//    z
+//
+//    console.log("hello".padStart(5, 'a'));//hello
+//    console.log("hello ".padEnd(10, 'world'));//hello worl
+
+//    console.log("123".padStart(10,"0"));//0000000123
+
+
+//    let str=`Hey,
+//            Are you OK?`;
+//    console.log(str);
+//    //Hey,
+//    //Are you OK?
+
+//    function f(){
+//        return "zjm";
+//    }
+//    let str= `My name is ${f()}`;
+//    console.log(str);//My name is zjm
+
+
+//    var str=`
+//        <ul>
+//            <li>1</li>
+//            <li>2</li>
+//        </ul>
+//        `;
+//    console.log(str);
+
+//    alert`Hello world!`;
+//    // 等价于
+//    alert('Hello world!');
+
+//    function f(stringArr,...values){
+//        let result = "";
+//        for(let i=0;i<stringArr.length;i++){
+//            result += stringArr[i];
+//            if(values[i]){
+//                result += values[i];
+//            }
+//        }
+//        return result;
+//    }
+//    let name = 'Mike';
+//    let age = 27;
+//    f`My Name is ${name},I am ${age+1} years old next year.`;//My Name is Mike,I am 28 years old next year.
+//    // 等价于
+//    f(['My Name is',',I am ',' years old next year.'],'Mike',28);
+
+
+    function f(stringArr,...values){
+        let result = "";
+        for(let i=0;i<stringArr.length;i++){
+            result += stringArr[i];
+            if(values[i]){
+                result += String(values[i]).replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;");
+            }
+        }
+        return result;
+    }
+    let msg="<hello & world!>";
+    console.log(f`世界${msg}`);//世界&lt;hello &amp; world!&gt;
+</script>
+</body>
+</html>
