@@ -15,12 +15,23 @@
     for(var key in a){
         console.log(key);//0 1 2 3 4 5 6
     }
+    for(var i=0;i< a.length;i++){
+        //根据字符串类对象所使用的方法来获取每一个
+        console.log(a[i]);//a b c d e f g
+    }
+    console.log(a.charAt(0));//a
+    //charAt根据索引获取字符串里面的每个字符
+    for(var i=0;i< a.length;i++){
+        console.log(a.charAt(i));//a b c d e f g
+    }
     var arr = new Array();
     arr[0] = 1;
     arr[1] = "a";
     arr[2] = true;
     arr[3] = function () {
     }
+
+
     for(var i = 0;i<arr.length;i++){
         console.log(arr[i]);
     }
