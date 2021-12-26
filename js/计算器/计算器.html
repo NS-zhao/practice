@@ -130,6 +130,8 @@
                     //最后一位
                     var lastchat=result.substr(result.length-1,1);
                     screenIpt.value=eval(res+lastchat+res);
+                    ischange=false;
+                    result="";
                 }
                 else{
                     result=len+this.innerText;
