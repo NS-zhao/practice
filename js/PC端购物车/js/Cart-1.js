@@ -130,7 +130,6 @@ function addButton(){
         number[i].onkeydown=function(e){
             if(isNaN(e.key)&& e.keyCode!=8){
                 e.preventDefault();
-                console.log(e.keyCode);
             }
         }
         number[i].onkeyup=function(e){
