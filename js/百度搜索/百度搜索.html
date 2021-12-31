@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu {
+            margin: 0 auto;
+            position: relative;
+            width: 500px;
+            height: 40px;
+            display: flex;
+            box-shadow: 0 0 1px #cbcbcb;
+            top: 300px;
+        }
+
+        .menu > input {
+            width: 410px;
+            height: 40px;
+            border: none;
+            padding-left: 10px;
+            line-height: 40px;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .menu > button {
+            width: 80px;
+            height: 40px;
+            border: none;
+            line-height: 40px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .list {
+            position: absolute;
+            left: 0;
+            top: 40px;
+            width: 420px;
+            border: 1px solid #cbcbcb;
+            padding: 10px 0;
+        }
+
+        .list > li {
+            padding-left: 10px;
+            line-height: 25px;
+            list-style: none;
+        }
+
+        .list a {
+            text-decoration: none;
+            color: #000;
+            font-size: 14px;
+        }
+
+        .list a:hover {
+            color: #666;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="menu">
+    <input id="iptinfo" type="text"/>
+    <button id="btngo">搜索</button>
+    <ul class="list hide"></ul>
+</div>
+<script>
+    //搜索接口：http://www.baidu.com/s?wd=?
+    //关键字联想搜索：https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd="+val+"&cb=callback
+    var script,list,info;
+    window.onload=function(){
+        list=document.querySelector(".list");
+        info=document.querySelectorAll(".info");
+        iptinfo.onclick=function(e){
+            e.stopPropagation();
+        };
+        document.body.onclick=function(){
+            list.classList.add('hide');
+        };
+        iptinfo.onfocus=function(){
+            if(list.classList.contains("hide")){
+                list.classList.remove("hide");
+            }
+        }
+        //闭包节流
+        iptinfo.oninput=handle();
+        function handle(){
+            var timer;
+            return function(){
+                //因为计时器内部的this指向window
+                var that=this;//指向事件执行对象
+                //用户连续输入的时候，如果停顿超过200ms，则发送请求，小于200ms不请求
+                timer=setTimeout(function(){
+                    var value=that.value;
+                    //value值不存在直接出
+                    if(!value){
+                        return;
+                    }
+                    //动态创建script标签
+                    if(script){
+                        script.remove();
+                    }
+                    script=document.createElement("script");
+                    script.src="https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=" + value + "&cb=getData";
+                    document.body.appendChild(script);
+                },200)
+            }
+        }
+        btngo.onclick = function(){
+            location.href="https://www.baidu.com/s?wd=" + iptinfo.value;
+        }
+    }
+    function getData(res){
+        console.log(res);
+        var str="";
+        for(var i=0;i<res.s.length;i++){
+            str+="<li><a href='http://www.baidu.com/s?wd=" +res.s[i]+"'>"+res.s[i]+"</a></li>";
+        }
+        list.innerHTML=str;
+    }
+</script>
+</body>
+</html>
