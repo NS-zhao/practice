@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;;
+        }
+        .box{
+            width: 600px;
+            height: 300px;
+            border: 1px solid #3fcb46;
+            position: relative;
+            margin: 0 auto;
+        }
+        .menu{
+            line-height: 30px;
+            border-bottom: 1px solid #cbcbcb;
+        }
+        .menu>span{
+            display: inline-block;
+            font-size: 13px;
+            padding: 0 30px;
+            color: #666;
+            text-decoration: none;
+        }
+        .nav{
+            position: relative;
+        }
+        .navitem{
+            position: relative;
+            width: 600px;
+            height: 269px;
+            overflow: hidden;
+        }
+        .check{
+            color: #e61a10;
+        }
+        .check:after{
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 100%;
+            height: 2px;
+            background-color: #e61a10;
+        }
+        .itemlist{
+            width: 3000px;
+            overflow: hidden;
+            transition: transform .2s ease;
+        }
+        .itemlist>li{
+            float: left;
+            width: 600px;
+            height: 269px;
+            text-align: center;
+            line-height: 269px;
+            font-size: 40px;
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="menu">
+        <a href="#"></a><span class="nav check">选项卡一</span></a>
+        <a href="#"></a><span class="nav">选项卡二</span></a>
+        <a href="#"></a><span class="nav">选项卡三</span></a>
+        <a href="#"></a><span class="nav">选项卡四</span></a>
+        <a href="#"></a><span class="nav">选项卡五</span></a>
+    </div>
+    <div class="navitem">
+        <ul class="itemlist">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+    </div>
+</div>
+<script>
+    <!-- 选项卡案例-->
+    //获取所有的nav
+    var item=document.querySelectorAll(".nav");
+    var itemlist=document.querySelector(".itemlist");
+    //记录默认状态
+    var save=item[0];
+    var maxWidth=600;
+    for(var i=0;i<item.length;i++) {
+        //关联自定义属性
+        item[i].index = i;
+        item[i].onmouseenter = function () {
+            if (save) {
+                save.classList.remove("check");
+            }
+            this.classList.add("check");
+            save = this;
+            itemlist.style.transform="translatex("+(-this.index*maxWidth)+"px)";
+        }
+    }
+</script>
+</body>
+</html>

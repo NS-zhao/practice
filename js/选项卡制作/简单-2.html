@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;;
+        }
+        .box{
+            width: 600px;
+            height: 300px;
+            border: 1px solid #3fcb46;
+            position: relative;
+            margin: 0 auto;
+        }
+        .menu{
+            line-height: 30px;
+            border-bottom: 1px solid #cbcbcb;
+        }
+        .menu>span{
+            display: inline-block;
+            font-size: 13px;
+            padding: 0 30px;
+            color: #666;
+            text-decoration: none;
+        }
+        .nav{
+            position: relative;
+        }
+        .navitem{
+            position: relative;
+            width: 600px;
+            height: 269px;
+        }
+        .check{
+            color: #e61a10;
+        }
+        .check:after{
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 100%;
+            height: 2px;
+            background-color: #e61a10;
+        }
+        .navitem>div{
+            width: 600px;
+            height: 269px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="menu">
+        <a href="#"></a><span class="nav check">选项卡一</span></a>
+        <a href="#"></a><span class="nav">选项卡二</span></a>
+        <a href="#"></a><span class="nav">选项卡三</span></a>
+        <a href="#"></a><span class="nav">选项卡四</span></a>
+        <a href="#"></a><span class="nav">选项卡五</span></a>
+    </div>
+    <div class="navitem">
+        <div>页面1</div>
+        <div>页面2</div>
+        <div>页面3</div>
+        <div>页面4</div>
+        <div>页面5</div>
+    </div>
+</div>
+<script>
+    var item=document.querySelectorAll(".nav");
+    var child=document.querySelector(".navitem").children;
+    var save=item[0];
+    child[0].style.display='block';
+    for(var i=0;i<item.length;i++)
+    {
+//        item[i].index=i;
+//        item[i].onmouseover=function(){
+//            if(save&&save.classList.contains('check')){
+//                item[save.index].classList.remove('check');
+//                child[save.index].style.display='none';
+//            }
+//            item[this.index].classList.add('check');
+//            child[this.index].style.display='block';
+//            save=this;
+//        }
+        (function (n){
+            item[n].index=i;
+            item[n].onmouseover=function(){
+                if(save&&save.classList.contains('check')){
+                    item[save.index].classList.remove('check');
+                    child[save.index].style.display='none';
+                }
+                item[this.index].classList.add('check');
+                child[this.index].style.display='block';
+                save=this;
+            }
+        })(i)
+    }
+</script>
+</body>
+</html>
