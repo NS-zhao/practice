@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function repeat(s){
+        var i=0;
+        var flag=true;
+        var arr=[];
+        while(i< s.length){
+            flag=false;
+            while(arr.length!=0&&i< s.length&&s[i]==arr.top){
+                flag=true;
+                i++;
+            }
+            if(flag==false){
+                arr.push(s[i]);
+                i++;
+            }
+            else{
+                st.pop();
+            }
+        }
+        var res="";
+        while(arr.length!=0){
+            res=arr.top+res;
+            arr.pop();
+        }
+        console.log(res);
+        return 0;
+    }
+    repeat("aaaaaffssfds");
+</script>
+</body>
+</html>

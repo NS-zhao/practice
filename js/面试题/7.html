@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-end;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div style="width: 100px;height: 100px;background-color: red">1</div>
+    <div style="width: 100px;height: 100px;background-color: blue">2</div>
+    <div style="width: 100px;height: 100px;background-color: yellow">3</div>
+    <div style="width: 100px;height: 100px;background-color: black">4</div>
+    <div style="width: 100px;height: 100px;background-color: red">5</div>
+</div>
+<script>
+    console.log('5' + 2);
+    console.log('5' - 2);
+//    setTimeout("alert('welcome');",1000);
+//    alert(typeof null);
+    console.log(1 && 0 && 2);
+
+    console.log(1 || 0 || 2);
+
+    console.log(["1", "2", "3"].map(parseInt));
+
+    var arr=[];
+    console.log(typeof arr);
+
+    function Foo(){
+        console.log(this.location);
+    }
+    Foo();
+
+    function addCount(){
+        let counter=0;
+        const myFunction=function(){
+            counter=counter+1;
+            return counter;
+        }
+        return myFunction;
+    }
+    const increment=addCount();
+    const c1=increment();
+    const c2=increment();
+    const c3=increment();
+    console.log(c1, c2, c3);
+
+//    for(var i=0;i<10;i++){
+//        ((i)=>{
+//            setTimeout(function(){
+//                console.log(i);
+//            },1000)
+//        })(i)
+//    }
+
+    function fn1(){
+        console.log(this);
+    }
+    fn1();
+    fn1.call({x:100});
+    const fn2=fn1.bind({x:200});
+    fn2();
+</script>
+</body>
+</html>

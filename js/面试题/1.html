@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var list=[];
+    var a=[];
+    var b=[];
+    for(var n=1;n<=100000;n++) {
+        //如果只有一个盒子
+        if (n == 1) {
+            list.push(1);
+        }
+        if (n == 2) {
+            list.push(2);
+        }
+        //两个以上的盒子
+        else if (n > 2) {
+            list.push((parseInt(list[n-1]) + parseInt(list[n])) * 2);
+        }
+
+    }
+    console.log(list);
+
+</script>
+</body>
+</html>
