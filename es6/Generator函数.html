@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//    function* method(){
+//        yield 1+1;
+//        yield 2+2;
+//        yield 3+3;
+//        yield 4+4;
+//        return 10;
+//    }
+//    //执行该函数
+//    let f=method();//执行之后返回遍历器
+//    //下面是一个遍历器的使用
+//    console.log(f.next());
+//    console.log(f.next());
+//    console.log(f.next());
+//    console.log(f.next());
+//    console.log(f.next());
+
+//    function* f() {
+//        console.log('执行了！')
+//    }
+//    var generator = f();
+//    setTimeout(function () {
+//        generator.next()
+//    }, 2000);
+
+
+//    function* method(){
+//        let x=yield 1+2;
+//        console.log(x);//3
+//        let y=yield 3+x;
+//        console.log(y);//7
+//        return y+10;
+//    }
+//    let met=method();
+//    console.log(met.next());//{value: 3, done: false}
+//    console.log(met.next(3));//{value: 6, done: false}
+//    console.log(met.next(7));//{value: 17, done: true}
+
+
+//    //yield表达式写在一行，由内向外执行
+//    function* fun(){
+//        let x=yield 5+(yield 1+2);
+//        return x;
+//    }
+//    let xf=fun();
+//    console.log(xf.next());//{value: 3, done: false}
+//    console.log(xf.next(10));//{value: 15, done: false}
+//    console.log(xf.next(2));//{value: 2, done: true}
+
+
+//    function* fm(){
+//        console.log("start");
+//        console.log(1, `${yield}`);
+//        console.log(2, `${yield}`);
+//        console.log("end");
+//    }
+//    let f=fm();
+//    console.log(f.next());
+//    console.log(f.next('a'));
+//    //1 "a"
+//    console.log(f.next('b'));
+//    //1 "b"
+
+
+//    function* foo(){
+//        yield 1;
+//        yield 2;
+//        yield 3;
+//        yield 4;
+//        yield 5;
+//        return 6;
+//    }
+//    for(let i of foo()){
+//        console.log(i);//1 2 3 4 5
+//    }
+
+
+//    function* fibo(){
+//        let [prev,cur]=[0,1];
+//        for(;;){
+//            yield cur;
+//            [prev,cur]=[cur,prev+cur];
+//        }
+//    }
+//    for(let n of fibo()){
+//        if(n>50)
+//            break;
+//        console.log(n);//1 1 2 3 5 8 13 21 34
+//    }
+
+
+//    function Ajax(method,url,data,callback){
+//        var http;
+//        if(window.XMLHttpRequest){
+//            http=new XMLHttpRequest();
+//        }
+//        else{
+//            http=new ActiveXObject("Microsoft.XMLHTTP");
+//        }
+//        if(method=="get"){
+//            if(data){
+//                url+="?";
+//                url+=data;
+//            }
+//            http.open(method,url);
+//            http.send();
+//        }
+//        else{
+//            http.open(method,url);
+//            if(data){
+//                http.send(data);
+//            }
+//            http.send();
+//        }
+//        http.onreadystatechange=function(){
+//            if(http.readyState==4&&http.status==200){
+//                callback(http.response);
+//            }
+//        }
+//    }
+//    function* requCity(){
+//        let result=yield Ajax('get','./city.json',null,function(res){
+//            console.log(aja.next(res));
+//        })
+//        let json=JSON.parse(result);
+//        return json;
+//    }
+//    let aja=requCity();
+//    aja.next();
+
+
+//    var g=function* (){
+//        try{
+//            yield;
+//        }
+//        catch(e){
+//            console.log('内部捕获', e);
+//        }
+//    };
+//    var i=g();
+//    i.next();
+//    try{
+//        i.throw('a');
+//        i.throw('b');
+//    }
+//    catch(e){
+//        console.log('外部捕获', e);
+//    }
+//    //内部捕获 a
+//    //外部捕获 b
+
+
+
+//    function* method(){
+//        try{
+//            yield 1+2;
+//            yield 2+3;
+//            yield 3+4;
+//        }
+//        catch(e){
+//            console.log(e.message);
+//        }
+//    }
+//    let m=method();
+//    console.log(m.next());//{value: 3, done: false}
+//    m.throw(new Error("出错了"));
+//    //出错了
+
+
+//    var g=function*(){
+//    while(true){
+//        try{
+//            yield;
+//        }
+//        catch(e){
+//            if(e!='a')
+//            throw e;
+//        }
+//    }
+//    };
+//    var i=g();
+//    i.next();
+//    try{
+//        throw new Error('a');
+//        throw new Error('b');
+//    }
+//    catch(e){
+//        console.log('外部捕获', e);
+//    }
+//    //外部捕获 Error: a
+
+
+//    var g=function*(){
+//        while(true){
+//            yield;
+//            console.log('内部捕获', e);
+//        }
+//    };
+//    var i=g();
+//    i.next();
+//    try{
+//        i.throw('a');
+//        i.throw('b');
+//    }
+//    catch(e){
+//        console.log('外部捕获', e);
+//    }
+//    //外部捕获 a
+
+
+//    var gen = function* gen(){
+//        yield console.log('hello');
+//        yield console.log('world');
+//    }
+//    var g = gen();
+//    g.next();
+//    g.throw();
+//    //hello
+//    //Uncaught undefined
+
+
+//    let fun=function*(){
+//        yield 1;
+//        yield 2;
+//        yield 3;
+//        yield 4;
+//    }
+//    let f=fun();
+//    console.log(f.next());//{value: 1, done: false}
+//    console.log(f.next());//{value: 2, done: false}
+//    console.log(f.return('123'));//{value: true, done: true}
+//    console.log(f.next());//{value: undefined, done: true}
+//    console.log(f.next());//{value: undefined, done: true}
+//    console.log(f.next());//{value: undefined, done: true}
+
+
+//    function* method(){
+//        yield 1;
+//        yield 2;
+//        yield 3;
+//    }
+//    var m=method();
+//    console.log(m.next());//{value: 1, done: false}
+//    console.log(m.return());//{value: undefined, done: true}
+
+
+//    function* numbers(){
+//        yield 1;
+//        try{
+//            yield 2;
+//            yield 3;
+//            yield 4;
+//        }
+//        finally{
+//            yield 5;
+//            yield 6;
+//        }
+//        yield 7;
+//    }
+//    var g=numbers();
+//    console.log(g.next());//{value: 1, done: false}
+//    console.log(g.next());//{value: 2, done: false}
+//    console.log(g.return(8));//{value: 5, done: false}
+//    console.log(g.next());//{value: 6, done: false}
+//    console.log(g.next());//{value: 8, done: true}
+
+
+
+//    const g=function* (x,y){
+//        let result=yield x+y;
+//        return result;
+//    };
+//    const gen=g(1,2);
+//    console.log(gen.next());//{value: 3, done: false}
+//    console.log(gen.next(1));//{value: 1, done: true}
+//    console.log(gen.return(2));//{value: 2, done: true}
+
+
+//    let a=function* (){
+//        yield 'a';
+//        yield 'b';
+//    }
+//    let b=function *(){
+//        yield 1;
+//        yield* a();
+//        yield 2;
+//    }
+//    let bf=b();
+//    console.log(bf.next());//{value: 1, done: false}
+//    console.log(bf.next());//{value: "a", done: false}
+//    console.log(bf.next());//{value: "b", done: false}
+//    console.log(bf.next());//{value: 2, done: false}
+//    console.log(bf.next());//{value: undefined, done: true}
+
+
+
+//    function* gen(){
+//        yield* ["a","b","c"];
+//    }
+//    let g=gen();
+//    console.log(g.next());//{value: "a", done: false}
+//    console.log(g.next());//{value: "b", done: false}
+//    console.log(g.next());//{value: "c", done: false}
+//    console.log(g.next());//{value: undefined, done: true}
+
+
+//    let read=(function* (){
+//        yield 'hello';
+//        yield* 'hello';
+//    })();
+//    console.log(read.next());//{value: "hello", done: false}
+//    console.log(read.next());//{value: "h", done: false}
+//    console.log(read.next());//{value: "e", done: false}
+//    console.log(read.next());//{value: "l", done: false}
+//    console.log(read.next());//{value: "l", done: false}
+//    console.log(read.next());//{value: "o", done: false}
+//    console.log(read.next());//{value: undefined, done: true}
+
+
+//    function* g(){}
+//    g.prototype.hello=function(){
+//        return 'hi';
+//    };
+//    let obj=g();
+//    console.log(obj instanceof g);//true
+//    console.log(obj.hello());//hi
+//
+
+//    function* g(){
+//        this.a=11;
+//    }
+//    let obj=g();
+//    console.log(obj.next());//{value: undefined, done: true}
+//    console.log(obj.a);//undefined
+
+
+//    function* F(){
+//        this.a=1;
+//        yield this.b=2;
+//        yield this.c=3;
+//    }
+//    var obj={};
+//    var f= F.call(F.prototype);
+//    console.log(f.next());//{value: 2, done: false}
+//    console.log(f.next());//{value: 3, done: false}
+//    console.log(f.next());//{value: undefined, done: true}
+//    console.log(f.a);//1
+//    console.log(f.b);//2
+//    console.log(f.c);//3
+
+
+
+//    function* gen(){
+//        this.a=1;
+//        yield this.b=2;
+//        yield this.c=3;
+//    }
+//    function F(){
+//        return gen.call(gen.prototype);
+//    }
+//    var f=new F();
+//    console.log(f.next());//{value: 2, done: false}
+//    console.log(f.next());//{value: 3, done: false}
+//    console.log(f.next());//{value: undefined, done: true}
+//    console.log(f.a);//1
+//    console.log(f.b);//2
+//    console.log(f.c);//3
+//
+
+
+    //多参数版本的readFile
+//    fs.readFile(fileName,callback);
+//    //Thunk版本（单参数版本）的readFile
+//    var Thunk=function(fileName){
+//        return function(callback){
+//            return fs.readFile(fileName,callback);
+//        };
+//    };
+//    var readFileThunk=Thunk(fileName);
+//    readFileThunk(callback);
+
+
+//    const thunk = function (fileName, codeType) {
+//        // 返回一个只接受 callback 参数的函数
+//        return function (callback) {
+//            fs.readFile(fileName, codeType, callback)
+//        }
+//    }
+//    const readFileThunk = thunk('data1.json', 'utf-8')
+//    readFileThunk((err, data) => {
+//        // 获取文件内容
+//    })
+
+
+    //dom元素监听
+    let button=document.createElement("button");
+    button.innerText="按钮";
+    let thunk=function (obj,type,captrue){
+        return function (callback){
+            obj.addEventListener(type,callback,captrue);
+        }
+    }
+    let thunkEvent=thunk(button,'click',false);
+    thunkEvent(function (e){
+        console.log(e);
+    });
+    document.body.appendChild(button);
+
+</script>
+</body>
+</html>
