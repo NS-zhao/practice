@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .c_box {
+            position: relative;
+            width: 350px;
+            height: 420px;
+            border: 1px solid #000;
+            margin: 10px auto;
+        }
+
+        .c_middle > img {
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        .c_bottom_list {
+            position: relative;
+            height: 70px;
+            overflow: hidden;
+        }
+
+        .c_bottom_list:hover .leftbtn {
+            left: 0;
+        }
+
+        .c_bottom_list:hover .rightbtn {
+            right: 0;
+        }
+
+        .c_bottom_list > span {
+            position: absolute;
+            width: 15px;
+            height: 70px;
+            background-color: rgba(203, 203, 203, 0.58);
+            text-align: center;
+            line-height: 70px;
+            color: #ff6324;
+            transition: all .2s linear;
+            cursor: pointer;
+        }
+
+        .leftbtn {
+            left: 0;
+        }
+
+        .rightbtn {
+            right: 0;
+        }
+
+        .small_img {
+            position: absolute;
+            left: 20px;
+            top: 5px;
+            width: 310px;
+            height: 60px;
+            overflow: hidden;
+        }
+
+        .small_box {
+            position: relative;
+            float: left;
+            width: 50px;
+            height: 50px;
+            margin-right: 8px;
+        }
+
+        .small_box > img {
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        .marnone {
+            margin-right: 0;
+        }
+
+        .small_list {
+            width: 398px;
+            height: 50px;
+            background-color: #ebebeb;
+            padding: 5px;
+            transition: transform .2s ease-in;
+        }
+
+        .userck:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 46px;
+            height: 46px;
+            border: 2px solid #eb0000;
+        }
+
+        .userck:before {
+            content: "√";
+            position: absolute;
+            color: #fff;
+            font-size: 10px;
+            line-height: 5px;
+            width: 0;
+            height: 0;
+            right: 0;
+            bottom: 0;
+            border: 10px solid transparent;
+            border-color: transparent #eb0000 #eb0000 transparent;
+        }
+
+        .c_middle {
+            position: relative;
+            cursor: move;
+        }
+
+        .ceng {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            background: rgba(255, 255, 0, 0.3) url("./img/bg.png");
+            background-size: 4px;
+        }
+
+        .big_img {
+            display: none;
+            position: absolute;
+            left: 350px;
+            top: 0;
+            width: 500px;
+            height: 500px;
+            border: 1px solid #000;
+            background: url("./img/4a988d9749f15e5d-3.jpg") left top no-repeat;
+
+        }
+    </style>
+</head>
+<body>
+<div class="c_box">
+    <div class="c_middle">
+        <img class="c_middle_img" src="./img/4a988d9749f15e5d-2.jpg" alt=""/>
+    </div>
+    <div class="big_img">
+
+    </div>
+    <div class="c_bottom_list">
+        <span class="leftbtn"><</span>
+        <span class="rightbtn">></span>
+
+        <div class="small_img">
+            <div class="small_list">
+                <div class="small_box userck" data-big="./img/4a988d9749f15e5d-3.jpg"
+                     data-middle="./img/4a988d9749f15e5d-2.jpg"><img
+                        src="./img/4a988d9749f15e5d-1.jpg" alt=""/></div>
+                <div class="small_box" data-big="./img/57fd6c6ef45a1fec-3.jpg"
+                     data-middle="./img/57fd6c6ef45a1fec-2.jpg"><img
+                        src="./img/57fd6c6ef45a1fec-1.jpg" alt=""/></div>
+                <div class="small_box" data-big="./img/5adee555d32b26e8-3.jpg"
+                     data-middle="./img/5adee555d32b26e8-2.jpg"><img
+                        src="./img/5adee555d32b26e8-1.jpg" alt=""/></div>
+                <div class="small_box" data-big="./img/c3225ff19f8ed3ad-3.jpg"
+                     data-middle="./img/c3225ff19f8ed3ad-2.jpg"><img
+                        src="./img/c3225ff19f8ed3ad-1.jpg" alt=""/></div>
+                <div class="small_box" data-big="./img/4a988d9749f15e5d-3.jpg"
+                     data-middle="./img/4a988d9749f15e5d-2.jpg"><img
+                        src="./img/4a988d9749f15e5d-1.jpg" alt=""/></div>
+                <div class="small_box" data-big="./img/5adee555d32b26e8-3.jpg"
+                     data-middle="./img/5adee555d32b26e8-2.jpg"><img
+                        src="./img/5adee555d32b26e8-1.jpg" alt=""/></div>
+                <div class="small_box marnone" data-big="./img/d8a96efb9a5a061b-3.jpg"
+                     data-middle="./img/d8a96efb9a5a061b-2.jpg"><img
+                        src="./img/d8a96efb9a5a061b-1.jpg" alt=""/></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var leftbtn=document.querySelector(".leftbtn");
+    var rightbtn=document.querySelector(".rightbtn");
+    var small_list=document.querySelector(".small_list");
+    var small_img=document.querySelector(".small_img");
+    var small_box=document.querySelectorAll(".small_box");
+    var c_middle_img=document.querySelector(".c_middle_img");
+    var big_img=document.querySelector(".big_img");
+    var c_middle=document.querySelector(".c_middle");
+    var c_box=document.querySelector(".c_box");
+    leftbtn.onclick=function(){
+        small_list.style.transform="translatex(0px)";
+    }
+    rightbtn.onclick=function(){
+        var trans=small_list.offsetWidth-small_img.offsetWidth;
+        small_list.style.transform="translatex("+(-trans)+"px)";
+    }
+    var save=small_box[0];
+    for(var i=0;i<small_box.length;i++){
+        small_box[i].onclick=function(){
+            save.classList.remove("userck");
+            this.classList.add("userck");
+            save=this;
+            var middle=this.getAttribute("data-middle");
+            c_middle_img.src=middle;
+            var big=this.getAttribute("data-big");
+            big_img.style.backgroundImage="url('"+big+"')";
+        }
+    }
+    var posceng=null;
+    var bili=800/350;
+    c_middle.onmouseenter=function(){
+        big_img.style.display="block";
+        posceng=document.createElement("div");
+        posceng.className="ceng";
+        posceng.style.width=500/bili+"px";
+        posceng.style.height=500/bili+"px";
+        this.appendChild(posceng);
+    }
+    c_middle.onmouseleave=function(){
+        big_img.style.display="none";
+        posceng.remove();
+    }
+    c_middle.onmousemove=function(e){
+        var x=(e.pageX-c_box.offsetLeft)-posceng.offsetWidth/2;
+        var y=(e.pageY-c_box.offsetTop)-posceng.offsetTop/2;
+        var maxleft=c_middle.offsetWidth-posceng.offsetWidth;
+        var maxtop=c_middle.offsetHeight-posceng.offsetHeight;
+        x=x<=0?0:x>=maxleft?maxleft:x;
+        y=y<=0?0:y>=maxtop?maxtop:y;
+        posceng.style.left=x+"px";
+        posceng.style.top=y+"px";
+        big_img.style.backgroundPosition=(-x*bili)+"px "+(-y*bili)+"px";
+    }
+</script>
+</body>
+</html>
