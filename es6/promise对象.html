@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//    let promise=new Promise((resolve,reject)=>{
+//        let status=true;
+//        if(status){
+//            resolve('成功');
+//        }
+//        else{
+//            reject(new Error("失败"));
+//        }
+//    });
+    //promise对象的使用
+//    promise.then((res)=>{
+//        //成功回调函数resolve
+//        console.log(res);//成功
+//    },(error)=>{
+//        //失败的回调函数reject
+//        console.log(error);
+//    })
+
+    //或者
+//    promise.then((res)=>{
+//        //resolve
+//        console.log(res);
+//    }).catch((err)=>{
+//        //reject
+//        console.log(err);
+//    }).finally(()=>{
+//        console.log("最终执行的代码");
+//    })
+
+
+//    function Ajax(method,url,data,callback){
+//        var http;
+//        if(window.XMLHttpRequest){
+//            http=new XMLHttpRequest();
+//        }
+//        else{
+//            http=new ActiveXObject("Microsoft.XMLHTTP");
+//        }
+//        if(method=="get"){
+//            if(data){
+//                url+="?";
+//                url+=data;
+//            }
+//            http.open(method,url);
+//            http.send();
+//        }
+//        else{
+//            http.open(method,url);
+//            if(data){
+//                http.send(data);
+//            }
+//            http.send();
+//        }
+//        http.onreadystatechange=function(){
+//            if(http.readyState==4&&http.status==200){
+//                callback(http.response);
+//            }
+//        }
+//    }
+//    let promise=new Promise((resolve,reject)=>{
+//        try{
+//            Ajax('get','./city.json',null,(res)=>{
+//                resolve(res);
+//            })
+//        }catch(e){
+//            reject(e);
+//        }
+//    });
+//    promise.then((res)=>{
+//        //resolve
+//        console.log(res);
+//    }).catch((err)=>{
+//        //reject
+//        console.log(err);
+//    }).finally(()=>{
+//        console.log("最终执行的代码");
+//    });
+
+
+    //使用promise异步加载图片
+//    let promise=function (src){
+//        return new Promise(function (resolve,reject){
+//            let image=new Image();
+//            image.onload=function (){
+//                resolve(image);
+//            };
+//            image.onerror=function (){
+//                reject(new Error("图片加载失败！"));
+//            };
+//            image.src=src;
+//        });
+//    };
+//    let src='https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2Ftp09%2F210611094Q512b-0-lp.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644675006&t=144fbdde7f20cda32982c51b59ef3c28';
+//    promise(src).then(function (img){
+//        document.body.appendChild(img);
+//    }).catch(function (error){
+//        console.log(error);
+//    });
+
+
+//    let promise=new Promise(function (resolve,reject){
+//        let data={
+//            json:function (){
+//                return {id:1};
+//            }
+//        }
+//        if(data){
+//            resolve(data);
+//        }
+//        else{
+//            reject(new Error("出错了"));
+//        }
+//    });
+//    promise.then(function (res){
+//        return res.json();
+//    }).then(function (res){
+//        console.log(res);//{id: 1}
+//    });
+
+//    let p1=new Promise(function (resolve,reject){
+//        resolve(1);
+//    });
+//    let p2=new Promise(function (resolve,reject){
+//        reject(new Error("错误！"));
+//    });
+//    let p=Promise.all([p1,p2]);
+//    p.then(function (result){
+//        console.log(result);
+//    }).catch(function (err){
+//        console.log(err);
+//    })
+
+//    let p1=new Promise(function (resolve,reject){
+//        //模拟请求，5000s请求回来的数据
+//        setTimeout(function (){
+//            resolve("数据");
+//        },5000);
+//    });
+//    let p2=new Promise(function (resolve,reject){
+//        //2s之后按超时处理
+//        setTimeout(function (){
+//            reject(new Error("超时"));
+//        },2000);
+//    });
+//    let p=Promise.race([p1.p2]);
+//    p.then(function (res){
+//        console.log(res);
+//    }).catch(function (err){
+//        console.log(err);
+//    });
+
+//    Promise.resolve(12);
+//    //等价
+//    new Promise(resolve=>resolve(12));
+//    //等价
+//    new Promise(function (resolve){
+//        resolve(12);
+//    });
+
+
+//    let obj={
+//        then:function (resolve){
+//            resolve(22);
+//        }
+//    };
+//    let p=Promise.resolve(obj);
+//    p.then(function (res){
+//        console.log(res);//22
+//    });
+
+//    let obj={id:1};
+//    let p=Promise.resolve(obj);
+//    p.then(function (res){
+//        console.log(res);//{id: 1}
+//    })
+
+
+//    Promise.reject(new Error("失败"));
+//    Promise.reject(reject=>reject(new Error("失败")));
+//    Promise.reject(function (reject){
+//        reject(new Error("失败"))
+//    });
+
+    let p=function (){
+        return new Promise(function (resolve){
+            setTimeout(function (){
+                resolve("数据");
+            },3000);
+        });
+    }
+    let gen=function *(){
+        try{
+            let res=yield p();
+            console.log(res);//数据
+        }catch(e){
+            throw e.message
+        }
+    }
+    function run(Generator){
+        let it=Generator();//返回遍历器
+        function go(result){
+            if(result.done)
+                return result.value;
+            return result.value.then(function (res){
+                return go(it.next(res));
+            }).catch(function (err){
+                it.throw(err);
+            });
+        }
+        go(it.next());
+    }
+    run(gen);
+</script>
+</body>
+</html>
