@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button id="btn">按钮</button>
+<script>
+//    //传统类的写法
+//    //直接定义构造函数
+//    function Point(x,y){
+//        this.x=x;
+//        this.y=y;
+//    }
+//    Point.prototype.toString=function (){
+//        console.log(`输入当前坐标，${this.x},${this.y}`);
+//    }
+//    var point=new Point(10,20);
+//    console.log(point);
+//    point.toString();
+//
+
+    //es6中声明类
+//    class Point{
+//        constructor(x,y){
+//            this.x=x;
+//            this.y=y;
+//        }
+//        toString(){
+//            console.log(`输入当前坐标，${this.x},${this.y}`);
+//        }
+//    }
+//    let point=new Point(1,2);
+//    console.log(point);
+//    point.toString();
+//    console.log(typeof Point);//function
+//    console.log(Point === Point.prototype.constructor);//true
+
+
+//    class Point{
+//        constructor(){
+//
+//        }
+//        toString(){
+//
+//        }
+//        toValue(){
+//
+//        }
+//    }
+//    //等同于
+//    Point.prototype={
+//        constructor(){},
+//        toString(){},
+//        toValue(){},
+//    };
+
+
+//    class B{}
+//    const b=new B();
+//    console.log(b.constructor === B.prototype.constructor);//true
+//
+
+
+//    class Point{
+//        constructor(){
+//
+//        }
+//    }
+//    Object.assign(Point.prototype,{
+//        toString(){},
+//        toValue(){}
+//    });
+//    console.log(Point.prototype.constructor === Point);//true
+
+
+    //对象的属性或者方法通过一些方法可以获取（可枚举的属性或者方法），不能获取不可枚举的属性或方法
+//    class fun{
+//        constructor(x,y){
+//            this.x=x;
+//            this.y=y;
+//        }
+//        toString(){
+//            console.log(`当前坐标${this.x},${this.y}`);
+//        }
+//    }
+//    var f=new fun(1,2);
+//    console.log(Object.keys(f));// ["x", "y"]
+
+
+//    class Point{
+//
+//    }
+//    //等同于
+//    class Point{
+//        constructor(){}
+//    }
+//
+
+
+//    class Foo{
+//        constructor(){
+//            return Object.create(null);
+//        }
+//    }
+//    console.log(new Foo() instanceof Foo);//false
+//    console.log(Object.create(null));//{}
+//    console.log(Foo());//TypeError: Class constructor Foo cannot be invoked without 'new'
+
+
+//    class Point{
+//        constructor(x,y){
+//            this.x=x;
+//            this.y=y;
+//        }
+//        toString(){
+//            return '('+this.x+', '+this.y+')';
+//        }
+//    }
+//    var point=new Point(2,3);
+//    console.log(point.toString());//(2, 3)
+//    console.log(point.hasOwnProperty('x'));//true
+//    console.log(point.hasOwnProperty('y'));//true
+//    console.log(point.hasOwnProperty('toString'));//false
+//    console.log(point.__proto__.hasOwnProperty('toString'));//true
+
+
+
+//    var p1=new Point(2,3);
+//    var p2=new Point(3,3);
+//    console.log(p1.__proto__ === p2.__proto__);//true
+
+
+//    var p1=new Point(2,3);
+//    var p2=new Point(3,2);
+//    p1.__proto__.Name=function (){
+//        return 'zzz';
+//    };
+//    console.log(p1.Name());//zzz
+//    console.log(p2.Name());//zzz
+//    var p3=new Point(4,2);
+//    console.log(p3.Name());//zzz
+
+
+//    //getter、setter访问器的作用是对某个属性设置存值函数和取值函数，拦截该属性的存取行为
+//    //这两个访问器是一致写法，简写get、set
+//    class Student{
+//        constructor(){
+//
+//        }
+//        get allName(){
+//            return this.name;
+//        }
+//        set allName(name){
+//            this.name=name;
+//        }
+//    }
+//    let stu=new Student();
+//    stu.allName='zzz';
+//    console.log(stu.allName);//zzz
+//    console.log(stu);//Student {name: "zzz"}
+
+
+
+//    //获取元素的html
+//    class Element{
+//        constructor(element){
+//            this.element=element;
+//        }
+//        get html(){
+//            return this.element.innerHTML;
+//        }
+//        set html(str){
+//            this.element.innerHTML=str;
+//        }
+//    }
+//    let btn=document.querySelector("#btn");
+//    let ele=new Element(btn);
+//    ele.html="zzz";
+//    console.log(ele.html);//zzz
+//
+
+
+//    //class类里面的属性可以修改为表达式（字面量解析）
+//    let proto="getname";
+//    class People{
+//        constructor(name){
+//            this.name=name;
+//        }
+//        [proto](){
+//            console.log(this.name);
+//        }
+//    }
+//    let p=new People("zzz");
+//    console.log(p);//People {name: "zzz"}
+//    p.getname();//zzz
+//    p[proto]();//zzz
+//
+
+
+//    let car=new Car{
+//        constructor(name){
+//            this.name=name;
+//        }
+//    }("宝马");
+//    console.log(car);//{name: "宝马"}
+//    console.log(car.name);//宝马
+//
+
+//    //class类的静态字段和静态方法，不在类对象上显示
+//    class Book{
+//        name;
+//        price;
+//        author;
+//        static type;
+//        constructor(name,price,author){
+//            //this指向当前类的实例
+//            //this点出的都是非静态的
+//            this.name=name;
+//            this.price=price;
+//            this.author=author;
+//        }
+//        toString(){
+//            return `${this.name}书${this.price}元`;
+//        }
+//        static getType(){
+//            return `当前属于${Book.type}`;
+//        }
+//    }
+//    let book=new Book('水浒传',99.9,'吴承恩');
+//    console.log(book);//Book {name: "水浒传", price: 99.9, author: "吴承恩"}
+//    console.log(book.toString());//水浒传书99.9元
+//    Book.type="书";
+//    console.log(Book.type);//书
+//    console.log(Book.getType());//当前属于书
+//
+
+//    class Foo{
+//        static Method(){
+//            return 'hello'
+//        }
+//    }
+//    class Bar extends Foo{
+//
+//    }
+//    console.log(Bar.Method());//hello
+//
+
+
+//    class Foo{
+//        static Method(){
+//            return 'hello'
+//        }
+//    }
+//    class Bar extends Foo{
+//        static Can(){
+//            return super.Method()+',too';
+//        }
+//    }
+//    console.log(Bar.Can());//hello,too
+
+
+//    //老写法
+//    class Foo{
+//
+//    }
+//    Foo.prop=1;
+//    //新写法
+//    class Foo{
+//        static prop=1;
+//    }
+//
+
+
+//    //class类里面的私有属性和私有方法
+//    //es6暂时没有提供解决方案，只能通过自己变通实现
+//    class Animal{
+//        constructor(){
+//
+//        }
+//        //公有的
+//        getAge(){
+//
+//        }
+//        //私有的
+//        _setColor(){
+//
+//        }
+//    }
+//    let cat=new Animal();
+//    console.log(cat);
+//
+
+//    class Point{}
+//    console.log(Point.name);//Point
+//
+</script>
+</body>
+</html>
