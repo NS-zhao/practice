@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    class Point{
+        static pos;
+        constructor(x,y){
+            this.x=x;
+            this.y=y;
+        }
+        getPos(){
+            console.log(`坐标${this.x},${this.y}`);
+            Point.pos=[this.x,this.y];
+        }
+    }
+    //子类拿到父类相关的属性和方法
+    class getColor extends Point{
+        constructor(color,x,y){
+            //继承之后super关键字指父类
+            //这个super只带父类的构造函数
+            super(x,y);//当函数使用指的是父类的构造
+            this.color=color;
+            //super当做对象使用，指父类的原型对象
+            super.getPos();//坐标12,22
+        }
+        static getValue(){
+            //在静态方法中，super指代的是父类
+            console.log(super.pos);
+        }
+        toString(){
+
+        }
+    }
+    let color=new getColor('blue',12,22);
+    console.log(color);//getColor {x: 12, y: 22, color: "blue"}
+
+    //获取子类的父类
+    console.log(Object.getPrototypeOf(getColor)===Point);//true
+
+
+//    class A{}
+//    class B extends A{
+//        constructor(){
+//            super();
+//        }
+//    }
+
+
+
+//    class A{
+//        p(){
+//            return 2;
+//        }
+//    }
+//    class B extends A{
+//        constructor(){
+//            super();
+//            console.log(super.p());//2
+//        }
+//    }
+//    let b=new B();
+
+
+//    class A{
+//
+//    }
+//    class B extends A{
+//
+//    }
+//    //子类的原型对象还是本身，原型对象的原型链指向的是父类的构造
+//    console.log(B.prototype.__proto__);
+//    //子类的原型链指向的是父类
+//    console.log(B.__proto__);
+//
+
+
+
+//    class Person{
+//        name;
+//        age;
+//        sex;
+//        constructor(name,age,sex){
+//            this.name=name;
+//            this.age=age;
+//            this.sex=sex;
+//        }
+//        eat(){
+//
+//        }
+//        sleep(){
+//            return `${this.name} 开始睡觉`;
+//        }
+//    }
+//    class student extends Person{
+//        job;
+//        constructor(name,age,sex,job){
+//            super(name,age,sex);
+//            this.job=job;
+//        }
+//    }
+//    let stu=new student('小明',20,'男','学习');
+//    console.log(stu);//student {name: "小明", age: 20, sex: "男", job: "学习"}
+//    console.log(stu.sleep());//小明 开始睡觉
+//
+
+    class A{
+
+    }
+    class B extends A{
+
+    }
+    var p1=new A();
+    var p2=new B();
+    console.log(p2.__proto__ === p1.__proto__);//false
+    console.log(p2.__proto__.__proto__ === p1.__proto__);//true
+
+    p2.__proto__.__proto__.print=function(){
+        return 'hello world';
+    };
+    console.log(p1.print());//hello world
+
+</script>
+</body>
+</html>
