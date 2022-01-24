@@ -5,7 +5,7 @@
     <title></title>
 </head>
 <body>
-<script>
+<script type="module">
 //    //CommonJS模块
 //    let {stat,exists,readfile}=require('fs');
 //    //等同于
@@ -103,23 +103,23 @@
     console.log('圆周长：' + circumference(14));
 
 
-    export default function (){
-        console.log('foo');
-    }
+    //export default function (){
+    //    console.log('foo');
+    //}
 
 
-    import customName from './export-default';
-    customName();//'foo'
+    //import customName from './export-default';
+    //customName();//'foo'
 
 
-    export default function foo(){
-        console.log('foo');
-    }
+//    export default function foo(){
+//        console.log('foo');
+//    }
     //或者
-    function foo(){
-        console.log('foo');
-    }
-    export default foo;
+//    function foo(){
+//        console.log('foo');
+//    }
+//    export default foo;
 
 </script>
 </body>
