@@ -1,0 +1,81 @@
+//@width:100px;
+//@height:100px;
+//@w:5cm+10mm;
+//#btn{
+//  @color:red;
+//  width: @width;
+//  height: @height;
+//  color: @color;
+//  .borderradius;
+//}
+//#btn1{
+//  width: @w;
+//  height: @height + 20;
+//  .borderradius(20px);
+//}
+//.borderradius(@rad:50px){
+//  border-radius: @rad;
+//}
+//
+ul{
+   margin: 0;
+   padding: 0;
+   li{
+     line-height: 30px;
+     padding-left: 10px;
+     list-style: none;
+     a{
+       color: #000;
+       text-decoration: none;
+     }
+     &:hover{
+       border-bottom: 1px solid red;
+     }
+   }
+ }
+
+
+body{
+  background-color: #fff;
+  @media (min-width: 1280px) {
+    background-color: red;
+    @media (max-width: 768px) {
+      background-color: blue;
+    }
+  }
+  @media (max-width: 768px) {
+    background-color: orange;
+  }
+}
+
+
+//ЧЄТе
+@bgimg:~'url(./image/1.png)';
+body{
+  background-image: @bgimg;
+}
+
+
+
+#boundle(){
+  .boxshow(@sh:~'0 0 1px #000'){
+    box-shadow:@sh;
+  }
+  .boxrad(@rad:10px){
+    border-radius:@rad;
+  }
+}
+button{
+  width:100px;
+  height:30px;
+  #boundle.boxshow(~'3px 5px 10px #000');
+}
+
+
+#boun(){
+  primary:'green';
+  danger:red;
+}
+#btn{
+  background-color: #boun[danger];
+}
