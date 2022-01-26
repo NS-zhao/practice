@@ -1,0 +1,63 @@
+@w:50px;
+@h:50px;
+@max:-10;
+//if()  中间写法类似三元
+// .box{
+//     width:if(@max>0,@w,@w * 2);
+//     height:if(@max>0,@w,@w * 2);
+//     border: 1px solid #000;
+// }
+
+//boolean()---返回true或者false
+//@bool:boolean(@max>0);
+//.box{
+//  width: if(@bool,@w,@w*2);
+//  height: if(@bool,@w,@w*2);
+//  border: 1px solid #000;
+//}
+
+
+//@color:#cbcbcb;
+//@bool:boolean(@max>0);
+//.box{
+//  width: if(@bool,@w,@w*2);
+//  height: if(@bool,@w,@w*2);
+//  border: 1px solid escape(@color);
+//}
+
+
+//length()---返回长度（值长度）
+//@str:red,blue,black;
+//.box{
+//  width: length(@str);//3
+//}
+
+
+////extract()---返回集合值里面某个位置的值
+//@str:red,blue,black;
+//.box{
+//  background-color: extract(@str,2);//blue
+//}
+
+
+////range()---写一个参数，返回当前值以下的值
+//range(4);//1 2 3 4
+//range(10px,40px,10);//10px 20px 30px 40px
+
+
+//each--遍历集合值，value指当前值，index当前值索引
+//@str:red,blue,black;
+//each(@str,{
+//  .box@{index}{
+//    background-color: @value;//绑定属性值@value
+//  }
+//})
+
+
+
+@co: argb(rgba(90, 23, 148, 0.5));
+.box1{
+  width: 200px;
+  height: 200px;
+  background-color: difference(rgb(109, 224, 42),#0ef1e6);
+}
