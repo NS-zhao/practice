@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li {
+            list-style: none;
+        }
+        .box{
+            width: 1000px;
+            height: 200px;
+            border: 1px solid #000;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .list{
+            width: 2800px;
+            overflow: hidden;
+        }
+        .nav{
+            float: left;
+            width: 1400px;
+            height: auto;
+            overflow: hidden;
+        }
+        .nav>li{
+            float: left;
+            width: 350px;
+            height: 200px;
+        }
+        .nav>li img{
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+        }
+        .speed,.timerIpt,.setSpeed,.setTimer{
+            display: block;
+            position: relative;
+            left: 1535px;
+            top: -165px;
+            margin-bottom: 10px;
+        }
+        .speed,.timerIpt{
+            width: 80px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="list">
+        <ul class="nav">
+            <li><img src="img/1.jpg" alt=""/></li>
+            <li><img src="img/2.jpg" alt=""/></li>
+            <li><img src="img/3.jpg" alt=""/></li>
+            <li><img src="img/4.jpg" alt=""/></li>
+        </ul>
+    </div>
+</div>
+<input type="text" class="speed"/>
+<button class="setSpeed">设置speed</button>
+<input type="text" class="timerIpt"/>
+<button class="setTimer">设置time</button>
+<script>
+    var box=document.getElementsByClassName("box")[0];
+    var nav=document.getElementsByClassName("nav")[0];
+    var list=document.getElementsByClassName("list")[0];
+    var speedIpt=document.getElementsByClassName("speed")[0];
+    var setSpeed=document.getElementsByClassName("setSpeed")[0];
+    var timerIpt=document.getElementsByClassName("timerIpt")[0];
+    var setTimer=document.getElementsByClassName("setTimer")[0];
+    var maxLeft=nav.clientWidth;
+    var speed=5;
+    var timer=1;
+    var time;
+    //使用计时器写无缝滚动
+    window.onload=function(){
+        //元素克隆
+        list.appendChild(nav.cloneNode(true));
+        //直接执行动画
+        loop();
+        //设置速度
+        setSpeed.onclick=function(){
+            var val=speedIpt.value;
+            if(val.length>0&&!isNaN(val.value)){
+                speed=parseInt(val);
+            }
+            speedIpt.value="";
+        }
+        //设置时间
+        setTimer.onclick=function(){
+            var val=timerIpt.value;
+            if(val.length>0&&!isNaN(val.value)){
+                timer=parseInt(val);
+            }
+            timerIpt.value="";
+        }
+        //设置鼠标悬停滚动停止
+        box.onmouseenter=function(){
+            clearTimeout(time);
+        }
+        box.onmouseleave=function(){
+            loop();
+        }
+    }
+    function loop(){
+        //获取scrollLeft
+        var scleft=box.scrollLeft;
+        scleft+=speed;
+        if(scleft>=maxLeft){
+            scleft=0;
+        }
+        box.scrollLeft=scleft;
+        time=setTimeout(loop,timer);
+    }
+</script>
+</body>
+</html>
