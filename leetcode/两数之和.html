@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //方法一
+    var twoSum = function(nums, target) {
+        for(let i=0;i<nums.length-1;i++){
+            for(let j=i+1;j<nums.length;j++){
+                if(nums[i]+nums[j]==target){
+                    return [i,j];
+                }
+            }
+        }
+    };
+
+
+    //方法二
+//    var twoSum = function(nums, target) {
+//        for(let i=0;i<nums.length;i++){
+//            const index=nums.indexOf(target-nums[i]);
+//            if(index !== -1 && index !== i){
+//                return [i,index];
+//            }
+//        }
+//    };
+
+
+    //方法三：哈希表
+//    var twoSum = function(nums, target) {
+//        const map=new Map();
+//        for(let i=0;i<nums.length;i++){
+//            const index=target-nums[i];
+//            if(map.has(index)){
+//                return [map.get(index),i];
+//            }
+//            else{
+//                map.set(nums[i],i);
+//            }
+//        }
+//    };
+//    console.log(twoSum([3, 3], 6));
+</script>
+</body>
+</html>
