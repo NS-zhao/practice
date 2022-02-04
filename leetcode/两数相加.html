@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var addTwoNumbers = function(l1, l2) {
+        let len=Math.max(l1.length,l2.length);
+        let array=0;
+        var result=[];
+        for(let i=0;i<len;i++){
+            if(l1[i]!=null&&l2[i]!=null){
+                let sum=l1[i]+l2[i]+array;
+                let res1=sum%10;
+                array=parseInt(sum/10);
+                result.push(res1);
+            }
+            else{
+                if(i>l1.length){
+                    let sum=l2[i]+array;
+                    let res1=sum%10;
+                    array=parseInt(sum/10);
+                    result.push(res1);
+                    if(i===l2.length-1){
+                        result.push(array);
+                    }
+                }
+                if(i>l2.length){
+                    let sum=l1[i]+array;
+                    let res1=sum%10;
+                    array=parseInt(sum/10);
+                    result.push(res1);
+                    if(i===l1.length-1){
+                        result.push(array);
+                    }
+                }
+            }
+        }
+        return result;
+    };
+</script>
+</body>
+</html>
