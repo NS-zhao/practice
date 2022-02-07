@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var findMedianSortedArrays = function(nums1, nums2) {
+        let s=nums1.concat(nums2).sort((a,b)=>a-b);
+        if(s.length%2===0){
+            return (s[s.length/2-1]+s[s.length/2])/2;
+        }
+        else{
+            return s[Math.floor(s.length/2)];
+        }
+    };
+
+</script>
+</body>
+</html>
