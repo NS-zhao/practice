@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var longestPalindrome = function(s) {
+        if(s.length<2){
+            return s;
+        }
+        let res="";
+        for(let i=0;i< s.length;i++){
+            //回文子串的长度是奇数
+            help(i,i);
+            //回文子串的长度是偶数
+            help(i,i+1);
+        }
+        function help(m,n){
+            while(m>=0&&n< s.length&&s[m]==s[n]){
+                m--;
+                n++;
+            }
+            //此时的m,n的值循环完后，是恰好不满足条件的值
+            //此时m到n的距离为n-m-1，但是m和n的两个边界不能取，所以应该取m-1到n-1的区间，距离是n-m-1
+            if(n-m-1>res.length){
+                res= s.slice(m-1,n);
+            }
+        }
+        return res;
+    };
+
+</script>
+</body>
+</html>
