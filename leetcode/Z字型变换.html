@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var convert = function(s, numRows) {
+        if(numRows==1||s.length<numRows){
+            return s;
+        }
+        //创建一个新的数组
+        const arr=new Array(numRows).fill("");
+        //新数组对应的行数
+        let num=0;
+        //true表示行数向下+1,false表示行数向上-1
+        let plus=true;
+        for(let i=0;i<s.length;i++){
+            arr[num]+=s[i];
+            if(plus){
+                num++;
+            }
+            else{
+                num--;
+            }
+            //0说明到顶部了，要向下，所以为true
+            if(num===0){
+                plus=true;
+            }
+            //再次到底部，说明要向上了，为false
+            if(num===numRows-1){
+                plus=false;
+            }
+        }
+        return arr.join('');
+    };
+
+</script>
+</body>
+</html>
