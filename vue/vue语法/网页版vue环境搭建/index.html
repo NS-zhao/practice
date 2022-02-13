@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        el:生态系统渲染的元素
+        data:生态系统的数据源
+        methods:定义使用的方法
+        {{}}:数据模板指定绑定数据的
+        v-model指令:针对表单元素进行双向绑定的指令
+     -->
+    <div id="app">
+        <input type="text" v-model="msg">
+        {{msg}}
+    </div>
+    <script>
+        //创建vue的实例对象
+        let vue=new Vue({
+            el:'#app',//渲染的元素
+            data:{
+                msg:"hello world!"
+            },
+            methods:{
+
+            }
+        });
+        console.log(vue);//输出整个vue对象
+    </script>
+</body>
+</html>
