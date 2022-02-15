@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//    var isValid = function(s) {
+//        let res=[];
+//        if(s.length%2){
+//            return false;
+//        }
+//        for(let i of s){
+//            switch(i){
+//                case "{":
+//                case "[":
+//                case "(":
+//                    res.push(i);
+//                    break;
+//                case "}":
+//                    if(res.pop()!=="{"){
+//                        return false;
+//                    }
+//                    break;
+//                case "]":
+//                    if(res.pop()!=="["){
+//                        return false;
+//                    }
+//                    break;
+//                case ")":
+//                    if(res.pop()!=="("){
+//                        return false;
+//                    }
+//                    break;
+//            }
+//        }
+//        return !res.length;
+//    };
+//    console.log(isValid("{[]}"));
+
+
+    var isValid = function(s) {
+        s=s.split('');
+        if(s.length%2){
+            return false;
+        }
+        let map=new Map([[')','('],[']','['],['}','{']]);
+        let res=[];
+        for(let i of s){
+            if(map.get(i)){
+                if(res[res.length-1]!==map.get(i)){
+                    return false;
+                }
+                else{
+                    res.pop();
+                }
+            }
+            else{
+                res.push(i);
+            }
+        }
+        return !res.length;
+    };
+
+</script>
+</body>
+</html>
