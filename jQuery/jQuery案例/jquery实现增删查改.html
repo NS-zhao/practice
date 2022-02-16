@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        ul li{
+            list-style: none;
+        }
+        .main{
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+        }
+        .main-top{
+            width: 100%;
+            height: 81px;
+            padding-bottom: 10px;
+            background: #fff;
+            margin: 20px 0;
+        }
+        .main-bottom{
+            flex: 1;
+
+        }
+        #searchbtn,#resetbtn{
+            color: #fff;
+            width: 80px;
+            height: 35px;
+            font-size: 13px;
+            background: #3ea2ee;
+            outline: none;
+            border-radius: 3px;
+            padding: 0 12px;
+            margin-left: 15px;
+            line-height: 35px;
+            border: 1px solid transparent;
+            margin-bottom: 7px;
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        .main-top>span{
+            margin-left: 15px;
+            font-size: 13px;
+            color: #666;
+            display: inline-block;
+            float: left;
+            height: 35px;
+            line-height: 35px;
+        }
+        #search{
+            width: 180px;
+            height: 35px;
+            border: 1px solid #dfdfdf;
+            border-radius: 3px !important;
+            padding: .0rem .75rem;
+            font-size: 13px;
+            color: #dfdfdf !important;
+            line-height: 35px;
+            display: inline-block;
+            font-weight: 400;
+            background-color: #fff;
+            background-clip: padding-box;
+        }
+        #searchbtn:hover,#resetbtn:hover{
+            color: #fff;
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+        #searchbtn:active,#resetbtn:active{
+            color: #fff;
+            background-color: #0062cc;
+            border-color: #005cbf;
+        }
+        .add:hover{
+            color: #0069d9;
+        }
+        .add:active{
+            color: #0062cc;
+        }
+        .add_user{
+            margin-bottom: 20px;
+            height: 25px;
+            line-height: 25px;
+            float: left;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #212529;
+            text-align: left;
+        }
+        .add{
+            color: #3ea2ee;
+            background: none !important;
+            border: none;
+            opacity: 0.9;
+            height: 35px;
+            line-height: 35px;
+            border-radius: 3px;
+            text-align: center;
+            margin-right: 10px;
+            padding: 4px 8px;
+            font-size: 14px;
+            width: 80px;
+            background: #3ea2ee;
+            outline: none;
+            margin-left: 15px;
+            margin-bottom: 7px;
+        }
+        .add>img{
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+        .add>span{
+            padding-top: 2px !important;
+        }
+        .line{
+            width: 100%;
+            border-bottom: 1px solid #dfdfdf;
+            margin-bottom: 20px;
+        }
+        .user_data table{
+            width: 100%;
+            margin-bottom: 1rem;
+            background-color: transparent;
+            border-collapse: collapse;
+        }
+        .title th{
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+            padding: 12px;
+            border-top: 1px solid #dee2e6;
+            border-top: 1px solid #f0f0f0 !important;
+            border-bottom: 1px solid #f0f0f0 !important;
+            color: #595e66 !important;
+            background: #f5f7fa;
+            font-size: 13px;
+            text-align: center;
+            font-weight: 600 !important;
+        }
+        .tab_user td{
+            padding: .75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+            color: #61666e;
+            font-size: 12px;
+            text-align: center;
+            border-bottom: 1px solid #f0f0f0 !important;
+        }
+        .bgs{
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1050;
+            display: none;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            outline: 0;
+            transition: opacity .15s linear;
+            background: rgba(0,0,0,0.5);
+        }
+        .alert-msg{
+            position: relative;
+            transform: none;
+            transition: transform .3s ease-out,-webkit-transform .3s ease-out;
+            max-width: 500px;
+            margin: 90px auto;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0,0,0,.2);
+            border-radius: .3rem;
+            outline: 0;
+            height: 230px;
+        }
+        .box{
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 1rem 1rem;
+            border-bottom: 1px solid #e9ecef;
+            border-top-left-radius: .3rem;
+            border-top-right-radius: .3rem;
+        }
+        h4{
+            margin-bottom: 0;
+            line-height: 1.5;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        .content{
+            position: relative;
+            flex: 1 1 auto;
+            padding: 16px;
+        }
+        .btn{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 16px;
+            border-top: 1px solid #e9ecef;
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        #close{
+            display: inline-block;
+            font-weight: 400;
+            text-align: center;
+            vertical-align: middle;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 4px;
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        .btn button:nth-child(1) {
+            color: #3ea2ee;
+            border: 1px solid #3ea2ee;
+        }
+
+        .box_1{
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 1rem 1rem;
+            border-bottom: 1px solid #e9ecef;
+            border-top-left-radius: .3rem;
+            border-top-right-radius: .3rem;
+        }
+        .cha{
+            padding: 16px 12px;
+            margin: -16px -16px -16px auto;
+            float: right;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1;
+            text-shadow: 0 1px 0 #fff;
+            opacity: 0.5;
+            color: #007bff;
+            outline: none;
+            border: none;
+            background-color: #fff;
+        }
+        .bgs_1{
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1050;
+            display: none;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            outline: 0;
+            background: rgba(0,0,0,0.5);
+        }
+        .add-msg{
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 500px;
+            top: 100px;
+            left: 50%;
+            margin-left: -250px;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0,0,0,.2);
+            border-radius: 5px;
+            outline: 0;
+            height: 445px;
+        }
+        .cha:hover{
+            color: #0069d9;
+        }
+        .cha:active{
+            color: #0062cc;
+        }
+        .content table{
+            width: 100%;
+            margin-bottom: 1rem;
+            background-color: transparent;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        .content table tr{
+            line-height: 25px;
+        }
+        .tb_bg{
+            background: #f5f7fa;
+            width: 66px;
+            height: 60px;
+            text-align: center;
+            box-sizing: border-box;
+            font-size: 12px;
+            padding: .75rem;
+            color: #61666e;
+            border-bottom: 1px solid #f0f0f0 !important;
+            line-height: 25px;
+        }
+
+        .tb_bg label{
+            display: inline-block;
+            margin-bottom: .5rem;
+            font-size: 12px;
+        }
+        table tr td input{
+            width: 100% !important;
+            padding: 0 8px;
+            height: 35px;
+            border: 1px solid #dfdfdf;
+            border-radius: 3px !important;
+            font-size: 13px;
+            color: #666 !important;
+            line-height: 32px;
+            display: inline-block;
+            outline: none;
+            overflow: visible;
+            box-sizing: border-box;
+        }
+        .inp{
+            padding: .75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+            background: #fff;
+            color: #61666e;
+            font-size: 12px;
+            text-align: center;
+            border-bottom: 1px solid #f0f0f0 !important;
+            line-height: 25px;
+            box-sizing: border-box;
+         }
+        #leavel{
+            display: block;
+            width: 100%;
+            height: calc(2.25rem + 2px);
+            padding: .375rem .75rem;
+            font-weight: 400;
+            line-height: 1.5;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        #type{
+            display: block;
+            width: 100%;
+            height: calc(2.25rem + 2px);
+            padding: .375rem .75rem;
+            font-weight: 400;
+            line-height: 1.5;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        .btn{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 1rem;
+            border-top: 1px solid #e9ecef;
+            border-bottom-right-radius: .3rem;
+            border-bottom-left-radius: .3rem;
+            margin-top: 30px;
+            text-align: center !important;
+            line-height: 25px;
+        }
+        #closebtn{
+            color: #3ea2ee;
+            border: 1px solid #3ea2ee;
+            margin-right: .25rem;
+            background: none !important;
+            opacity: 0.9;
+            height: 35px;
+            line-height: 1.5rem;
+            border-radius: 3px;
+            text-align: center;
+            display: inline-block;
+            font-weight: 400;
+            vertical-align: middle;
+            user-select: none;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+        }
+        #addbtn{
+            color: #fff;
+            background: #3ea2ee !important;
+            border: none;
+            opacity: 0.9;
+            height: 35px;
+            line-height: 1.5rem;
+            border-radius: 3px;
+            text-align: center;
+            margin-right: 10px;
+            display: inline-block;
+            font-weight: 400;
+            vertical-align: middle;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+        }
+        a{
+            text-decoration: none;
+        }
+        .b_user,.r_user{
+            margin-right: 10px;
+            color: #479eff;
+        }
+        .r_user{
+            margin-right: 0 !important;
+        }
+        a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="main-top">
+        <span>姓名：</span>
+        <input id="search" type="text" placeholder="请输入姓名"/>
+        <button type="button" id="searchbtn">查询</button>
+        <button type="button" id="resetbtn">重置</button>
+    </div>
+    <div class="line"></div>
+    <div class="main-bottom">
+        <div class="add_user">
+            <button class="add"><img src="./imgs/add_two.png" alt=""/><span>添加</span></button>
+        </div>
+        <div class="user_data">
+            <table id="tableuser">
+                <tr class="title">
+                    <th>姓名</th>
+                    <th>工号</th>
+                    <th>手机号</th>
+                    <th>产品名称</th>
+                    <th>技能等级</th>
+                    <th>用户类型</th>
+                    <th>操作</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="bgs">
+        <div class="alert-msg">
+            <div class="box">
+                <h4>来自火星的提示</h4>
+            </div>
+            <div class="content">
+                搜索的内容不能为空
+            </div>
+            <div class="btn">
+                <button id="close">OK</button>
+            </div>
+        </div>
+    </div>
+    <!-- 添加-->
+    <div class="bgs_1">
+        <div class="add-msg">
+            <div class="box_1">
+                <h4 class="showtitle">添加</h4>
+                <button class="cha">×</button>
+            </div>
+            <div class="content">
+                <table>
+                    <tr>
+                        <td class="tb_bg">
+                            <label><font style="font-size: 14px; color: red;">*</font>姓名</label>
+                        </td>
+                        <td class="inp">
+                            <input id="uname" type="text" placeholder="请输入姓名"/>
+                        </td>
+                        <td class="tb_bg">
+                            <label><font style="font-size: 14px; color: red;">*</font>工号</label>
+                        </td>
+                        <td class="inp">
+                            <input id="facid" type="text" placeholder="请输入工号"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tb_bg">
+                            <label><font style="font-size: 14px; color: red;">*</font>手机号</label>
+                        </td>
+                        <td class="inp">
+                            <input id="tel" type="text" placeholder="请输入手机号"/>
+                        </td>
+                        <td class="tb_bg">
+                            <label>产品名称</label>
+                        </td>
+                        <td class="inp">
+                            <input id="userfun" type="text" placeholder="请输入产品名称"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tb_bg">
+                            <label>技能等级</label>
+                        </td>
+                        <td class="inp">
+                            <select id="leavel" style="font-size: 13px;color: #666;">
+                                <option value="一级" selected>一级</option>
+                                <option value="二级">二级</option>
+                                <option value="三级">三级</option>
+                            </select>
+                        </td>
+                        <td class="tb_bg">
+                            <label>用户类型</label>
+                        </td>
+                        <td class="inp">
+                            <select id="type" style="font-size: 13px;color: #666;">
+                                <option value="初级" selected>初级</option>
+                                <option value="中级">中级</option>
+                                <option value="高级">高级</option>
+                                <option value="专家">专家</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="btn">
+                <button id="closebtn">取消</button>
+                <button id="addbtn">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+    $(function(){
+        var searBtn=$("#searchbtn"),
+            restBtn=$("#resetbtn"),
+            searIpt=$("#search"),
+            bgs=$(".bgs"),
+            closeMsg=$("#close"),
+            addBtn=$(".add"),
+            bgs_1=$(".bgs_1"),
+            MsgTitle=$(".showtitle"),
+            tableUser=$("#tableuser"),
+            nowDta=null,
+            addMsgbtn=$("#addbtn"),
+            unamemsg=$("#uname"),
+            facidmsg=$("#facid"),
+            telmsg=$("#tel"),
+            userfunmsg=$("#userfun"),
+            leavelmsg=$("#leavel"),
+            typemsg=$("#type"),
+            isaddMsg=false,
+            uindex=null;
+        searBtn.on("click",function(){
+            if(!searIpt.val()){
+                bgs.fadeIn(200);
+                return;
+            }
+            getUser('http://127.0.0.1:8080/syssearch',searIpt.val());
+        });
+        closeMsg.on("click",function(){
+            bgs.fadeOut(200);
+        });
+        restBtn.on("click",function(){
+            searIpt.val("");
+        });
+        addBtn.on("click",function(){
+            MsgTitle.html("添加");
+            bgs_1.fadeIn(200);
+            isaddMsg=true;
+        });
+        bgs_1.on("click",'#closebtn',function(){
+            bgs_1.fadeOut(200);
+        }).on("click",'.cha',function(){
+            bgs_1.fadeOut(200);
+        });
+        //点击添加数据
+        addMsgbtn.on("click",function(){
+            //获取上面列表的所有数据
+            var name=unamemsg.val();
+            var facid=facidmsg.val();
+            var tel=telmsg.val();
+            var userfun=userfunmsg.val();
+            var leavel=leavelmsg.val();
+            var type=typemsg.val();
+            if(isaddMsg){
+                $.ajax({
+                    method:'get',
+                    url:'http://127.0.0.1:8080/sysaddMsg',
+                    data:{name:name,facid:facid,tel:tel,userfun:userfun,leavel:leavel,type:type},
+                    success:function(res){
+                        if(res.status=="ok"){
+                            getUser('http://127.0.0.1:8080/sysgetData');
+                        }
+                        bgs_1.fadeOut(200);
+                    }
+                })
+            }
+            else{
+                $.ajax({
+                    method:'get',
+                    url:'http://127.0.0.1:8080/sysbianMsg',
+                    data:{index:uindex,name:name,facid:facid,tel:tel,userfun:userfun,leavel:leavel,type:type},
+                    success:function(res){
+                        if(res.status=="ok"){
+                            getUser('http://127.0.0.1:8080/sysgetData');
+                        }
+                        bgs_1.fadeOut(200);
+                    }
+                })
+            }
+        })
+        getUser('http://127.0.0.1:8080/sysgetData');
+        function getUser(url,name){
+            $.ajax({
+                method:'get',
+                url:url,
+                data:name?{name:name}:null,
+                success:function(res){
+                    $(".tab_user").remove();
+                    nowDta=res;//获取当前的请求数据
+                    var str="";
+                    for(var i=0;i<res.length;i++){
+                        str+="<tr class='tab_user'><td>"+res[i].name+"</td><td>"+res[i].facid+"</td><td>"+res[i].tel+"</td><td>"+res[i].userfun+"</td><td>"+res[i].leavel+"</td><td>"+res[i].utype+"</td><td><a class='b_user' href='#'>编辑</a><a class='r_user' href='#'>删除</a></td></tr>";
+                    }
+                    tableUser.append(str);
+                    $(".b_user").each(function(index){
+                        $(this).off().on("click",function(){
+                            console.log(nowDta[index]);
+                            MsgTitle.html("编辑");
+                            bgs_1.fadeIn(200);
+                            isaddMsg=false;
+                            uindex=index;
+                            var user=nowDta[index];
+                            unamemsg.val(user.name);
+                            facidmsg.val(user.facid);
+                            telmsg.val(user.tel);
+                            userfunmsg.val(user.userfun);
+                            leavelmsg.val(user.leavel);
+                            typemsg.val(user.type);
+                        });
+                    });
+                    $(".r_user").on("click",function(){
+                        $(this).parent().parent().remove();
+                    })
+                }
+            });
+        }
+    })
+</script>
+</body>
+</html>
