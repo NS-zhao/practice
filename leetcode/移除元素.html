@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//    var removeElement = function(nums, val) {
+//        if(!nums.length){
+//            return 0;
+//        }
+//        let i=0;
+//        for(let num of nums){
+//            if(num!==val){
+//                nums[i]=num;
+//                i++;
+//            }
+//        }
+//        return i;
+//    };
+
+
+    var removeElement = function(nums, val) {
+        if(!nums.length){
+            return 0;
+        }
+        for(let i=0;i<nums.length;){
+            if(nums[i]===val){
+                nums[i]=nums[nums.length-1];
+                nums.length--;
+            }
+            else{
+                i++;
+            }
+        }
+        return nums.length;
+    };
+
+</script>
+</body>
+</html>
