@@ -4,5 +4,21 @@ module.exports={
     output:{
         path:path.resolve(__dirname+'/build'),
         filename:'bundle.js'
+    },
+    module:{
+        rules:[
+            //css
+            {
+                test:/\.css$/,
+                use:[
+                    {loader:'style-loader'},
+                    {
+                        loader:'css-loader',options:{
+                            modules:true
+                        }
+                    }
+                ]
+            }
+        ]
     }
 }
